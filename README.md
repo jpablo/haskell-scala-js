@@ -77,8 +77,10 @@ compose (+1) (+2) 1
 def compose[A,B,C](f: B ⇒ C, g: A ⇒ B) = (x: A) ⇒ f(g(x))
 // generic type need to be specified in the function definition in scala.
 // this method takes 5 arguments: types A, B, C and functions f, b
-// they type arguments can be specified explicitlyl
+
+// the type arguments can be specified explicitly
 compose[Int, Int, Int](_+1, _+2)(1)
+
 // or inferred from the definitions of f and g
 compose((x: Int) ⇒ x+1, (x: Int) ⇒ x+2)(1)
 ```
