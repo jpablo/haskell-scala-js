@@ -120,14 +120,36 @@ function Vector(x, y) {
 }
 ```
 ## Parametrized datatypes
-haskell
+### haskell
 ```haskell
 data Option a = Some a | None
 ```
-scala
+### scala
 ```scala
 sealed trait Option[+A]
 case class Some[+A](a: A) extends Option[A]
 case object None extends Option[Nothing]
 ```
 
+# Pattern matching
+## haskell
+```haskell
+data Option a = Some a | None
+
+option :: b -> (a -> b) -> Option a -> b
+option n f None  = n
+option n f (Some a) = f a
+
+-- can also be written using case statements:
+option :: b -> (a -> b) -> Option a -> b
+option n f x = case x of
+  None -> n
+  Some a  -> f a
+```
+## scala
+```scala
+def option[A, B](n: B, f: A => B, x: Option[A]) = x match {
+    case None ⇒ n
+    case Some(a) ⇒ f(a)
+}
+```
