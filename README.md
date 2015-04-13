@@ -19,7 +19,8 @@ object myModule {
 ```
 function
 ```scala
-val f = (x: Int, z: Int, z: Int) => x + y + z
+// the unicode arrow ⇒ is an alias for the fat arrow =>
+val f = (x: Int, z: Int, z: Int) ⇒ x + y + z
 ```
 methods are not values, just object attributes: pros: can have type parameters
 
@@ -67,10 +68,19 @@ Haskell, scala and JS support passing around and returning functions
 ### Haskell
 ```haskell
 compose f g = \x -> f (g x)
+-- functions are generic my default in haskell, types are inferred at call site
+compose (+1) (+2) 1
+4
 ```
 ### Scala
 ```scala
-def compose[A,B,C](f: B => C, g: A => B) = (x: A) => f(g(x))
+def compose[A,B,C](f: B ⇒ C, g: A ⇒ B) = (x: A) ⇒ f(g(x))
+// generic type need to be specified in the function definition in scala.
+// this method takes 5 arguments: types A, B, C and functions f, b
+// they type arguments can be specified explicitlyl
+compose[Int, Int, Int](_+1, _+2)(1)
+// or inferred from the definitions of f and g
+compose((x: Int) ⇒ x+1, (x: Int) ⇒ x+2)(1)
 ```
 ### JS
 JS being a dynamic language allows you do pass around whatever the #@!% you want.
@@ -148,7 +158,7 @@ option n f x = case x of
 ```
 ## scala
 ```scala
-def option[A, B](n: B, f: A => B, x: Option[A]) = x match {
+def option[A, B](n: B, f: A ⇒ B, x: Option[A]) = x match {
     case None ⇒ n
     case Some(a) ⇒ f(a)
 }
