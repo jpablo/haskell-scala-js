@@ -157,14 +157,15 @@ Int, [Int]
 ```haskell
 -- this defines a type Bool, and to values: False and True
 data Bool = False | True
+
 Prelude> :t True
 True :: Bool
 Prelude> :k Bool
 Bool :: *
 
 -- this defines a type Container (the left side) and a value, the constructor Container
-
 data IntContainer = Container Int
+
 Prelude> :t IntContainer
 Container :: Int -> IntContainer
 Prelude> :k IntContainer
