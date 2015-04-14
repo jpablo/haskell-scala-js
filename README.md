@@ -163,7 +163,7 @@ True :: Bool
 Prelude> :k Bool
 Bool :: *
 
--- this defines a type IntContainer (the left side) and a value, the constructor IntContainer
+-- this defines a type IntContainer (the left side) and a value (a function value), the constructor IntContainer
 data IntContainer = IntContainer Int
 
 Prelude> :t IntContainer
