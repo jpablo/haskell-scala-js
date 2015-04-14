@@ -142,7 +142,35 @@ sealed trait Option[+A]
 case class Some[+A](a: A) extends Option[A]
 case object None extends Option[Nothing]
 ```
+## kinds
+Values have types and can be passed around.
+Types have kinds (not unlike the type of a type)
+### haskell
+```haskell
+-- values
+1, [1,2,3]
+-- types
+Int, [Int]
+-- kinds
+*
+```
+```haskell
+data Bool = False | True
+-- this defines a type Bool, and to values: False and True
+Prelude> :t True
+True :: Bool
+Prelude> :k Bool
+Bool :: *
 
+data Container = Container Int
+-- this defines a type Container (the left side) and a value, the constructor Container
+
+Prelude> :t Container
+Container :: Int -> Container
+Prelude> :k Container
+Container :: *
+
+```
 # Pattern matching
 ## haskell
 ```haskell
