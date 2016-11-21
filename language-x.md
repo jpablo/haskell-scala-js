@@ -18,6 +18,11 @@ Unholy child of Scala + PureScript + JavasScript + Python + Haskell
 * Sum types
 * String separation of data vs behaviour
 * structural types ???
+* Optional  { } ??
+* Tab as syntax ?
+* Clean syntax / model for type level programming
+* macros
+* type providers ??
 
 # Functions
 Curried by default
@@ -48,32 +53,48 @@ Flexible type annotation syntax
 def f x y = x + y
 
 // 2. PureScript like
- f : Int -> Int -> Int 
+ f : Int => Int => Int 
 def f x y = x + y
 
 // 3. Scala like
 def f(x:Int, y:Int): Int = x + y
 
-g : { name: A, age: Int } -> Int 
+g : { name: A, age: Int } => Int 
 def g { name, age } = age + 1 
 ```
 
 Generic arguments
 ```
-f : A -> B -> A
+f : A => B => A
 def f x y = x
 
 // type constraints
  
 [A : Semiring] 
-f : A -> A -> A
+f : A => A => A
 def f x y = x + y
 
 ```
-# Records
+
+# lambda syntax
 ```
 // option 1
+\x y = x + y
+
+// option 2
+x y => x + y
+
+// option 3
+_ + _
+
+```
+
+# Records
+```
+// option 1   ???
 point = { x: 1, y: 2 }
+// this seems complicated (TypeScript)
+// potential confusion with type ascription
 
 // option 2
 point = { x = 1, y = 2 }
@@ -85,9 +106,10 @@ point = { x = 1, y = 2 }
 type TInt A = (A, Int)
 type I = Int
 type Id X = X
-type Function1 A B = A -> B
+type Function1 A B = A => B
 type Point2 = { x: Int, y: Int }
 type Option1 = Int || Char || Float
+type \A => A
 ```
 
 # Data
