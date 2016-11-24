@@ -2,18 +2,20 @@
 
 # basics
 
-Unholy child of Scala + PureScript + JavasScript + Python + Haskell
+Unholy child of Scala + PureScript + JavasScript + Python + Haskell + OCaml
 
 * Strict
 * Interpreted + Compiled
 * Compiles to JS, JVM, Native
-* Type System similar to PureScript
+* Type System similar to PureScript / Haskell
 * Optionally: flag to turn off the type system
 * Effects?
 * Built-in Liquid Haskell
 * Records with dot notation
 * importers from different languages (typescript, scala, etc)
 * first class type classes
+* first class support for ADTs
+* easy to define interpreters
 * Library of algebraic structures (with common names a la fantasyland? or more beginner friendly names?)
 * Sum types
 * String separation of data vs behaviour
@@ -23,6 +25,34 @@ Unholy child of Scala + PureScript + JavasScript + Python + Haskell
 * Clean syntax / model for type level programming
 * macros
 * type providers ??
+* OCaml object system??
+* awesome repl
+
+
+## ideas
+analogous to how you can use prefixes to string to construct different things in Scala / Python
+
+use prefixes to arrays to indicate for example mutable arrays, immutable arrays, vectors, lists, etc
+
+mutable array
+`marray = m[1,2,3]`
+
+etc
+
+### versions
+maintain multiple versions of the syntax optimized for
+* JS users
+* Python users
+
+Provide ports of the std libraries for each version
+
+### language levels
+0. Dynamic, no effect tracking, etc
+1. Static, no effect tracking
+2. Static, effect tracking
+    explore Eff, Monad transformers, etc
+3. Liquid Types
+4. Dependent types?
 
 # Functions
 Curried by default
@@ -38,13 +68,20 @@ f 1 2 3 == (((f 1) 2) 3)
 But powerful language for pattern matching
 
 ```
-def f(x, y, z) = x + y + z
-
-def f(0, _, _) = 0
+def f | (x, y, z) = x + y + z
+      | (0, _, _) = 0
 
 def g { name, age } = age + 1
 ob = { name: 'John', age: 20 }
 g ob == 21 == g(ob) == (g ob)
+
+
+def a |+| b = ...
+def a + b = ...
+def a . b = ... 
+
+// compilation time (macros)
+transform a + b = (+ a b) 
 ```
 
 Flexible type annotation syntax
@@ -139,7 +176,14 @@ case class Point2[A](x: A, y: A)
 # Behaviour
 ```
 interface Point2 A {
-    p1 + p2 = { x = p1.x + p2.x, y = p1.y + p2.y }
+    def p1 + p2 = { x = p1.x + p2.x, y = p1.y + p2.y }
 }
+
+interface Show A {
+    def show : A => String
+}
+
+
+
 
 ```
