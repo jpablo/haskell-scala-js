@@ -16,7 +16,7 @@ No clear distinction between mutable / immutable interfaces
 
 Hard to read type signatures (CanBuildFrom)
 
-# Scala meta
+## Scala meta
 
 # Worst features
 
