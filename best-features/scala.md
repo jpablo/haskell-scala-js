@@ -1,9 +1,9 @@
 # Best features of Scala
 
-# Concise syntax (compared to Java / C++)
-# Powerful type system
-# Flexible syntax (good for DSLs)
-# Collection libraries
+## Concise syntax (compared to Java / C++)
+## Powerful type system
+## Flexible syntax (good for DSLs)
+## Collection libraries
 a lot of methods
 
 too many of them
