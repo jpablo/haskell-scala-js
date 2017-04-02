@@ -123,7 +123,7 @@ Same as in Python, `s.take(i) + s.drop(i)` always equals `s`
 "Scala".length
 ```
 
-Note: There's no global `len` function as in Python but rather each collection has its own `length` method.
+> Note: There's no global `len` function as in Python but rather each collection has its own `length` method.
 
 ### See Also
 TODO
@@ -315,7 +315,7 @@ We can observe a few differences:
 
  The expression on the right (1) is evaluated as many times as variables on the left (n).
 
-* Scala does not uses indentation as part of the syntax. The body of the `while` loop consists of the block immediately next to it; curly brackets `{}` are required if there is more than one line (as in this case).
+* Scala does not use indentation as part of the syntax. The body of the `while` loop consists of the block immediately next to it; curly brackets `{}` are required if there is more than one line (as in this case).
 
 
 
