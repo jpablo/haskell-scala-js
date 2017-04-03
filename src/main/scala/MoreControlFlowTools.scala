@@ -1,3 +1,5 @@
+import java.io.{File, FileNotFoundException, FileWriter, PrintWriter}
+
 object MoreControlFlowTools {
 
   val input = io.StdIn.readLine("Please enter an integer: ")
@@ -120,14 +122,63 @@ object MoreControlFlowTools {
     List(9, 10, 11, 12)
   )
 
-  for(i <- 0 until 4) yield { for(row <- matrix) yield row(i) }
-
+  for (i <- 0 until 4) yield {
+    for (row <- matrix) yield row(i)
+  }
 
 
   if (!"abc".contains('a')) println("si")
 
 
-//  questions = ["name", "quest", "favorite color"]
-//  answers = ["lancelot", "the holy grail", "blue"]  
-  
+  //  questions = ["name", "quest", "favorite color"]
+  //  answers = ["lancelot", "the holy grail", "blue"]
+
+
+  var break = false
+  while (break) {
+    try {
+      io.StdIn.readLine("Please enter an integer: ").toInt
+      break = true
+    } catch {
+      case ex: NumberFormatException =>
+        println("Oops!  That was no valid number.  Try again...")
+    }
+  }
+
+
+  var writer: FileWriter = null
+  try {
+    writer = new FileWriter("/8745934759/README.md")
+    writer.write("Lorem ipsum dolor sit amet, consectetur adipiscing elit\n")
+  } catch {
+    case ex: FileNotFoundException =>
+      println(s"Error not found: $ex")
+    case ex: Exception =>
+      println(s"Unexpected error: $ex")
+      throw ex
+  } finally {
+    if (writer != null)
+      writer.close()
+  }
+
+def withFileWriter(file: String)(op: FileWriter => Unit) = {
+  val writer = new FileWriter(file)
+  try {
+    op(writer)
+  } finally {
+    writer.close()
+  }
+}
+
+withFileWriter("/8745934759/README.md") { writer =>
+  try {
+    writer.write("Lorem ipsum dolor sit amet, consectetur adipiscing elit\n")
+  } catch {
+    case ex: FileNotFoundException =>
+      println(s"Error not found: $ex")
+    case ex: Exception =>
+      println(s"Unexpected error: $ex")
+      throw ex
+  }
+}
 }
