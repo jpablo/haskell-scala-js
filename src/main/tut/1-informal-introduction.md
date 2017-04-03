@@ -28,6 +28,7 @@ val height = 5 * 9
 width * height
 ```
 
+
 > Note: names created with `val` cannot be reassigned. For such cases you need to use `var`:
 
 ```tut
@@ -43,7 +44,7 @@ The most common numeric types are:
 `Double`
 `BigInt`
 
-Note: There's no built in support for complex or fractional numbers.
+> Note: There's no built in support for complex or fractional numbers.
 
 ## Strings
 There are 3 common ways to create literal strings:
@@ -128,11 +129,12 @@ Same as in Python, `s.take(i) + s.drop(i)` always equals `s`
 ### See Also
 TODO
 
-## Collections
-Scala has a rich library of data structures. Unlike Python's square brackets `[]`, there's no special syntax for lists. 
+## Collections  
+Scala has a rich library of data structures. A few highlights:
 
-By default, only the immutable data structures are imported automatically since they are better aligned with the Functional nature of Scala. 
-
+* There's no special syntax for building lists. 
+* Scala collections are *homogeneous*. They can only hold values of a single type.
+* Only the immutable data structures are imported automatically.
 This means that they can be used right away without any import or prefix. 
 
 ```tut
@@ -143,8 +145,8 @@ List("aa", "bb", "cc")
 In contrast, the **mutable** data structures have to be imported before using them:
 
 ```tut
-import collection.mutable.ArrayBuffer
-ArrayBuffer(1, 2, 3)
+import collection.mutable.Buffer
+Buffer(1, 2, 3)
 ```
 
 Let's start with a versatile immutable collection.
@@ -155,7 +157,15 @@ Let's start with a versatile immutable collection.
 val squares = Vector(1, 4, 9, 16, 25)
 ```
 
-Note: Vectors contains elements of the same type.
+> Note: Vectors contains elements of the same type. We'll write `Vector[A]` to indicate a vector of some type A.
+
+In the previous example Scala was able to infer the type of the elements. In contrast, to create an empty container the element type has to be explicitly declared:
+
+```scala
+val vi = Vector[Int]()
+val vs = Vector[String]()
+// etc
+```
 
 Vectors support many of the same operations as Strings:
 
@@ -201,7 +211,7 @@ v.length
 
 Another commonly used collection is `List`. Lists are in fact **linked lists**, which means that they are very fast at inserting elements at the beginning and iterating sequentially, but accessing element *n* requires scanning the whole list up to the *n-th* element.
 
-Pro tip: `List` is *not* like Python's `list`. Use `Vector` (immutable) or `ArrayBuffer` (mutable) if you need fast access to an arbitrary index.
+Pro tip: `List` is *not* like Python's `list`. Use `Vector` (immutable) or `Buffer` (mutable) if you need fast access to an arbitrary index.
 
 ```tut
 val lst = List(1, 2, 3, 4, 5, 6)
@@ -236,18 +246,18 @@ The code above highligths a suprising (at first) technique used in immutable dat
 
 
 
-### ArrayBuffer
+### Buffer
 
-Probably the most similar structure to Python's `list` is `collection.mutable.ArrayBuffer`.
+Probably the most similar structure to Python's `list` is `collection.mutable.Buffer`.
 
 
 ```tut
-import collection.mutable.ArrayBuffer // required import
+import collection.mutable.Buffer // required import
 
-val b = ArrayBuffer(1, 2, 3, 4, 5)
+val b = Buffer(1, 2, 3, 4, 5)
 ```
 
-All of the operations that we've seen on Strings and Vectors work for ArrayBuffer
+All of the operations that we've seen on Strings and Vectors work for Buffer
 
 ```tut
 b(0)
@@ -268,16 +278,16 @@ b.append(6)
 b
 b.prepend(0)
 b
-b.appendAll(ArrayBuffer(7,8,9))
+b.appendAll(Buffer(7,8,9))
 b
 ```
 
 Since a collection is completely agnostic towards its contents (i.e. "generic") we can have nested buffers
 
 ```tut
-val b1 = ArrayBuffer(1, 2, 3)
-val b2 = ArrayBuffer(4, 5, 6)
-val c = ArrayBuffer(b1, b2)
+val b1 = Buffer(1, 2, 3)
+val b2 = Buffer(4, 5, 6)
+val c = Buffer(b1, b2)
 
 ```
 

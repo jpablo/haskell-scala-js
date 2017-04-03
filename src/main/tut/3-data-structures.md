@@ -270,4 +270,43 @@ for ((q,a) <- questions.zip(answers))
 
 ## Comparing Sequences and Other Types
 
-TODO
+> Note: **This section is NOT required to sort sequences containing tuples or other sequences!!**
+```tut
+List((1,2,3), (1,2,1)).sorted
+```
+> as you can see a lexicography order was used to sort the elements
+
+On the other hand if you want to use compare tuples yourself, then continue reading.
+
+In Scala it is common to divide operations and functions on a given type in two groups:
+
+1. Operations that are intrinsic to a type and constantly used:
+  * Numerical operations on Int: `1 + 2`, `3 * 5`.
+  * Tatking the `lst.head` of a list
+2. Operations that can be considered auxiliary and used only ocasionally:
+  * Comparison operators on tuples `(1,2) < (3,4)`
+  * etc
+
+Operations in the second group are usually available only after importing a specific package that provides the functionality by adding the missing methods / operations to specific types.
+
+The location of such extensions is specific to each library, so it usually involves checking the documentation.
+
+Let's see how we can use the usual comparison operators on tuples
+
+Before (this won't compile!)
+
+```tut:fail
+(1,2,"a") < (1,2,"c")
+```
+
+After importing the required package
+
+```tut
+import math.Ordering.Implicits._
+(1,2,"a") < (1,2,"c")
+```
+
+
+
+
+
