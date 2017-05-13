@@ -1,3 +1,4 @@
+enablePlugins(TutPlugin)
 
 lazy val root = (project in file(".")).
   settings(
@@ -6,7 +7,7 @@ lazy val root = (project in file(".")).
       scalaVersion := "2.12.1",
       version      := "0.1.0-SNAPSHOT"
     )),
-    name := "Python To Scala",
-    tutSettings,
-    tutScalacOptions := Seq("-Dscala.color")
-  )
+    name := "Python To Scala"
+)
+
+scalacOptions in Tut := Seq("-Dscala.color")
