@@ -1,5 +1,33 @@
 # Data Structures
 
+## Brief tour of common data structures
+
+`c.m` == `collection.mutable`
+
+`c.i` == `collection.immutable`
+
+
+| Structure | Description | Immutable | Mutable | Use case
+| ---       | --- | --- | --- | ---
+| Linked list | Linked list | `List` |  | Access the head + tail
+| Growable list | | | `ListBuffer` | Constant time append / prepend 
+| Arrays | Continguos memory region | NA |`Array` | Access arbitrary position
+| Growable Array | | | `ArrayBuffer` | Add / remove elements from the beginning / end
+| Sets | |`Set`| `c.m.Set` 
+| Sorted sets | |`c.i.TreeSet`| `c.m.TreeSet` 
+| Maps||`Map`|`c.m.Map` 
+| Sorted maps||`c.i.TreeMap`|`c.m.TreeMap` 
+
+
+### Lists (immutable)
+`List` implements an immutable linked list.
+### Arrays (mutable, fixed length)
+To efficiently access elements at an arbitrary position you can use an `Array`
+### List buffers
+
+
+
+
 ## More on mutable.Buffer
 
 | Python | Scala `mutable.Buffer`| Notes
@@ -142,8 +170,6 @@ There's a way to access an arbitrary element of a tuple given a index `i` using 
 
 In other words, the type of each element will be lost.
 
-Btw, Python is in a similar situation here since being a dynamic language the interpreter doesn't have any kind of type information until it actually runs the program.
-
 ### Namedtuples / Case Classes
 Instead of `namedtuples` you can use *case classes* which will be discussed at length later
 
@@ -271,6 +297,7 @@ for ((q,a) <- questions.zip(answers))
 ## Comparing Sequences and Other Types
 
 > Note: **This section is NOT required to sort sequences containing tuples or other sequences!!**
+> 
 ```tut
 List((1,2,3), (1,2,1)).sorted
 ```
@@ -282,7 +309,7 @@ In Scala it is common to divide operations and functions on a given type in two 
 
 1. Operations that are intrinsic to a type and constantly used:
   * Numerical operations on Int: `1 + 2`, `3 * 5`.
-  * Tatking the `lst.head` of a list
+  * Taking the `lst.head` of a list
 2. Operations that can be considered auxiliary and used only ocasionally:
   * Comparison operators on tuples `(1,2) < (3,4)`
   * etc
@@ -293,7 +320,7 @@ The location of such extensions is specific to each library, so it usually invol
 
 Let's see how we can use the usual comparison operators on tuples
 
-Before (this won't compile!)
+Before: (won't compile!)
 
 ```tut:fail
 (1,2,"a") < (1,2,"c")

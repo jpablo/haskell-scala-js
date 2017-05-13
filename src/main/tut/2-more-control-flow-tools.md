@@ -233,21 +233,22 @@ So in most cases the empty body (`{}`) is a good substitute for `pass` and in cl
 
 ```python
 def fib(n):
-    """Print a Fibonacci series up to n."""
+    """Calculate a Fibonacci series up to n."""
     a, b = 0, 1
     while a < n:
         print(a, end=' ')
         a, b = b, a+b
-    print()
+    return b
 
 fib(2000)
 ```
+becomes
 
 ```tut:silent
 /**
   * Print a Fibonacci series up to n.
   */
-def fib(n: Int): Unit = {
+def fib(n: Int): Int = { // <= function signature
   var a = 0
   var b = 1
   var tmp = 0
@@ -255,7 +256,7 @@ def fib(n: Int): Unit = {
     print(s"$a ")
     tmp = a + b; a = b; b = tmp
   }
-  println()
+  b     // <= returned value!
 }
 ```
 
@@ -263,67 +264,43 @@ def fib(n: Int): Unit = {
 fib(2000)
 ```
 
+Observe how there is no need to use `return b`. The last expression to be evaluated is the one returned to the caller (in this case `b`).
+
 So far we've relied on Scala's hability to guess the type of our `val`s and `var`s so that we don't have to write them explicitly.
 
-Unfortunately this is not possible on function signatures, where Scala requires us to always declare the type of the arguments. 
+Unfortunately this is not possible on function definitions, where Scala requires us to always declare the type of the arguments. 
 
-In our previous example there are a few differences:
+Let's analize the function definition
 
-* The aformentioned type declaration of `n` as an `Int`: `fib(n: Int)`
-* The declaration of the return value of the function as `Unit`
-* Instead of colons (`:`) we use an equal sign `=`
-* The docstring is written before the function.
-
-`Unit` plays the role of `void` in other languages. It is used to indicate that a function doesn't return anything interesting.
-
-Next example:
-
-Let's return the calculated values instead of just printing them.
-
-```python
-def fib2(n):
-    """Return a list containing the Fibonacci series up to n."""
-    result = []
-    a, b = 0, 1
-    while a < n:
-        result.append(a)
-        a, b = b, a+b
-    return result
+```scala
+def fib(n: Int): Int = { ... }
+//         ^      ^      body
+//         |      |
+//         |   return type    
+//         |
+//   argument type
 ```
-Now that we know how to define functions let's use a different approach than just copying the Python version:
 
-```tut:silent
-def fib2(n: Int): List[Int] = {
-  def go(a: Int, b: Int, result: List[Int]): List[Int] =
-    if (a < n) go(b, a + b, a :: result) else result
-    
-  go(0, 1, List()).reverse
+This says: "*`fib` is a function that takes a single `Int` argument `n`, and returns another `Int`*". 
+
+In general type annotations have the form:
+
+```
+x: T
+```
+
+which is meant to be read: "`x` **is a** `T`".
+
+If a function doesn't return anything meaninful, like in
+
+```scala
+def foo(x: Int): Unit = {
+  println(x + 1)
 }
 ```
+we can use the type `Unit`.
 
-```tut
-val f100 = fib2(100)
-f100
-```
-
-* `def fib2(n: Int): List[Int] =`
-
- `fib2` is a function that takes an integer `n` and returns a `List` of integers.
-* Inside `fib2` we define another (inner) function `go`.
-* which takes 3 arguments: 2 integers and a list of `Int`s.
-* and returns a `List` of `Int`s
-* `go` has 2 branches:
-    * if `a < n` then it calls itself but with different arguments
-     
-      Observe how on every iteration the current value of `a` is prepended to `result` via the operator `::`.
-      
-      This means that result grows backwards, so we have to reverse it at the end.
-    * otherwise, it just returns the accumulated list `result`
-* Once `go` is set up this way, we start the process by calling it
-  with appropriate initial values.
-  
-
-A function like `go` above is called **recursive**. It is always possible to transform a `while` loop into a recursive function definition + invocation with suitable initial values. 
+`Unit` plays the role of `void` in other languages. It is used to indicate that a function doesn't return anything interesting. 
 
 
 ## More on defining functions
@@ -405,7 +382,10 @@ This method is more limited than Python's since only functions that explicitly s
 
 ### Lambda Expressions
 
-The analogous to `lambda a, b: a + b` would be
+```python
+lambda a, b: a + b
+```
+becomes
 
 ```scala
 (a: Int, b: Int) => a + b
@@ -419,9 +399,6 @@ List(1,2,3,4).filter((x: Int) => x % 2 == 0)
 ```tut
 List(1,2,3,4).filter(x => x % 2 == 0)
 ```
-
-or even the more compact
-
 ```tut
 List(1,2,3,4).filter(_ % 2 == 0)
 ```
@@ -449,7 +426,7 @@ def make_incrementor(n):
 
 ```
 
-vs
+becomes
 
 ```tut
 def makeIncrementor(n: Int) =
@@ -458,8 +435,11 @@ def makeIncrementor(n: Int) =
 
 now, what is the return type of the previous function? It is the same as
 
-```tut:silent
-val f: Int => Int = (x: Int) => x + 1
+```scala
+val f: Int => Int = x => x + 1
+//  |   \_______/   \________/
+// name:    |           |
+//         type       value (a lambda)
 ```
 
 The above expression:

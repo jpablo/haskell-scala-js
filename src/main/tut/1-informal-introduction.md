@@ -157,8 +157,6 @@ Let's start with a versatile immutable collection.
 val squares = Vector(1, 4, 9, 16, 25)
 ```
 
-> Note: Vectors contains elements of the same type. We'll write `Vector[A]` to indicate a vector of some type A.
-
 In the previous example Scala was able to infer the type of the elements. In contrast, to create an empty container the element type has to be explicitly declared:
 
 ```scala
@@ -166,6 +164,11 @@ val vi = Vector[Int]()
 val vs = Vector[String]()
 // etc
 ```
+
+> Notes: 
+> 
+> * Types in Scala start with an Uppercase letter by convention.
+> *  Since `Int` and `String` are *different* types, then `Vector[Int]` and `Vector[String]` are *also different*!.
 
 Vectors support many of the same operations as Strings:
 
@@ -232,19 +235,6 @@ Another fast operation on Lists is prepending an element via the `(::)` operator
 val lst2 = 0 :: lst
 lst2.head
 ```
-
-and watch this:
-
-```tut
-lst2.tail.hashCode
-lst.hashCode
-```
-
-Note: `hashCode` is similar to Python's `id` function. It is unique and different for every object unless they are the ***same*** "physical" object in memory. 
-
-The code above highligths a suprising (at first) technique used in immutable data structures to make them performant: they copy and reuse existing data as much as possible.
-
-
 
 ### Buffer
 
