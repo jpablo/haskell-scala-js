@@ -188,10 +188,10 @@ After that you can explore the project on the panel to the left and start making
 
 There are a few concepts that are useful to understand while using Scala
 
-### Java Language
+### The Java Language
 You probably already know about the Java Programming Language. It is an Object Oriented statically typed language released by Sun Microsystems back in 1995.
 
-Unlike languages like C or C++, Java doesn't compile to native code, but rather to *bytecode* that can be executed on any *Java Virtual Machine* (`JVM`).
+Unlike languages like C or C++, Java doesn't compile directly to native code, but rather to *bytecode* that can be executed on any *Java Virtual Machine* (`JVM`).
 
 ### JVM
 A *Java Virtual Machine* or *JVM* for short is a an idealized version of a computing machine. The idea is that once a program has been compiled to bytecodes it can then run unmodified into any platform for which an JVM exists.
@@ -208,14 +208,11 @@ The Java std library is accessible in Scala programs under the `java.*` namespac
 
 ## `sbt`
 
-`sbt` is a commonly used build tool for Scala. It can take care amongs other things
+`sbt` is a commonly used build tool for Scala. It can take care amongst other things:
 
 * Start a project from scratch via templates
 * Managing dependencies
 * Building a project
 * Running tests
 * etc
-
-
-
 

@@ -1,5 +1,11 @@
 # Scala as a calculator
-## Numbers
+All the commands so far will assume that you started the Scala REPL via inside the `hello-world` project created in the introduction.
+
+```
+$ sbt console
+```
+## Numbers and arithmetic
+
 ```tut
 2 + 2
 50 - 5*6
@@ -8,10 +14,10 @@
 ```
 As you can see, each result has the type indicated to the left.
 
-> Note: `8/5` performs integer division. In order to get a Float you need to convert one of the arguments:
+> Note: `8/5` performs integer division. In order to get a floating point operation you need to convert one of the arguments:
 
 ```tut
-8.toFloat / 5
+8.toDouble / 5
 ```
 
 There's no predefined operator to calculate powers, but you can use `Math.pow`
@@ -36,15 +42,34 @@ var x = 1
 x = x + 1
 ```
 
-The most common numeric types are:
+## Numeric types
+Python has 4 main numeric types. All have a corresponding type in Scala except `complex`.
 
-`Int`
-`Long`
-`Float`
-`Double`
-`BigInt`
+| Python | Scala |
+| ---    |---    |
+| `bool` | `Boolean`
+| `int` | `BigInt`
+| `float` | `Double`
+| `complex` | NA
 
-> Note: There's no built in support for complex or fractional numbers.
+
+From the Scala point of view these are the numeric types:
+
+
+| Type | T.MinValue | T.MaxValue | Example
+| --- | --- | --- | ---
+|`Int` | `-2147483648` | `2147483647` | `100`
+|`Long` | `-9223372036854775808` | `9223372036854775807` | `2147483648L`
+|`Float` | `-3.4028235E38` | `3.4028235E38` | `1.23F`
+|`Double` | `-1.7976931348623157E308` | `1.7976931348623157E308` | `1.23`
+|`BigInt` | Unbounded (limited by memory) | Unbounded | `BigInt(123)`
+| `BigDecimal` | Unbounded (limited by memory) | Unbounded | `BigDecimal(1.23)`
+
+For all bounded types you can obtain the min/max values using the `MinValue` / `MaxValue` functions.
+
+```tut
+Int.MaxValue
+```
 
 ## Strings
 There are 3 common ways to create literal strings:
@@ -55,6 +80,8 @@ There are 3 common ways to create literal strings:
 "spam eggs"
 "doesn't"
 "\"abc\""
+"La niña comía rábanos"
+"The 🐱 ate the 🍎" 
 ```
 
 ### Triple quotes
@@ -65,7 +92,8 @@ There are 3 common ways to create literal strings:
 multiline
 word
 """
-println("""c:\some\name""")
+"""c:\some\name"""
+"""{"x":1, "y":"2"}"""
 ```
 
 Translation: `print(s)` becomes `println(s)`
@@ -88,133 +116,83 @@ Characters have a special type in scala `Char` and are constructed using single 
 ### String operations
 A String is conceptually a sequence of characters. 
 
-#### Concatenate
-```tut
-"The 🐱 " + "ate the 🍎" 
-```
+<table>
+<tbody>
+<tr>
+<td></td>
+<td>Python</td>
+<td>Scala</td>
+<td>Notes</td>
+</tr>
 
-#### Indexing
-They can be indexed using the `()` syntax:
+<tr>
+<td>Concatenate</td>
+<td><pre>"a" + "b"</pre></td>
+<td><pre>"a" + "b"</pre></td>
+</tr>
 
-```tut
-val word = "Scala"
-word(0)
-word(4)
-```
-> Notes:
-> * The result is a `Char`, not a `String`
-> * Indices cannot be negative.
+<tr>
 
-#### Slices
+<td>Indexing</td>
 
-```tut
-"Scala".slice(0,3)
-"Scala".slice(3,5)
-```
+<td>
+<pre>word = "Scala"
+word[0] == "S"
+word[4] == "a"</pre>
+</td>
+
+<td>
+<pre>val word = "Scala"
+word(0) == 'S'
+word(4) == 'a'</pre>
+</td>
+
+<td>
+<ul>
+<li> Insted of square brackets `seq[i]` Scala uses parenthesis `seq(i)` to access the `i-th` element of a sequence.
+<li> The result is a `Char`, not a `String`
+<li> Indices cannot be negative.
+<ul>
+</td>
+</tr>
+
+<tr>
+<td>Slices</td>
+<td><pre>"Python"[2:6] == "thon"</pre></td>
+<td><pre>"Python".slice(2,6) == "thon"</pre></td>
+<td>There is no syntax for slices (you have to use the `.slice` method)<td>
+</tr>
+
+<tr>
+<td>Length</td>
+<td><pre>len("Python") == 6</pre></td>
+<td><pre>"Python".length == 6</pre></td>
+<td>There's no global `len` function as in Python but rather each collection has its own `length` method.<td>
+</tr>
 
 
-#### take, drop
-```tut
-"Scala".take(3) + "Scala".drop(3)
-```
-Same as in Python, `s.take(i) + s.drop(i)` always equals `s`
+</tbody>
+</table>
 
-#### length
-```tut
-"Scala".length
-```
-
-> Note: There's no global `len` function as in Python but rather each collection has its own `length` method.
-
-### See Also
-TODO
 
 ## Collections  
 Scala has a rich library of data structures. A few highlights:
 
-* There's no special syntax for building lists. 
+* There's no special syntax for building lists. (e.g. `[1,2,3]`)
 * Scala collections are *homogeneous*. They can only hold values of a single type.
-* Only the immutable data structures are imported automatically.
-This means that they can be used right away without any import or prefix. 
-
-```tut
-Vector(1, 3, 3)
-List("aa", "bb", "cc")
-```
-
-In contrast, the **mutable** data structures have to be imported before using them:
-
-```tut
-import collection.mutable.Buffer
-Buffer(1, 2, 3)
-```
-
-Let's start with a versatile immutable collection.
-
-### Vector
-
-```tut
-val squares = Vector(1, 4, 9, 16, 25)
-```
-
-In the previous example Scala was able to infer the type of the elements. In contrast, to create an empty container the element type has to be explicitly declared:
-
-```scala
-val vi = Vector[Int]()
-val vs = Vector[String]()
-// etc
-```
-
-> Notes: 
-> 
-> * Types in Scala start with an Uppercase letter by convention.
-> *  Since `Int` and `String` are *different* types, then `Vector[Int]` and `Vector[String]` are *also different*!.
-
-Vectors support many of the same operations as Strings:
-
-```tut
-squares(0)
-squares(1)
-
-squares.slice(1,3)
-
-squares.take(2)
-squares.drop(2)
-```
-
-To concatenate two Vectors (and other sequences) you can use the `(++)` operator
-
-```tut
-Vector(1, 2) ++ Vector(3, 4)
-```
-
-To add elements at the beginning or the end you can use the `(+:)` and `(:+)` operators
-
-```tut
-0 +: Vector(1, 2)
-Vector(1, 2) :+ 3
-```
-
-> Hint: The colon goes on the Vector side, as a reminder that the operator belongs to the Vector and not to the number.
-
-Since we're using the *immutable* Vector what you get is a new copy of the original Vector.
+* Most of the collections have a *immutable* version and a *mutable* version. In general only the immutable variant is imported automatically (`Array` is an exception).
+* The immutable versions are probably more performant than what you'd expect.
+* When in doubt, is better to use the immutable variant and only switch to the mutable variant when you need it for reasons like convenience, performance, etc.
 
 
-```tut
-val v = Vector(1, 2)
-v :+ 3
-v
-```
+Let's start with one of the most popular immutable collections.
 
-```tut
-v.length
-```
 
-### List
+### `List`
 
-Another commonly used collection is `List`. Lists are in fact **linked lists**, which means that they are very fast at inserting elements at the beginning and iterating sequentially, but accessing element *n* requires scanning the whole list up to the *n-th* element.
+Lists are in fact **linked lists**, which means that they are very fast at inserting elements at the beginning and iterating sequentially, but accessing element *n* requires scanning the whole list up to the *n-th* element.
 
-Pro tip: `List` is *not* like Python's `list`. Use `Vector` (immutable) or `Buffer` (mutable) if you need fast access to an arbitrary index.
+Pro tip: `List` is *not* like Python's `list`. Use `Vector` (immutable) or `Array` (mutable) if you need fast access to an arbitrary index.
 
 ```tut
 val lst = List(1, 2, 3, 4, 5, 6)
@@ -236,18 +214,20 @@ val lst2 = 0 :: lst
 lst2.head
 ```
 
-### Buffer
+### mutable.ArrayBuffer
 
-Probably the most similar structure to Python's `list` is `collection.mutable.Buffer`.
+Probably the most similar structure to Python's `list` is `collection.mutable.ArrayBuffer`.
+
+The "Buffer" part refers to the fact that the size can be changed, as opposed to the `Array` which has a fixed size (see below).
 
 
 ```tut
-import collection.mutable.Buffer // required import
+import collection.mutable.ArrayBuffer // required import
 
-val b = Buffer(1, 2, 3, 4, 5)
+val b = ArrayBuffer(1, 2, 3, 4, 5)
 ```
 
-All of the operations that we've seen on Strings and Vectors work for Buffer
+All of the operations that we've seen on Strings and Vectors work for `ArrayBuffer`:
 
 ```tut
 b(0)
@@ -257,7 +237,7 @@ b.take(2)
 b.drop(2)
 ```
 
-Since they are mutable they support a few extra operations to modify / append / preppend / extend the buffer
+Since they are mutable they support a few extra operations to modify / append / preppend / extend the Arraybuffer
 
 ```tut
 b(0) = 2 // modify in place
@@ -268,16 +248,16 @@ b.append(6)
 b
 b.prepend(0)
 b
-b.appendAll(Buffer(7,8,9))
+b.appendAll(ArrayBuffer(7,8,9))
 b
 ```
 
 Since a collection is completely agnostic towards its contents (i.e. "generic") we can have nested buffers
 
 ```tut
-val b1 = Buffer(1, 2, 3)
-val b2 = Buffer(4, 5, 6)
-val c = Buffer(b1, b2)
+val b1 = ArrayBuffer(1, 2, 3)
+val b2 = ArrayBuffer(4, 5, 6)
+val c = ArrayBuffer(b1, b2)
 
 ```
 
@@ -286,6 +266,22 @@ let's update the element (0,0)
 ```tut
 c(0)(0) += 1
 c
+```
+
+As we saw, `ArrayBuffer` allow not only updating its contents in-place but also modifing the length of the array. This imposes a small overhead; if you need maximum performance it's better to use an `Array` which allows in place modification but cannot change its size.
+
+You can build an ArrayBuffer and the transform it into an Array
+```tut
+b.toArray
+```
+
+or if you know the size beforehand it's better to create the Array directly
+
+```tut
+val arr = Array(1,2,3)
+arr(0) += 1
+arr
+Array.ofDim[Int](5)
 ```
 
 # First Steps Towards Programming
