@@ -1,6 +1,25 @@
 import java.io.{File, FileNotFoundException, FileWriter, PrintWriter}
 
 object MoreControlFlowTools {
+  {
+import util.Random.nextInt
+val x = nextInt(3) - 1
+val message =
+  if (x < 0) "Found a negative number"
+  else if (x == 0)  "Found zero"
+  else if (x > 1) "Found a positive number"
+
+
+println(message)
+  }
+
+  val lst = List(Vector(1,2), Vector(), Vector(3))
+for {
+  v <- lst
+  i <- v
+} yield i+1
+
+
 
   val input = io.StdIn.readLine("Please enter an integer: ")
   var y     = input.toInt // 💣

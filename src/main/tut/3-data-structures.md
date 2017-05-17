@@ -2,48 +2,43 @@
 
 ## Brief tour of common data structures
 
-`c.m` == `collection.mutable`
+Scala has a rich collection of data structures. Each data structure has a few unique operations that are specific to it but also implements a large number of methods that are the same across all structures.
 
-`c.i` == `collection.immutable`
+For the rest of the section assume the following imports:
 
+```scala
+import collection.{mutable, immutable}
+```
 
-| Structure | Description | Immutable | Mutable | Use case
-| ---       | --- | --- | --- | ---
-| Linked list | Linked list | `List` |  | Access the head + tail
-| Growable list | | | `ListBuffer` | Constant time append / prepend 
-| Arrays | Continguos memory region | NA |`Array` | Access arbitrary position
-| Growable Array | | | `ArrayBuffer` | Add / remove elements from the beginning / end
-| Sets | |`Set`| `c.m.Set` 
-| Sorted sets | |`c.i.TreeSet`| `c.m.TreeSet` 
-| Maps||`Map`|`c.m.Map` 
-| Sorted maps||`c.i.TreeMap`|`c.m.TreeMap` 
-
-
-### Lists (immutable)
-`List` implements an immutable linked list.
-### Arrays (mutable, fixed length)
-To efficiently access elements at an arbitrary position you can use an `Array`
-### List buffers
+| Structure | Immutable | Mutable | Use case
+| ---       |  --- | --- | ---
+| Linked list |  `List` |  | Access the head + tail
+| Growable list |  | `ListBuffer` | Constant time append / prepend 
+| Array (Continguos memory region) ||`Array`, `BufferArray` | Access arbitrary position
+| Growable Array | | `ArrayBuffer` | Add / remove elements from the beginning / end
+| Sets |`Set`| `mutable.Set` 
+| Sorted sets |`immutable.TreeSet`| `mutable.TreeSet` 
+| Maps |`Map`|`mutable.Map` 
+| Sorted maps |`immutable.TreeMap`|`mutable.TreeMap` 
 
 
 
+## More on mutable.ArrayBuffer
 
-## More on mutable.Buffer
-
-| Python | Scala `mutable.Buffer`| Notes
+| Python array | Scala `ArrayBuffer`
 | ---    | --- |---
-|`list = []` | `val b = Buffer[Int]()`
-|`list.append(x)`|`b.append(x)`
-|`list.extend(iterable)`|`b.appendAll(iterable)`
-|`list.insert(i,x)`|`b.insert(i, elems*)`
-|`list.remove(x)`|`b.remove(i)`
-|`list.pop([i])`|`b.remove(b.length - 1)`
-|`list.clear()`|`b.clear()`
-|`list.index(x[,start[,end]])`|`b.indexOf(x[,start])`
-|`list.count(x)`|`b.count(_ == x)`
-|`list.sort([key])`|`b.sorted` <br>`b.sortBy(key)`| Creates a new Buffer
-|`list.reverse()`|`b.reverse`
-|`list.copy()`|`b.clone`
+|`a = []` | `val b = mutable.ArrayBuffer[Int]()`
+|`a.append(x)`|`b.append(x)` or<br>`b += x`
+|`a.extend(iterable)`|`b.appendAll(iterable)` or<br>`b ++= iterable`
+|`a.insert(i,x)`|`b.insert(i, elems*)`
+|`a.remove(x)`|`b.remove(i)`
+|`a.pop([i])`|`b.remove(b.length - 1)`
+|`a.clear()`|`b.clear()`
+|`a.index(x[,start[,end]])`|`b.indexOf(x[,start])`
+|`a.count(x)`|`b.count(_ == x)`
+|`a.sort([key])`|`b.sorted` <br>`b.sortBy(key)`
+|`a.reverse()`|`b.reverse`
+|`a.copy()`|`b.clone`
 
 ### Stacks
 Scala has a `Stack` class that is deprecated now. The recommended alternative is to use a `List` assigned to a `var`. 
@@ -73,8 +68,7 @@ q
 ```python
 squares = [x**2 for x in range(10)]
 ```
-
-Translates into
+becomes
 
 ```tut
 val squares = for(x <- 0 until 10) yield x*x
@@ -84,7 +78,7 @@ val squares = for(x <- 0 until 10) yield x*x
 ```python
 [(x, y) for x in [1,2,3] for y in [3,1,4] if x != y]
 ```
-Translates
+becomes
 
 ```tut
 for {
@@ -127,8 +121,18 @@ lists.flatten
 For comprehensions have the effect of *flattening* inner structures:
 
 ```tut
-val lst = List(Vector(1,2), Vector(), Vector(3))
-for(v <- lst; i <- v) yield i+1
+val vs = Vector(Vector(1,2), Vector(), Vector(3))
+for {
+  v <- vs // top level
+  i <- v  // 2nd level
+} yield i + 1
+
+```
+(same as)
+
+```python
+vs = [[1,2], [], [3]
+[i + 1 for v in vs for i in v]
 ```
 
 If we don't want this then we can nest them:
@@ -142,6 +146,19 @@ val matrix = List(
 )
 
 for(i <- 0 until 4) yield { for(row <- matrix) yield row(i) }
+```
+
+(same as)
+
+```python
+matrix = [
+    [1, 2, 3, 4],
+    [5, 6, 7, 8],
+    [9, 10, 11, 12]
+]
+
+[[row[i] for row in matrix] for i in range(4)]
+
 ```
 
 (which can be done with the builtin `matrix.transpose`)

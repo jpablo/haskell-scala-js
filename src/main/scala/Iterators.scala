@@ -6,3 +6,8 @@ object Iterators {
   }
 
 }
+
+
+class Factory(x: Int) {
+  def apply(y: Int) = x + y
+}

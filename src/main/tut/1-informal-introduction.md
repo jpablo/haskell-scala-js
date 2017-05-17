@@ -286,9 +286,18 @@ Array.ofDim[Int](5)
 
 # First Steps Towards Programming
 
-Let's generate the classic fibonacci series (mutable version)
+Let's generate the classic fibonacci series
 
-```tut
+```python
+a, b = 0, 1
+while b < 10:
+    print(b)
+    a, b = b, a+b
+```
+
+becomes
+
+```tut:book
 var a = 0
 var b = 1
 var tmp = 0
@@ -301,15 +310,16 @@ while (b < 10) {
 ```
 
 We can observe a few differences: 
-* The Python version doesn't need the temporal variable because multiple assignment: `a, b = b, a + b` works element by element: "n to n"
 
- In contrast, Scala has a special version that is more like "n to 1" that works like this
+* The Python version doesn't need the temporal variable because multiple assignment: `a, b = b, a + b` works element by element.
+
+ In contrast, Scala has a special version that works like this
 
  ```tut
  val x, y, z = Math.random 
  ```
 
- The expression on the right (1) is evaluated as many times as variables on the left (n).
+ The expression on the right is evaluated as many times as variables on the left.
 
 * Scala does not use indentation as part of the syntax. The body of the `while` loop consists of the block immediately next to it; curly brackets `{}` are required if there is more than one line (as in this case).
 

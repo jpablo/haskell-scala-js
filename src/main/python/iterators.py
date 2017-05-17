@@ -1,3 +1,12 @@
+
+
+class Factory:
+    def __init__(self, x):
+        self.x = x
+
+    def __call__(self, y):
+        return self.x + y
+
 class Reverse:
     """Iterator for looping over a sequence backwards."""
     def __init__(self, data):

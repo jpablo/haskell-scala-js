@@ -4,39 +4,44 @@ Most of the usual Python control flow constructs translate into Scala but there 
 
 ## `if` Expressions
 
-First lets copy the Python version
+In Scala (unlike Python) an `if` is an **expression**, which means that it has a return value.
 
-```scala
-val input = io.StdIn.readLine("Please enter an integer: ")
-var x = input.toInt // 💣
-if (x < 0) {
-  println("Negative changed to zero")
-  x = 0
-} else if (x == 0)
-  println("Zero")
-else if (x == 1)
-  println("Single")
-else
-  println("More")
+Consider the following Python code
+
+```python
+from random import randint
+x = randint(-1,0,1)
+message = ''
+if x < 0:
+    message = "Found a negative number"
+elif x == 0:
+    message = "Found zero"
+elif x > 1:
+    message = "Found a positive number"
+    
+print(message)
 ```
-> Note: The 💣 comment indicates that this line can throw an exception (why?)
 
-While this works, we can write a slightly more idiomatic version
+becomes
 
 ```scala
-val input = io.StdIn.readLine("Please enter an integer: ")
-val x0 = input.toInt // 💣
-val negative = x0 < 0
+import util.Random.nextInt
+val x = nextInt(3) - 1
 val message =
-  if (negative) "Negative changed to zero"
-  else if (x0 == 0) "Zero"
-  else if (x0 == 1) "Single"
-  else "More"
-val x = if (negative) 0 else x0
+  if (x < 0) "Found a negative number"
+  else if (x == 0)  "Found zero"
+  else if (x > 1) "Found a positive number"
+
 println(message)
 ```
 
-In Scala (unlike in Python) an `if` is a **expression**, which means that it has a return value. In the first case it is a String and in the second case an Int.
+Python's `if` doesn't return anything, so we cannot say 
+
+```python
+message = if x < 0: ...
+```
+thereby forcing us to create one extra mutable variable (`message`).
+
 
 > Python actually has a second `if` for that behaves in a similar (albeit limited) way:
 
@@ -44,12 +49,6 @@ In Scala (unlike in Python) an `if` is a **expression**, which means that it has
 # Python
 x = 0 if x < 0 else x0
 ```
-
-The second version has a few differences:
-
-* We got rid of the `var x` by introducing an auxiliary value `x0`.
-* We separated the (trivial) "business logic" from the message logic.
-* Consolidated the `println` statement to a single place.
 
 ## `for` comprehensions
 
@@ -60,20 +59,20 @@ They operate in two ways.
 ### As `for` loops
 The first one is similar to a `for` statement in Python:
 
-```tut
-val words = List("Cat 🐈", "Dog 🐕", "Monkey 🐒")
-for (w <- words)
-  println(s"$w ${w.length}")  // have to use string interpolation
-```
-
-Compare with the Python version:
-
 ```python
-## 🐍
-words = ["Cat 🐈", "Dog 🐕", "Monkey 🐒"]
+words = ["Cat", "Dog", "Monkey"]
 for w in words:
     print(w, len(w))
 ```
+becomes
+
+```tut:book
+val words = List("Cat", "Dog", "Monkey")
+for (w <- words)
+  println(w, w.length)
+```
+
+
 
 > Note: `println` does not automatically transforms a list of arguments into a single space-separated string (as Python's `print` does).
 
@@ -81,22 +80,22 @@ for w in words:
 A nested for loop in Python:
 
 ```python
-## 🐍
 for x in range(2):
     for y in range(x, 4):
-        print (x, y)
+        for z in range(y, 2):
+            print (x, y, z)
 ```
 
-Can be written in Scala:
+becomes
 
-```tut
+```tut:book
 for {
   x <- 0 until 2
   y <- x until 4
-} println(s"$x $y")
+  z <- y until 2
+} println(x, y, z)
 ```
 
-Which is pretty much the same except that the Scala version is "flatter".
 
 ### As lists comprehensions
 
@@ -104,11 +103,10 @@ The second form operates similarly to Python's list comprehensions:
 
 
 ```python
-## 🐍
 words_length = [len(w) for w in words]
 print(words_length)
 ```
-vs
+becomes
 
 ```tut
 val wordsLength = for (w <- words) yield w.length
@@ -130,22 +128,28 @@ As you can see the only difference is that now we are using the keyword **`yield
 
 To iterate over the indices of a sequence you could do the same trick as in Python:
 
-```tut
-val a = List("a", "b", "c")
-for (i <- 0 until a.length) println(s"$i ${a(i)}")
+```python
+lst = ["a", "b", "c"]
+for i in range(len(lst)): print(i, lst[i])
 ```
 
-but there is a niftier way using the standard method `indices`
+becomes
 
 ```tut
-for (i <- a.indices) println(s"$i ${a(i)}")
+val lst = List("a", "b", "c")
+for (i <- 0 until lst.length) println(i, lst(i))
+```
+
+but there is a niftier way using the standard method `.indices`
+
+```tut
+for (i <- lst.indices) println(i, lst(i))
 ```
 
 ## Enumerate
 Another standard function in Python is `enumerate`:
 
 ```python
-## 🐍
 seasons = ['Spring', 'Summer', 'Fall', 'Winter']
 list(enumerate(seasons))
 [(0, 'Spring'), (1, 'Summer'), (2, 'Fall'), (3, 'Winter')]
@@ -167,7 +171,6 @@ Let's examine `break` first.
 Consider the following Python code:
 
 ```python
-## 🐍
 for n in range(2, 10):
     for x in range(2, n):
         if n % x == 0:
@@ -179,7 +182,7 @@ for n in range(2, 10):
 
 This can be translated mechanically to the following Scala code
  
-```tut
+```tut:book
 for (n <- 2 until 10) {
   var break = false
   var x = 2
@@ -198,7 +201,6 @@ for (n <- 2 until 10) {
 `continue` can be treated in a similar way:
 
 ```python
-## 🐍
 for num in range(2, 10):
     if num % 2 == 0:
         print("Found an even number", num)
@@ -206,7 +208,9 @@ for num in range(2, 10):
     print("Found a number", num)
 ```
 
-```tut
+becomes
+
+```tut:book
 var num = 2
 while (num < 10) {
   if (num % 2 == 0)
@@ -268,7 +272,7 @@ Observe how there is no need to use `return b`. The last expression to be evalua
 
 So far we've relied on Scala's hability to guess the type of our `val`s and `var`s so that we don't have to write them explicitly.
 
-Unfortunately this is not possible on function definitions, where Scala requires us to always declare the type of the arguments. 
+This is not possible on function definitions, where Scala requires us to always declare the type of the arguments. 
 
 Let's analize the function definition
 
@@ -289,23 +293,45 @@ In general type annotations have the form:
 x: T
 ```
 
-which is meant to be read: "`x` **is a** `T`".
+which is meant to be read: "`x` is a variable that can only hold Ts".
 
-If a function doesn't return anything meaninful, like in
+For example:
+
+| | | example |
+|---| ---| --- |
+| `s: String` | s is a String | `"abc"`
+| `vec: Array[Double]`| vec is an array of Doubles | `Array(0.1, 0.2)`
+| `mat: Array[Array[Double]]` | mat is an array of array of Doubles | `Array(Array(0.1, 0.2))`
+| `a: Any` | a can be anything | `1` or `'c'` or `List()`, etc.
+
+If a function doesn't return anything meaninful we can use the type `Unit`.
+
+```python
+def foo(x):
+    print x + 1
+```
+
+becomes
 
 ```scala
 def foo(x: Int): Unit = {
   println(x + 1)
 }
 ```
-we can use the type `Unit`.
 
-`Unit` plays the role of `void` in other languages. It is used to indicate that a function doesn't return anything interesting. 
+
+In other languages `Unit` is called `void`.
+
+A function signature with `Unit` should alerts us that the function's main purpose is not calculate but to interact with the world. For example it could print to the console, or write to a database, or remove a file.
 
 
 ## More on defining functions
 
 ### Default argument values
+```python
+def ask_ok(prompt, retries=4, reminder='Please try again!'): ...
+```
+becomes
 
 ```scala
 def askOk(prompt: String, retries: Int = 4, reminder: String = "Please try again!") = ???
@@ -326,7 +352,7 @@ def parrot(voltage, state='a stiff', action='voom', type='Norwegian Blue'):
     print("-- Lovely plumage, the", type)
     print("-- It's", state, "!")
 ```
-vs
+becomes
 
 ```tut:silent
   def parrot(voltage: Any, state: String = "a stiff", action: String = "voom", `type`: String = "Norwegian Blue") = {
@@ -354,14 +380,20 @@ Note the type of the `voltage: Any` argument. In the Python function the argumen
 
 When a function needs to take an arbitrary number of arguments the following syntax can be used:
 
+```python
+def print_multiple_items(separator, *args):
+    print(separator.join(args))
+```
+becomes
+
 ```tut
-def printMultipleInts(separator: String, args: Int*) =
+def printMultipleItems(separator: String, args: Any*) =
   println(args.mkString(separator))
   
-printMultipleInts(":", 1,2,3,4)
+printMultipleItems(":", 1,2,3,4)
 ```
 
-Inside the function `args` will be a sequence of integers which we can manipulate with the usual methods from the standard library.
+Inside the function `args` will be a sequence of values which we can manipulate with the usual methods from the standard library.
 
 > Note: There is no analogue to the `**kwargs` form that is common in Python libraries.
 > 
@@ -372,15 +404,22 @@ Inside the function `args` will be a sequence of integers which we can manipulat
 
 The opposite situation to variable arguments would be when a function receives a variable list of arguments and the caller has the arguments inside a list for example:
 
+```python
+my_args = [1,2,3,4]
+print_multiple_items(":",*my_args)
+```
+
+becomes
+
 ```tut
 val myArgs = List(1,2,3,4)
-
-printMultipleInts(":", myArgs:_*)
+printMultipleItems(":", myArgs:_*)
 ```
 
 This method is more limited than Python's since only functions that explicitly support varargs can be used with this "spread" operator.
 
 ### Lambda Expressions
+A lambda expresion is just a name for an expression that represents a function but doesn't necessarily have a name. 
 
 ```python
 lambda a, b: a + b
@@ -420,7 +459,6 @@ List(1,2,3,4).reduce((x,y) => x + y)
 Lambdas can be the return value of functions:
 
 ```python
-## 🐍
 def make_incrementor(n):
     return lambda x: x + n
 
@@ -444,7 +482,7 @@ val f: Int => Int = x => x + 1
 
 The above expression:
 
-* Declares a `val` with name `f`
+* Declares a value with name `f`
 * and type `Int => Int`
 * and value `(x: Int) => x + 1` (which is a lambda)
 
