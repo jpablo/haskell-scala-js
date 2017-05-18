@@ -324,6 +324,47 @@ In other languages `Unit` is called `void`.
 
 A function signature with `Unit` should alerts us that the function's main purpose is not calculate but to interact with the world. For example it could print to the console, or write to a database, or remove a file.
 
+### Generic functions
+Many functions need to know the type of its arguments so that it can invoke methods / call functions or them.
+
+```tut:silent
+def add1(x: Int) = x + 1
+//                   ^
+//                   |
+//            plus operator
+```
+
+The compiler needs to know that `x` is an `Int` (`x: Int`) in order to allow the use of the plus operator.
+
+But what if within the body of the function we don't actually make use of any method or property associated with the type? In such cases we can make the function *agnostic* to the type of the argument. 
+
+This is common for functions that wrap arguments, for example
+
+```tut:silent
+def toList[A](x: A) = List(x)
+//         ^   
+//         |
+//  A is an unspecified type (a "type argument")
+//  Note the use of square brackets [] !!
+
+// full form:
+toList[Int](1) == List(1)
+
+// short form:
+toList(1) == List(1)
+```
+
+This function takes 2 arguments: (1) a type, called `A` inside the function and (2) a value of type `A`.
+
+In many cases (but not all), the type argument can be inferred by something else (in this case by the value argument `x`).
+
+One example when the type cannot be inferred is when we want to construct an empty list:
+
+```tut:silent
+List[Int]()
+```
+
+Clearly in this case the compiler doesn't have any extra information so we have to provide the type of the elements explicitly.
 
 ## More on defining functions
 

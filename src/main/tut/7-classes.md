@@ -52,7 +52,7 @@ class ClassName {
 }
 ```
 
-### Class Objects
+### Class objects
 Consider the following class declaration:
 
 ```python
@@ -188,6 +188,7 @@ object Dog {
 
 While a companion object can be defined everywhere, if it's defined in the same file than the class then it can access the companion class private members (and viceversa)
 
+
 ## Inheritance
 
 ```python
@@ -224,6 +225,49 @@ class DerivedClassName extends Base1 with Base2 with Base3 {
 }
 ```
 
+## Abstract members / incomplete definitions
+
+Consider the following class
+
+```tut:silent
+abstract class Showable {
+  def show(): String
+}
+```
+
+Notice how we didn't provide any implementation of the method `show`. Such methods are called *abstract*. If there is at least one abstract method in a class declaration Scala requires us to indicate that by using the `abstract` modifier.
+
+An abstract class *cannot* be instanciated directly (since it is "incomplete"). 
+
+Nevertheless, it is very useful since it provides a *contract* about some functionality.
+
+For example, we can define a function that operates on Showables:
+
+```tut:silent
+def print(s: Showable) = s.show()
+```
+
+In order to use `show` we can use inheritance:
+
+```tut:silent
+class MyClass(x: Int) extends Showable {
+  def show(): String = s"[$x]"
+}
+
+class MyUnrelatedClass(l: List[Int]) extends Showable {
+  def show(): String = s"count: ${l.length}"
+}
+
+val mc = new MyClass(10)
+
+print(mc) == "[10]"
+
+val uc = new MyUnrelatedClass(List(1,2,3))
+
+print(uc) == "count: 3"
+```
+
+The beauty of this is that `print` can ignore all the "irrelevant" (to the task at hand) details about the concrete argument, as long as it complies with the contract.
 
 ### Objects that behave like functions
 
@@ -293,7 +337,7 @@ This idiom is used a lot in Scala code, so it's very useful to be familiar with 
 
 Python has the notion of *iterable* objects capable of returning its members one at a time. This is accomplished by implementing a method `__iter__` that returns an *iterator*.
 
-An Iterator is an object  has a method `__next__` to get the next element of the container. 
+An Iterator is an object that has a method `__next__` to get the next element of the container. 
 
 
 The standard function `iter()` invokes `__iter__` while `next()` invokes `__next__()`
@@ -322,7 +366,7 @@ it.next
 
 in Python iterators are extremly common. In fact, `for` expressions are implemented in terms of `iter()` / `next()`.
 
-For example:
+For example, say we want to be able to use instances of our class in `for` comprehensions:
 
 ```python
 class Reverse:
@@ -358,7 +402,7 @@ Any class that implements `foreach` can be used as part of a `for` expression.
 
 
 ```tut:silent
-class Reverse[Elem](val data: Seq[Elem]) {
+class Reverse[Elem](data: Seq[Elem]) {
   
   def foreach(f: Elem => Unit) = {
     var i = data.length - 1
@@ -380,7 +424,7 @@ for (i <- r) println(i)
 If a class also *extends* the trait `Traversable` then it gains access to *a lot* of methods for free.
 
 ```tut:silent
-class Reverse2[Elem](val data: Seq[Elem]) extends Traversable[Elem] {
+class Reverse2[Elem](data: Seq[Elem]) extends Traversable[Elem] {
   
   def foreach[U](f: Elem => U) = {
     var i = data.length - 1
@@ -416,7 +460,7 @@ def iterator: Iterator[Elem]
 Let's reimplement our silly container using `Iterable`:
 
 ```tut:silent
-class Reverse3[Elem](val data: Seq[Elem]) extends Iterable[Elem] {
+class Reverse3[Elem](data: Seq[Elem]) extends Iterable[Elem] {
   
   def iterator = new Iterator[Elem] {
     private var i = data.length
@@ -444,7 +488,103 @@ def foreach[U](f: Elem => U): Unit = {  val it = iterator  while (it.hasNext) 
 
 ## Generators and Generator Expressions
 
-There is no equivalent notion of generators in Scala
+Generators in Python provide a lightweight way to create iterators. They come it two types:
+
+1. Via *generator expressions*
+2. Via the `yield` keyword
 
 
+While Scala lacks direct support for generators, the same functionality can be achieved in a slightly different way.
+
+Case 1 is supported via the method `.view` in the stdlib collections: 
+
+```python
+sum(i*i for i in range(10))
+```
+becomes
+
+```tut
+(for(i <- (0 until 10).view) yield i*i).sum
+```
+
+
+`view` creates a new iterator that only process the elements on an as-needed basis.
+
+
+Case 2 can be handled using `collection.immutable.Stream`.
+
+Streams in the stdlib are essentially a lazy version of a Lists.  It can be used like so:
+
+```tut
+val s = 1 #:: 2 #:: 3 #:: Stream.empty
+```
+
+Similarly to lists which are constructed with the `::` operator (`1 :: 2 :: Nil`), Streams are constructed with the `#::` operator. The difference is that `#::` doesn't evaluate the second argument. 
+
+To see this let's define a function that prints and returns its argument:
+
+```tut
+def print(i: Int) = { println(i); i }
+val s2 = print(1) #:: print(2) #:: print(3) #:: Stream.empty
+s2.tail
+```
+
+As you can see only the first `print()` was actually evaluated. Dereferencing the tail triggered an evaluation of the second `print()`.  
+
+Using this kind of lazy behaviour it is possible to construct infinite lists.
+
+For example, we could generate the fiboncci sequence like this:
+
+```tut:silent
+def fib(a: Int, b: Int): Stream[Int] = a #:: fib(b, a + b)
+```
+
+```tut:book
+fib(1,1).take(10).toList
+```
+which is the same as 
+
+```python
+def fib(a, b):
+    while True:
+        yield a
+        a, b = b, a + b
+        
+[f for (f, _) in zip(fib(1,1), range(10))] == [1, 1, 2, 3, 5, 8, 13, 21, 34, 55]
+```
+
+
+In a normal list this would cause a stack overflow since the recursion never terminates. In our Stream example we are terminating the recursion explicitly after 10 steps and then forcing the evaluation by transforming into a list.
+
+Armed with streams we can go back to our Python example
+
+```python
+def reverse(data):
+    for index in range(len(data)-1, -1, -1):
+        yield data[index]
+        
+for char in reverse("golf"):
+    print(char)        
+    
+# f
+# l
+# o
+# g    
+```
+
+becomes
+
+```tut:silent
+def reverse[A](data: Seq[A]) = {
+  def go(index: Int): Stream[A] = 
+    if (index >= 0) data(index) #:: go(index - 1) else Stream.empty
+    
+  go(data.length - 1)
+}
+```
+
+```tut:book
+for (char <- reverse("golf")) 
+    println(char)
+```
 
