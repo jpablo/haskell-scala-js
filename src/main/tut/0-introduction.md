@@ -1,4 +1,25 @@
+# Using Scala on the Browser via Scastie
+
+If you just want to try Scala in the browser without having to install anything
+then you can use
+<a href="https://scastie.scala-lang.org/" target="_blank">Scastie</a>
+.
+
+You can copy / paste most of the examples.
+
+# Using a standalone Scala Repl
+
+The next option in terms of commitment is downloading the amazing
+<a href="http://www.lihaoyi.com/Ammonite/#Ammonite-REPL" target="_blank">Ammonite</a>.
+
+Ammonite is not completely dissimilar to IPython and it's a great way to
+play with code in the console and run quick scripts.
+
+Installation is usually very simple provided you have Java already installed (see next section).
+
 # Installing Scala
+
+Finally, in order to run a full fledged Scala project with tests, etc. follow these instructions:
 
 ## Quick Start
 

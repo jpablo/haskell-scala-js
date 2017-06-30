@@ -1,4 +1,6 @@
 enablePlugins(TutPlugin)
+//enablePlugins(GhpagesPlugin)
+enablePlugins(JekyllPlugin)
 
 lazy val root = (project in file(".")).
   settings(
@@ -9,5 +11,6 @@ lazy val root = (project in file(".")).
     )),
     name := "Python To Scala"
 )
+
 
 scalacOptions in Tut := Seq("-Dscala.color")
