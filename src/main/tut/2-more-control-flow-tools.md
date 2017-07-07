@@ -286,13 +286,36 @@ def fib(n: Int): Int = { ... }
 
 This says: "*`fib` is a function that takes a single `Int` argument `n`, and returns another `Int`*". 
 
-In general type annotations have the form:
+You might be wondering, what exactly is `Int`, and what is the relationship between say `1` and `Int`?
+
+### Types 101
+
+A *type* is just a label that the compiler assigns to each expression. Why? Because it also knows which operations are valid for each label, and thus it is able to analyze our program and determine if our code makes sense or not *without actually running the code*. This process is know as *typechecking*.
+
+For example consider an expression like  `val x = 1 + 2`. 
+
+The compiler can recognize that 1 and 2 should be assigned the label `Int`.  It can then infer that it is Ok to apply the `+` operator. Since adding two Ints results in another Int, the compiler knows that `x` should be assigned the label `Int` as well.
+
+Now, given a label like `Boolean` we can ask ourselves: what is the set of values that can have that label attached to them?  In this case there are only two such values (`true` and `false`). This means that we have a correspondence between types (labels) and the set of valid values for that type. 
+
+Some examples:
+
+| Type (label)| Possible values (set)| Cardinality |
+| --- | --- | --- |
+| `Boolean` | `{true, false}` | 2
+| `(Boolean, Boolean)` | `{(true,true), (true,false), (false,true), (false,false)}` | 4
+| `Int` | `{-2147483648, ..., 0, ..., 2147483647}` | 2^32
+| `String` | `{"", "a", ..., "z", "aa", ...}` | Infinite
+
+In some cases the compiler is unable to infer what the type of an expression is, so we are forced to declare it ourselves by using a *type annotation*.
+
+Type annotations can be applied to any expression (for example this is valid: `1 + 1 : Int`); for the especial case of a variable, it indicates that the annotated variable can only hold values of the specified type:
 
 ```
-x: T
+var x: Char = ...
 ```
 
-which is meant to be read: "`x` is a variable that can only hold Ts".
+which is meant to be read: "the variable `x` can only be assigned characters".
 
 For example:
 
@@ -302,6 +325,8 @@ For example:
 | `vec: Array[Double]`| vec is an array of Doubles | `Array(0.1, 0.2)`
 | `mat: Array[Array[Double]]` | mat is an array of array of Doubles | `Array(Array(0.1, 0.2))`
 | `a: Any` | a can be anything | `1` or `'c'` or `List()`, etc.
+
+Finally: where do types come from? Some are built-in, like `Int`, `Char` and are known as "primitive" types. Other types can be defined by the user. We'll see later ways to create our own types.
 
 If a function doesn't return anything meaninful we can use the type `Unit`.
 
@@ -333,7 +358,7 @@ def add1(x: Int) = x + 1
 //            plus operator
 ```
 
-The compiler needs to know that `x` is an `Int` (`x: Int`) in order to allow the use of the plus operator.
+The compiler needs to know that `x` is an `Int` in order to allow the use of the plus operator.
 
 But what if within the body of the function we don't actually make use of any method or property associated with the type? In such cases we can make the function *agnostic* to the type of the argument. 
 
@@ -364,6 +389,41 @@ List[Int]()
 ```
 
 Clearly in this case the compiler doesn't have any extra information so we have to provide the type of the elements explicitly.
+
+### Casting
+At this point it is useful to consider the difference between the code as we write it vs the program as it is executed.
+
+This allows us to distinguish two different phases:
+
+1. Everything that the compiler does to generate the bytecode. This include: parsing a file, making sure the syntax is correct, making sure that the types are correct (type checking), compiling, applying optimizations, etc.
+
+2. Everything that happens when the code is actually run. 
+	
+	This is referred to as *Runtime*.
+
+This distinction opens up the possibility that there is discrepancy between the type (label) a value has in the source code vs the runtime representation of such value (when executed).
+
+In Scala (as in many other languages) there is a way to override the typechecker and declare that an expression has an arbitrary type:
+
+```scala
+def badConversion(i: Int): Boolean = { 
+	val b = i.asInstanceOf[Boolean] // <= Error!!
+	b
+}
+```
+
+After this declaration the compiler will treat `b` as a `Boolean`. The problem is that when the program is executed (at runtime) Booleans and Integers have different representations (operations available, memory layout, etc) and are *not* interchangeable.
+
+This function *will* compile but as soon as we try to execute it we'll get an Exception.
+
+If you want to convert (*cast*) one type into an unrelated type (like in our example `Int` to `Boolean`) you have to actually determine how to handle the different values of the source type:
+
+```scala
+def goodConversion(i: Int): Boolean =
+	if (i >= 0) true else false
+```
+
+In short: Don't use `.asInstanceOf` unless you *really* know what you're doing; and prepare to do extensive testing.
 
 ## More on defining functions {#more-functions}
 

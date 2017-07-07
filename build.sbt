@@ -1,6 +1,7 @@
 enablePlugins(TutPlugin)
 enablePlugins(GitBookPlugin)
 enablePlugins(GhpagesPlugin)
+enablePlugins(PreprocessPlugin)
 
 lazy val root = (project in file(".")).
   settings(
@@ -20,5 +21,7 @@ sourceDirectory in GitBook := tutTargetDirectory.value
 makeSite := makeSite.dependsOn(tutQuick).value
 previewLaunchBrowser := false
 
-preprocessVars in Preprocess := Map("VERSION" -> version.value, "DATE" -> new Date().toString)
+sourceDirectory in Preprocess := tutTargetDirectory.value
+
+preprocessVars in Preprocess := Map("VERSION" -> version.value, "DATE" -> (new java.util.Date).toString)
 
