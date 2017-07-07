@@ -1,9 +1,17 @@
 # Scala as a calculator
-All the commands so far will assume that you started the Scala REPL via inside the `hello-world` project created in the introduction.
+All the commands so far will assume that you started the Scala REPL via Ammonite as explained in the [Installation](0-installation.md) section.
 
+```sh
+$ amm
+Loading...
+Welcome to the Ammonite Repl 1.0.0
+(Scala 2.12.2 Java 1.8.0_131)
+If you like Ammonite, please support our development at www.patreon.com/lihaoyi
+jpablo@
 ```
-$ sbt console
-```
+
+> Note: The default Ammonite prompt is just `@` whereas the one shown in the examples is `scala>`. This should not have any effect in the code execution.
+
 ## Numbers and arithmetic {#arithmetic}
 
 ```tut
