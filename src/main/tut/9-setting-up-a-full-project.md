@@ -1,5 +1,4 @@
-# Full Scala installation {#full-installation}
-
+# Full Scala installation
 Finally, in order to run a full fledged Scala project with tests, etc. follow these instructions:
 
 ## Quick Start {#quick-start}

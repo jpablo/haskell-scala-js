@@ -1,4 +1,4 @@
-# Scala as a calculator {#calculator}
+# Scala as a calculator
 All the commands so far will assume that you started the Scala REPL via inside the `hello-world` project created in the introduction.
 
 ```
