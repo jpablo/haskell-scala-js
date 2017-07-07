@@ -216,30 +216,47 @@
 <p>All the commands so far will assume that you started the Scala REPL via inside the <code>hello-world</code> project created in the introduction.</p>
 <pre><code>$ sbt console
 </code></pre><h2 id="numbers-and-arithmetic">Numbers and arithmetic</h2>
-<pre><code class="lang-tut">2 + 2
-50 - 5*6
-(50 - 5*6) / 4
-8 / 5
+<pre><code class="lang-scala">scala&gt; <span class="hljs-number">2</span> + <span class="hljs-number">2</span>
+res0: <span class="hljs-type">Int</span> = <span class="hljs-number">4</span>
+
+scala&gt; <span class="hljs-number">50</span> - <span class="hljs-number">5</span>*<span class="hljs-number">6</span>
+res1: <span class="hljs-type">Int</span> = <span class="hljs-number">20</span>
+
+scala&gt; (<span class="hljs-number">50</span> - <span class="hljs-number">5</span>*<span class="hljs-number">6</span>) / <span class="hljs-number">4</span>
+res2: <span class="hljs-type">Int</span> = <span class="hljs-number">5</span>
+
+scala&gt; <span class="hljs-number">8</span> / <span class="hljs-number">5</span>
+res3: <span class="hljs-type">Int</span> = <span class="hljs-number">1</span>
 </code></pre>
 <p>As you can see, each result has the type indicated to the left.</p>
 <blockquote>
 <p>Note: <code>8/5</code> performs integer division. In order to get a floating point operation you need to convert one of the arguments:</p>
 </blockquote>
-<pre><code class="lang-tut">8.toDouble / 5
+<pre><code class="lang-scala">scala&gt; <span class="hljs-number">8.</span>toDouble / <span class="hljs-number">5</span>
+res4: <span class="hljs-type">Double</span> = <span class="hljs-number">1.6</span>
 </code></pre>
 <p>There&apos;s no predefined operator to calculate powers, but you can use <code>Math.pow</code></p>
-<pre><code class="lang-tut">Math.pow(5,2)
+<pre><code class="lang-scala">scala&gt; <span class="hljs-type">Math</span>.pow(<span class="hljs-number">5</span>,<span class="hljs-number">2</span>)
+res5: <span class="hljs-type">Double</span> = <span class="hljs-number">25.0</span>
 </code></pre>
 <p>To save a value for later use you can use the keyword <code>val</code> and the equal sign <code>(=)</code>:</p>
-<pre><code class="lang-tut">val width = 20
-val height = 5 * 9
-width * height
+<pre><code class="lang-scala">scala&gt; <span class="hljs-keyword">val</span> width = <span class="hljs-number">20</span>
+width: <span class="hljs-type">Int</span> = <span class="hljs-number">20</span>
+
+scala&gt; <span class="hljs-keyword">val</span> height = <span class="hljs-number">5</span> * <span class="hljs-number">9</span>
+height: <span class="hljs-type">Int</span> = <span class="hljs-number">45</span>
+
+scala&gt; width * height
+res6: <span class="hljs-type">Int</span> = <span class="hljs-number">900</span>
 </code></pre>
 <blockquote>
 <p>Note: names created with <code>val</code> cannot be reassigned. For such cases you need to use <code>var</code>:</p>
 </blockquote>
-<pre><code class="lang-tut">var x = 1
-x = x + 1
+<pre><code class="lang-scala">scala&gt; <span class="hljs-keyword">var</span> x = <span class="hljs-number">1</span>
+x: <span class="hljs-type">Int</span> = <span class="hljs-number">1</span>
+
+scala&gt; x = x + <span class="hljs-number">1</span>
+x: <span class="hljs-type">Int</span> = <span class="hljs-number">2</span>
 </code></pre>
 <h2 id="numeric-types">Numeric types</h2>
 <p>Python has 4 main numeric types. All have a corresponding type in Scala except <code>complex</code>.</p>
@@ -319,35 +336,60 @@ x = x + 1
 </tbody>
 </table>
 <p>For all bounded types you can obtain the min/max values using the <code>MinValue</code> / <code>MaxValue</code> functions.</p>
-<pre><code class="lang-tut">Int.MaxValue
+<pre><code class="lang-scala">scala&gt; <span class="hljs-type">Int</span>.<span class="hljs-type">MaxValue</span>
+res7: <span class="hljs-type">Int</span> = <span class="hljs-number">2147483647</span>
 </code></pre>
 <h2 id="strings">Strings</h2>
 <p>There are 3 common ways to create literal strings:</p>
 <h3 id="double-quotes">Double quotes</h3>
-<pre><code class="lang-tut">&quot;spam eggs&quot;
-&quot;doesn&apos;t&quot;
-&quot;\&quot;abc\&quot;&quot;
-&quot;La ni&#xF1;a com&#xED;a r&#xE1;banos&quot;
-&quot;The &#x1F431; ate the &#x1F34E;&quot;
+<pre><code class="lang-scala">scala&gt; <span class="hljs-string">&quot;spam eggs&quot;</span>
+res8: <span class="hljs-type">String</span> = spam eggs
+
+scala&gt; <span class="hljs-string">&quot;doesn&apos;t&quot;</span>
+res9: <span class="hljs-type">String</span> = doesn<span class="hljs-symbol">&apos;t</span>
+
+scala&gt; <span class="hljs-string">&quot;\&quot;abc\&quot;&quot;</span>
+res10: <span class="hljs-type">String</span> = <span class="hljs-string">&quot;abc&quot;</span>
+
+scala&gt; <span class="hljs-string">&quot;La ni&#xF1;a com&#xED;a r&#xE1;banos&quot;</span>
+res11: <span class="hljs-type">String</span> = <span class="hljs-type">La</span> ni&#xF1;a com&#xED;a r&#xE1;banos
+
+scala&gt; <span class="hljs-string">&quot;The &#x1F431; ate the &#x1F34E;&quot;</span> 
+res12: <span class="hljs-type">String</span> = <span class="hljs-type">The</span> &#x1F431; ate the &#x1F34E;
 </code></pre>
 <h3 id="triple-quotes">Triple quotes</h3>
-<pre><code class="lang-tut">&quot;&quot;&quot;&quot;Isn&apos;t,&quot; she said.&quot;&quot;&quot;
-&quot;&quot;&quot;a
+<pre><code class="lang-scala">scala&gt; &quot;&quot;&quot;&quot;Isn&apos;t,&quot; she said.&quot;&quot;&quot;
+res13: String = &quot;Isn&apos;t,&quot; she said.
+
+scala&gt; &quot;&quot;&quot;a
+     | multiline
+     | word
+     | &quot;&quot;&quot;
+res14: String =
+&quot;a
 multiline
 word
-&quot;&quot;&quot;
-&quot;&quot;&quot;c:\some\name&quot;&quot;&quot;
-&quot;&quot;&quot;{&quot;x&quot;:1, &quot;y&quot;:&quot;2&quot;}&quot;&quot;&quot;
+&quot;
+
+scala&gt; &quot;&quot;&quot;c:\some\name&quot;&quot;&quot;
+res15: String = c:\some\name
+
+scala&gt; &quot;&quot;&quot;{&quot;x&quot;:1, &quot;y&quot;:&quot;2&quot;}&quot;&quot;&quot;
+res16: String = {&quot;x&quot;:1, &quot;y&quot;:&quot;2&quot;}
 </code></pre>
 <p>Translation: <code>print(s)</code> becomes <code>println(s)</code></p>
 <h3 id="string-interpolation">String interpolation</h3>
-<pre><code class="lang-tut">val x = 1 + 2 + 3
-println(s&quot;1 + 2 + 3 = $x&quot;)
+<pre><code class="lang-scala">scala&gt; <span class="hljs-keyword">val</span> x = <span class="hljs-number">1</span> + <span class="hljs-number">2</span> + <span class="hljs-number">3</span>
+x: <span class="hljs-type">Int</span> = <span class="hljs-number">6</span>
+
+scala&gt; println(<span class="hljs-string">s&quot;1 + 2 + 3 = <span class="hljs-subst">$x</span>&quot;</span>)
+<span class="hljs-number">1</span> + <span class="hljs-number">2</span> + <span class="hljs-number">3</span> = <span class="hljs-number">6</span>
 </code></pre>
 <p>The <code>s&quot;...&quot;</code> syntax allows to embed code directly within a string.</p>
 <h3 id="characters">Characters</h3>
 <p>Characters have a special type in scala <code>Char</code> and are constructed using single quotes</p>
-<pre><code class="lang-tut">&apos;a&apos;
+<pre><code class="lang-scala">scala&gt; &apos;a&apos;
+res18: <span class="hljs-type">Char</span> = a
 </code></pre>
 <h3 id="string-operations">String operations</h3>
 <p>A String is conceptually a sequence of characters. </p>
@@ -423,62 +465,110 @@ word(4) == &apos;a&apos;</pre>
 <h3 id="list"><code>List</code></h3>
 <p>Lists are in fact <strong>linked lists</strong>, which means that they are very fast at inserting elements at the beginning and iterating sequentially, but accessing element <em>n</em> requires scanning the whole list up to the <em>n-th</em> element.</p>
 <p>Pro tip: <code>List</code> is <em>not</em> like Python&apos;s <code>list</code>. Use <code>Vector</code> (immutable) or <code>Array</code> (mutable) if you need fast access to an arbitrary index.</p>
-<pre><code class="lang-tut">val lst = List(1, 2, 3, 4, 5, 6)
-lst.length
+<pre><code class="lang-scala">scala&gt; <span class="hljs-keyword">val</span> lst = <span class="hljs-type">List</span>(<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">4</span>, <span class="hljs-number">5</span>, <span class="hljs-number">6</span>)
+lst: <span class="hljs-type">List</span>[<span class="hljs-type">Int</span>] = <span class="hljs-type">List</span>(<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">4</span>, <span class="hljs-number">5</span>, <span class="hljs-number">6</span>)
+
+scala&gt; lst.length
+res19: <span class="hljs-type">Int</span> = <span class="hljs-number">6</span>
 </code></pre>
 <p>List is particularly good if you need to get hold of the first element (the <em>head</em>) and everything but the head (the <em>tail</em>)</p>
-<pre><code class="lang-tut">val h = lst.head
-val t = lst.tail
+<pre><code class="lang-scala">scala&gt; <span class="hljs-keyword">val</span> h = lst.head
+h: <span class="hljs-type">Int</span> = <span class="hljs-number">1</span>
+
+scala&gt; <span class="hljs-keyword">val</span> t = lst.tail
+t: <span class="hljs-type">List</span>[<span class="hljs-type">Int</span>] = <span class="hljs-type">List</span>(<span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">4</span>, <span class="hljs-number">5</span>, <span class="hljs-number">6</span>)
 </code></pre>
 <p>In most data structures getting a copy of the tail is a relatively expensive operation that requires copying n - 1 elements. In a linked list this just involves following a pointer so it is super fast.</p>
 <p>Another fast operation on Lists is prepending an element via the <code>(::)</code> operator</p>
-<pre><code class="lang-tut">val lst2 = 0 :: lst
-lst2.head
+<pre><code class="lang-scala">scala&gt; <span class="hljs-keyword">val</span> lst2 = <span class="hljs-number">0</span> :: lst
+lst2: <span class="hljs-type">List</span>[<span class="hljs-type">Int</span>] = <span class="hljs-type">List</span>(<span class="hljs-number">0</span>, <span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">4</span>, <span class="hljs-number">5</span>, <span class="hljs-number">6</span>)
+
+scala&gt; lst2.head
+res20: <span class="hljs-type">Int</span> = <span class="hljs-number">0</span>
 </code></pre>
 <h3 id="mutablearraybuffer">mutable.ArrayBuffer</h3>
 <p>Probably the most similar structure to Python&apos;s <code>list</code> is <code>collection.mutable.ArrayBuffer</code>.</p>
 <p>The &quot;Buffer&quot; part refers to the fact that the size can be changed, as opposed to the <code>Array</code> which has a fixed size (see below).</p>
-<pre><code class="lang-tut">import collection.mutable.ArrayBuffer // required import
+<pre><code class="lang-scala">scala&gt; <span class="hljs-keyword">import</span> collection.mutable.<span class="hljs-type">ArrayBuffer</span> <span class="hljs-comment">// required import</span>
+<span class="hljs-keyword">import</span> collection.mutable.<span class="hljs-type">ArrayBuffer</span>
 
-val b = ArrayBuffer(1, 2, 3, 4, 5)
+scala&gt; <span class="hljs-keyword">val</span> b = <span class="hljs-type">ArrayBuffer</span>(<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">4</span>, <span class="hljs-number">5</span>)
+b: scala.collection.mutable.<span class="hljs-type">ArrayBuffer</span>[<span class="hljs-type">Int</span>] = <span class="hljs-type">ArrayBuffer</span>(<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">4</span>, <span class="hljs-number">5</span>)
 </code></pre>
 <p>All of the operations that we&apos;ve seen on Strings and Vectors work for <code>ArrayBuffer</code>:</p>
-<pre><code class="lang-tut">b(0)
-b(1)
-b.slice(1,3)
-b.take(2)
-b.drop(2)
+<pre><code class="lang-scala">scala&gt; b(<span class="hljs-number">0</span>)
+res21: <span class="hljs-type">Int</span> = <span class="hljs-number">1</span>
+
+scala&gt; b(<span class="hljs-number">1</span>)
+res22: <span class="hljs-type">Int</span> = <span class="hljs-number">2</span>
+
+scala&gt; b.slice(<span class="hljs-number">1</span>,<span class="hljs-number">3</span>)
+res23: scala.collection.mutable.<span class="hljs-type">ArrayBuffer</span>[<span class="hljs-type">Int</span>] = <span class="hljs-type">ArrayBuffer</span>(<span class="hljs-number">2</span>, <span class="hljs-number">3</span>)
+
+scala&gt; b.take(<span class="hljs-number">2</span>)
+res24: scala.collection.mutable.<span class="hljs-type">ArrayBuffer</span>[<span class="hljs-type">Int</span>] = <span class="hljs-type">ArrayBuffer</span>(<span class="hljs-number">1</span>, <span class="hljs-number">2</span>)
+
+scala&gt; b.drop(<span class="hljs-number">2</span>)
+res25: scala.collection.mutable.<span class="hljs-type">ArrayBuffer</span>[<span class="hljs-type">Int</span>] = <span class="hljs-type">ArrayBuffer</span>(<span class="hljs-number">3</span>, <span class="hljs-number">4</span>, <span class="hljs-number">5</span>)
 </code></pre>
 <p>Since they are mutable they support a few extra operations to modify / append / preppend / extend the Arraybuffer</p>
-<pre><code class="lang-tut">b(0) = 2 // modify in place
-b
-b(0) += 1 // increment operator
-b
-b.append(6)
-b
-b.prepend(0)
-b
-b.appendAll(ArrayBuffer(7,8,9))
-b
+<pre><code class="lang-scala">scala&gt; b(<span class="hljs-number">0</span>) = <span class="hljs-number">2</span> <span class="hljs-comment">// modify in place</span>
+
+scala&gt; b
+res27: scala.collection.mutable.<span class="hljs-type">ArrayBuffer</span>[<span class="hljs-type">Int</span>] = <span class="hljs-type">ArrayBuffer</span>(<span class="hljs-number">2</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">4</span>, <span class="hljs-number">5</span>)
+
+scala&gt; b(<span class="hljs-number">0</span>) += <span class="hljs-number">1</span> <span class="hljs-comment">// increment operator</span>
+
+scala&gt; b
+res29: scala.collection.mutable.<span class="hljs-type">ArrayBuffer</span>[<span class="hljs-type">Int</span>] = <span class="hljs-type">ArrayBuffer</span>(<span class="hljs-number">3</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">4</span>, <span class="hljs-number">5</span>)
+
+scala&gt; b.append(<span class="hljs-number">6</span>)
+
+scala&gt; b
+res31: scala.collection.mutable.<span class="hljs-type">ArrayBuffer</span>[<span class="hljs-type">Int</span>] = <span class="hljs-type">ArrayBuffer</span>(<span class="hljs-number">3</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">4</span>, <span class="hljs-number">5</span>, <span class="hljs-number">6</span>)
+
+scala&gt; b.prepend(<span class="hljs-number">0</span>)
+
+scala&gt; b
+res33: scala.collection.mutable.<span class="hljs-type">ArrayBuffer</span>[<span class="hljs-type">Int</span>] = <span class="hljs-type">ArrayBuffer</span>(<span class="hljs-number">0</span>, <span class="hljs-number">3</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">4</span>, <span class="hljs-number">5</span>, <span class="hljs-number">6</span>)
+
+scala&gt; b.appendAll(<span class="hljs-type">ArrayBuffer</span>(<span class="hljs-number">7</span>,<span class="hljs-number">8</span>,<span class="hljs-number">9</span>))
+
+scala&gt; b
+res35: scala.collection.mutable.<span class="hljs-type">ArrayBuffer</span>[<span class="hljs-type">Int</span>] = <span class="hljs-type">ArrayBuffer</span>(<span class="hljs-number">0</span>, <span class="hljs-number">3</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">4</span>, <span class="hljs-number">5</span>, <span class="hljs-number">6</span>, <span class="hljs-number">7</span>, <span class="hljs-number">8</span>, <span class="hljs-number">9</span>)
 </code></pre>
 <p>Since a collection is completely agnostic towards its contents (i.e. &quot;generic&quot;) we can have nested buffers</p>
-<pre><code class="lang-tut">val b1 = ArrayBuffer(1, 2, 3)
-val b2 = ArrayBuffer(4, 5, 6)
-val c = ArrayBuffer(b1, b2)
+<pre><code class="lang-scala">scala&gt; <span class="hljs-keyword">val</span> b1 = <span class="hljs-type">ArrayBuffer</span>(<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>)
+b1: scala.collection.mutable.<span class="hljs-type">ArrayBuffer</span>[<span class="hljs-type">Int</span>] = <span class="hljs-type">ArrayBuffer</span>(<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>)
+
+scala&gt; <span class="hljs-keyword">val</span> b2 = <span class="hljs-type">ArrayBuffer</span>(<span class="hljs-number">4</span>, <span class="hljs-number">5</span>, <span class="hljs-number">6</span>)
+b2: scala.collection.mutable.<span class="hljs-type">ArrayBuffer</span>[<span class="hljs-type">Int</span>] = <span class="hljs-type">ArrayBuffer</span>(<span class="hljs-number">4</span>, <span class="hljs-number">5</span>, <span class="hljs-number">6</span>)
+
+scala&gt; <span class="hljs-keyword">val</span> c = <span class="hljs-type">ArrayBuffer</span>(b1, b2)
+c: scala.collection.mutable.<span class="hljs-type">ArrayBuffer</span>[scala.collection.mutable.<span class="hljs-type">ArrayBuffer</span>[<span class="hljs-type">Int</span>]] = <span class="hljs-type">ArrayBuffer</span>(<span class="hljs-type">ArrayBuffer</span>(<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>), <span class="hljs-type">ArrayBuffer</span>(<span class="hljs-number">4</span>, <span class="hljs-number">5</span>, <span class="hljs-number">6</span>))
 </code></pre>
 <p>let&apos;s update the element (0,0)</p>
-<pre><code class="lang-tut">c(0)(0) += 1
-c
+<pre><code class="lang-scala">scala&gt; c(<span class="hljs-number">0</span>)(<span class="hljs-number">0</span>) += <span class="hljs-number">1</span>
+
+scala&gt; c
+res37: scala.collection.mutable.<span class="hljs-type">ArrayBuffer</span>[scala.collection.mutable.<span class="hljs-type">ArrayBuffer</span>[<span class="hljs-type">Int</span>]] = <span class="hljs-type">ArrayBuffer</span>(<span class="hljs-type">ArrayBuffer</span>(<span class="hljs-number">2</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>), <span class="hljs-type">ArrayBuffer</span>(<span class="hljs-number">4</span>, <span class="hljs-number">5</span>, <span class="hljs-number">6</span>))
 </code></pre>
 <p>As we saw, <code>ArrayBuffer</code> allow not only updating its contents in-place but also modifing the length of the array. This imposes a small overhead; if you need maximum performance it&apos;s better to use an <code>Array</code> which allows in place modification but cannot change its size.</p>
 <p>You can build an ArrayBuffer and the transform it into an Array</p>
-<pre><code class="lang-tut">b.toArray
+<pre><code class="lang-scala">scala&gt; b.toArray
+res38: <span class="hljs-type">Array</span>[<span class="hljs-type">Int</span>] = <span class="hljs-type">Array</span>(<span class="hljs-number">0</span>, <span class="hljs-number">3</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">4</span>, <span class="hljs-number">5</span>, <span class="hljs-number">6</span>, <span class="hljs-number">7</span>, <span class="hljs-number">8</span>, <span class="hljs-number">9</span>)
 </code></pre>
 <p>or if you know the size beforehand it&apos;s better to create the Array directly</p>
-<pre><code class="lang-tut">val arr = Array(1,2,3)
-arr(0) += 1
-arr
-Array.ofDim[Int](5)
+<pre><code class="lang-scala">scala&gt; <span class="hljs-keyword">val</span> arr = <span class="hljs-type">Array</span>(<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">3</span>)
+arr: <span class="hljs-type">Array</span>[<span class="hljs-type">Int</span>] = <span class="hljs-type">Array</span>(<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>)
+
+scala&gt; arr(<span class="hljs-number">0</span>) += <span class="hljs-number">1</span>
+
+scala&gt; arr
+res40: <span class="hljs-type">Array</span>[<span class="hljs-type">Int</span>] = <span class="hljs-type">Array</span>(<span class="hljs-number">2</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>)
+
+scala&gt; <span class="hljs-type">Array</span>.ofDim[<span class="hljs-type">Int</span>](<span class="hljs-number">5</span>)
+res41: <span class="hljs-type">Array</span>[<span class="hljs-type">Int</span>] = <span class="hljs-type">Array</span>(<span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>)
 </code></pre>
 <h1 id="first-steps-towards-programming">First Steps Towards Programming</h1>
 <p>Let&apos;s generate the classic fibonacci series</p>
@@ -488,21 +578,36 @@ Array.ofDim[Int](5)
     a, b = b, a+b
 </code></pre>
 <p>becomes</p>
-<pre><code class="lang-tut:book">var a = 0
-var b = 1
-var tmp = 0
-while (b &lt; 10) {
+<pre><code class="lang-scala"><span class="hljs-keyword">var</span> a = <span class="hljs-number">0</span>
+<span class="hljs-comment">// a: Int = 0</span>
+
+<span class="hljs-keyword">var</span> b = <span class="hljs-number">1</span>
+<span class="hljs-comment">// b: Int = 1</span>
+
+<span class="hljs-keyword">var</span> tmp = <span class="hljs-number">0</span>
+<span class="hljs-comment">// tmp: Int = 0</span>
+
+<span class="hljs-keyword">while</span> (b &lt; <span class="hljs-number">10</span>) {
   println(b)
   tmp = a + b
   a = b
   b = tmp
 }
+<span class="hljs-comment">// 1</span>
+<span class="hljs-comment">// 1</span>
+<span class="hljs-comment">// 2</span>
+<span class="hljs-comment">// 3</span>
+<span class="hljs-comment">// 5</span>
+<span class="hljs-comment">// 8</span>
 </code></pre>
 <p>We can observe a few differences: </p>
 <ul>
 <li><p>The Python version doesn&apos;t need the temporal variable because multiple assignment: <code>a, b = b, a + b</code> works element by element.</p>
 <p>In contrast, Scala has a special version that works like this</p>
-<pre><code class="lang-tut">val x, y, z = Math.random
+<pre><code class="lang-tut">scala&gt;  val x, y, z = Math.random 
+x: Double = 0.49372528011272343
+y: Double = 0.14089063742379482
+z: Double = 0.5630272215152881
 </code></pre>
 <p>The expression on the right is evaluated as many times as variables on the left.</p>
 </li>
@@ -552,7 +657,7 @@ while (b &lt; 10) {
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Informal Introduction to Scala","level":"1.3","depth":1,"next":{"title":"More control flow tools","level":"1.4","depth":1,"path":"2-more-control-flow-tools.md","ref":"2-more-control-flow-tools.md","articles":[]},"previous":{"title":"Installation","level":"1.2","depth":1,"path":"0-introduction.md","ref":"0-introduction.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"1-informal-introduction.md","mtime":"2017-07-06T02:00:19.000Z","type":"markdown"},"gitbook":{"version":"3.2.2","time":"2017-07-06T23:50:20.298Z"},"basePath":".","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Informal Introduction to Scala","level":"1.3","depth":1,"next":{"title":"More control flow tools","level":"1.4","depth":1,"path":"2-more-control-flow-tools.md","ref":"2-more-control-flow-tools.md","articles":[]},"previous":{"title":"Installation","level":"1.2","depth":1,"path":"0-introduction.md","ref":"0-introduction.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"1-informal-introduction.md","mtime":"2017-07-07T04:47:53.000Z","type":"markdown"},"gitbook":{"version":"3.2.2","time":"2017-07-07T04:50:21.927Z"},"basePath":".","book":{"language":""}});
         });
     </script>
 </div>

@@ -212,18 +212,22 @@
                                 
                                 <h1 id="objects">Objects</h1>
 <p>Scala has the keyword <code>object</code> to create a named container of definitions like methods, values, classes, etc.</p>
-<pre><code class="lang-tut:silent">object constants {
-  val Pi = 3.141592653589793
-  val E = 2.718281828459045
-  def doublePi = 2 * Pi
+<pre><code class="lang-scala"><span class="hljs-class"><span class="hljs-keyword">object</span> <span class="hljs-title">constants</span> </span>{
+  <span class="hljs-keyword">val</span> <span class="hljs-type">Pi</span> = <span class="hljs-number">3.141592653589793</span>
+  <span class="hljs-keyword">val</span> <span class="hljs-type">E</span> = <span class="hljs-number">2.718281828459045</span>
+  <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">doublePi</span> </span>= <span class="hljs-number">2</span> * <span class="hljs-type">Pi</span>
 }
 </code></pre>
 <p>The definitions can be used directly</p>
-<pre><code class="lang-tut">constants.doublePi
+<pre><code class="lang-scala">scala&gt; constants.doublePi
+res0: <span class="hljs-type">Double</span> = <span class="hljs-number">6.283185307179586</span>
 </code></pre>
 <p> or can be imported</p>
-<pre><code class="lang-tut">import constants.doublePi
-doublePi
+<pre><code class="lang-scala">scala&gt; <span class="hljs-keyword">import</span> constants.doublePi
+<span class="hljs-keyword">import</span> constants.doublePi
+
+scala&gt; doublePi
+res1: <span class="hljs-type">Double</span> = <span class="hljs-number">6.283185307179586</span>
 </code></pre>
 <p>Similar functionality can be achieved in Python by declaring static elements of a class:</p>
 <pre><code class="lang-python"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">constants</span>:</span>
@@ -483,7 +487,7 @@ sound/                          Top-level package
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Modules","level":"1.6","depth":1,"previous":{"title":"Data Structures","level":"1.5","depth":1,"path":"3-data-structures.md","ref":"3-data-structures.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"4-modules.md","mtime":"2017-07-06T02:04:19.000Z","type":"markdown"},"gitbook":{"version":"3.2.2","time":"2017-07-06T23:50:20.298Z"},"basePath":".","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Modules","level":"1.6","depth":1,"previous":{"title":"Data Structures","level":"1.5","depth":1,"path":"3-data-structures.md","ref":"3-data-structures.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"4-modules.md","mtime":"2017-07-07T04:48:11.000Z","type":"markdown"},"gitbook":{"version":"3.2.2","time":"2017-07-07T04:50:21.927Z"},"basePath":".","book":{"language":""}});
         });
     </script>
 </div>

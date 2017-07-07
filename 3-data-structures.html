@@ -341,74 +341,91 @@ stack.head <span class="hljs-comment">// &quot;top&quot;</span>
 stack = stack.tail <span class="hljs-comment">// &quot;pop&quot;</span>
 </code></pre>
 <h3 id="queues">Queues</h3>
-<pre><code class="lang-tut">import collection.mutable
-val q = mutable.Queue[String](&quot;Eric&quot;, &quot;John&quot;)
-q.enqueue(&quot;Terry&quot;)
-q.dequeue()
-q.dequeue()
-q
+<pre><code class="lang-scala">scala&gt; <span class="hljs-keyword">import</span> collection.mutable
+<span class="hljs-keyword">import</span> collection.mutable
+
+scala&gt; <span class="hljs-keyword">val</span> q = mutable.<span class="hljs-type">Queue</span>[<span class="hljs-type">String</span>](<span class="hljs-string">&quot;Eric&quot;</span>, <span class="hljs-string">&quot;John&quot;</span>)
+q: scala.collection.mutable.<span class="hljs-type">Queue</span>[<span class="hljs-type">String</span>] = <span class="hljs-type">Queue</span>(<span class="hljs-type">Eric</span>, <span class="hljs-type">John</span>)
+
+scala&gt; q.enqueue(<span class="hljs-string">&quot;Terry&quot;</span>)
+
+scala&gt; q.dequeue()
+res1: <span class="hljs-type">String</span> = <span class="hljs-type">Eric</span>
+
+scala&gt; q.dequeue()
+res2: <span class="hljs-type">String</span> = <span class="hljs-type">John</span>
+
+scala&gt; q
+res3: scala.collection.mutable.<span class="hljs-type">Queue</span>[<span class="hljs-type">String</span>] = <span class="hljs-type">Queue</span>(<span class="hljs-type">Terry</span>)
 </code></pre>
 <h3 id="for-comprehensions">For comprehensions</h3>
 <pre><code class="lang-python">squares = [x**<span class="hljs-number">2</span> <span class="hljs-keyword">for</span> x <span class="hljs-keyword">in</span> range(<span class="hljs-number">10</span>)]
 </code></pre>
 <p>becomes</p>
-<pre><code class="lang-tut">val squares = for(x &lt;- 0 until 10) yield x*x
+<pre><code class="lang-scala">scala&gt; <span class="hljs-keyword">val</span> squares = <span class="hljs-keyword">for</span>(x &lt;- <span class="hljs-number">0</span> until <span class="hljs-number">10</span>) <span class="hljs-keyword">yield</span> x*x
+squares: scala.collection.immutable.<span class="hljs-type">IndexedSeq</span>[<span class="hljs-type">Int</span>] = <span class="hljs-type">Vector</span>(<span class="hljs-number">0</span>, <span class="hljs-number">1</span>, <span class="hljs-number">4</span>, <span class="hljs-number">9</span>, <span class="hljs-number">16</span>, <span class="hljs-number">25</span>, <span class="hljs-number">36</span>, <span class="hljs-number">49</span>, <span class="hljs-number">64</span>, <span class="hljs-number">81</span>)
 </code></pre>
 <h4 id="guards">Guards</h4>
 <pre><code class="lang-python">[(x, y) <span class="hljs-keyword">for</span> x <span class="hljs-keyword">in</span> [<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">3</span>] <span class="hljs-keyword">for</span> y <span class="hljs-keyword">in</span> [<span class="hljs-number">3</span>,<span class="hljs-number">1</span>,<span class="hljs-number">4</span>] <span class="hljs-keyword">if</span> x != y]
 </code></pre>
 <p>becomes</p>
-<pre><code class="lang-tut">for {
-  x &lt;- List(1,2,3)
-  y &lt;- List(3,1,4) if x != y
-} yield (x,y)
+<pre><code class="lang-scala">scala&gt; <span class="hljs-keyword">for</span> {
+     |   x &lt;- <span class="hljs-type">List</span>(<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">3</span>)
+     |   y &lt;- <span class="hljs-type">List</span>(<span class="hljs-number">3</span>,<span class="hljs-number">1</span>,<span class="hljs-number">4</span>) <span class="hljs-keyword">if</span> x != y
+     | } <span class="hljs-keyword">yield</span> (x,y)
+res4: <span class="hljs-type">List</span>[(<span class="hljs-type">Int</span>, <span class="hljs-type">Int</span>)] = <span class="hljs-type">List</span>((<span class="hljs-number">1</span>,<span class="hljs-number">3</span>), (<span class="hljs-number">1</span>,<span class="hljs-number">4</span>), (<span class="hljs-number">2</span>,<span class="hljs-number">3</span>), (<span class="hljs-number">2</span>,<span class="hljs-number">1</span>), (<span class="hljs-number">2</span>,<span class="hljs-number">4</span>), (<span class="hljs-number">3</span>,<span class="hljs-number">1</span>), (<span class="hljs-number">3</span>,<span class="hljs-number">4</span>))
 </code></pre>
 <p>More examples</p>
-<pre><code class="lang-tut:silent">val vec = List(-4, -2, 0, 2, 4)
-for(x &lt;- vec) yield x*2
- // same as
-vec.map(_ * 2)
+<pre><code class="lang-scala"><span class="hljs-keyword">val</span> vec = <span class="hljs-type">List</span>(<span class="hljs-number">-4</span>, <span class="hljs-number">-2</span>, <span class="hljs-number">0</span>, <span class="hljs-number">2</span>, <span class="hljs-number">4</span>)
+<span class="hljs-keyword">for</span>(x &lt;- vec) <span class="hljs-keyword">yield</span> x*<span class="hljs-number">2</span>
+ <span class="hljs-comment">// same as</span>
+vec.map(_ * <span class="hljs-number">2</span>)
 
-for(x &lt;- vec if x &gt;= 0) yield x
-// same as
-vec.filter(_ &gt;= 0) 
+<span class="hljs-keyword">for</span>(x &lt;- vec <span class="hljs-keyword">if</span> x &gt;= <span class="hljs-number">0</span>) <span class="hljs-keyword">yield</span> x
+<span class="hljs-comment">// same as</span>
+vec.filter(_ &gt;= <span class="hljs-number">0</span>) 
 
-val freshFruit = List(&quot;  banana&quot;, &quot;  loganberry &quot;, &quot;passion fruit  &quot;)
-for(fruit &lt;- freshFruit) yield fruit.trim
- // same as
+<span class="hljs-keyword">val</span> freshFruit = <span class="hljs-type">List</span>(<span class="hljs-string">&quot;  banana&quot;</span>, <span class="hljs-string">&quot;  loganberry &quot;</span>, <span class="hljs-string">&quot;passion fruit  &quot;</span>)
+<span class="hljs-keyword">for</span>(fruit &lt;- freshFruit) <span class="hljs-keyword">yield</span> fruit.trim
+ <span class="hljs-comment">// same as</span>
 freshFruit.map(_.trim)
 
-for(x &lt;- 0 until 6) yield (x, x*x)
- // same as
-(0 until 6).map(x =&gt; (x, x*x))
-val lists = List(List(1,2,3),List(4,5,6),List(7,8,9))
+<span class="hljs-keyword">for</span>(x &lt;- <span class="hljs-number">0</span> until <span class="hljs-number">6</span>) <span class="hljs-keyword">yield</span> (x, x*x)
+ <span class="hljs-comment">// same as</span>
+(<span class="hljs-number">0</span> until <span class="hljs-number">6</span>).map(x =&gt; (x, x*x))
+<span class="hljs-keyword">val</span> lists = <span class="hljs-type">List</span>(<span class="hljs-type">List</span>(<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">3</span>),<span class="hljs-type">List</span>(<span class="hljs-number">4</span>,<span class="hljs-number">5</span>,<span class="hljs-number">6</span>),<span class="hljs-type">List</span>(<span class="hljs-number">7</span>,<span class="hljs-number">8</span>,<span class="hljs-number">9</span>))
 
-for(lst &lt;- lists; l &lt;- lst) yield l
- // same as
+<span class="hljs-keyword">for</span>(lst &lt;- lists; l &lt;- lst) <span class="hljs-keyword">yield</span> l
+ <span class="hljs-comment">// same as</span>
 lists.flatMap(lst =&gt; lst.map(identity))
- // or even
+ <span class="hljs-comment">// or even</span>
 lists.flatten
 </code></pre>
 <h4 id="nested-for-comprehensions">Nested For Comprehensions</h4>
 <p>For comprehensions have the effect of <em>flattening</em> inner structures:</p>
-<pre><code class="lang-tut">val vs = Vector(Vector(1,2), Vector(), Vector(3))
-for {
-  v &lt;- vs // top level
-  i &lt;- v  // 2nd level
-} yield i + 1
+<pre><code class="lang-scala">scala&gt; <span class="hljs-keyword">val</span> vs = <span class="hljs-type">Vector</span>(<span class="hljs-type">Vector</span>(<span class="hljs-number">1</span>,<span class="hljs-number">2</span>), <span class="hljs-type">Vector</span>(), <span class="hljs-type">Vector</span>(<span class="hljs-number">3</span>))
+vs: scala.collection.immutable.<span class="hljs-type">Vector</span>[scala.collection.immutable.<span class="hljs-type">Vector</span>[<span class="hljs-type">Int</span>]] = <span class="hljs-type">Vector</span>(<span class="hljs-type">Vector</span>(<span class="hljs-number">1</span>, <span class="hljs-number">2</span>), <span class="hljs-type">Vector</span>(), <span class="hljs-type">Vector</span>(<span class="hljs-number">3</span>))
+
+scala&gt; <span class="hljs-keyword">for</span> {
+     |   v &lt;- vs <span class="hljs-comment">// top level</span>
+     |   i &lt;- v  <span class="hljs-comment">// 2nd level</span>
+     | } <span class="hljs-keyword">yield</span> i + <span class="hljs-number">1</span>
+res26: scala.collection.immutable.<span class="hljs-type">Vector</span>[<span class="hljs-type">Int</span>] = <span class="hljs-type">Vector</span>(<span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">4</span>)
 </code></pre>
 <p>(same as)</p>
 <pre><code class="lang-python">vs = [[<span class="hljs-number">1</span>,<span class="hljs-number">2</span>], [], [<span class="hljs-number">3</span>]
 [i + <span class="hljs-number">1</span> <span class="hljs-keyword">for</span> v <span class="hljs-keyword">in</span> vs <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> v]
 </code></pre>
 <p>If we don&apos;t want this then we can nest them:</p>
-<pre><code class="lang-tut">val matrix = List(
-  List(1, 2, 3, 4),
-  List(5, 6, 7, 8),
-  List(9, 10, 11, 12)
-)
+<pre><code class="lang-scala">scala&gt; <span class="hljs-keyword">val</span> matrix = <span class="hljs-type">List</span>(
+     |   <span class="hljs-type">List</span>(<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">4</span>),
+     |   <span class="hljs-type">List</span>(<span class="hljs-number">5</span>, <span class="hljs-number">6</span>, <span class="hljs-number">7</span>, <span class="hljs-number">8</span>),
+     |   <span class="hljs-type">List</span>(<span class="hljs-number">9</span>, <span class="hljs-number">10</span>, <span class="hljs-number">11</span>, <span class="hljs-number">12</span>)
+     | )
+matrix: <span class="hljs-type">List</span>[<span class="hljs-type">List</span>[<span class="hljs-type">Int</span>]] = <span class="hljs-type">List</span>(<span class="hljs-type">List</span>(<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">4</span>), <span class="hljs-type">List</span>(<span class="hljs-number">5</span>, <span class="hljs-number">6</span>, <span class="hljs-number">7</span>, <span class="hljs-number">8</span>), <span class="hljs-type">List</span>(<span class="hljs-number">9</span>, <span class="hljs-number">10</span>, <span class="hljs-number">11</span>, <span class="hljs-number">12</span>))
 
-for(i &lt;- 0 until 4) yield { for(row &lt;- matrix) yield row(i) }
+scala&gt; <span class="hljs-keyword">for</span>(i &lt;- <span class="hljs-number">0</span> until <span class="hljs-number">4</span>) <span class="hljs-keyword">yield</span> { <span class="hljs-keyword">for</span>(row &lt;- matrix) <span class="hljs-keyword">yield</span> row(i) }
+res27: scala.collection.immutable.<span class="hljs-type">IndexedSeq</span>[<span class="hljs-type">List</span>[<span class="hljs-type">Int</span>]] = <span class="hljs-type">Vector</span>(<span class="hljs-type">List</span>(<span class="hljs-number">1</span>, <span class="hljs-number">5</span>, <span class="hljs-number">9</span>), <span class="hljs-type">List</span>(<span class="hljs-number">2</span>, <span class="hljs-number">6</span>, <span class="hljs-number">10</span>), <span class="hljs-type">List</span>(<span class="hljs-number">3</span>, <span class="hljs-number">7</span>, <span class="hljs-number">11</span>), <span class="hljs-type">List</span>(<span class="hljs-number">4</span>, <span class="hljs-number">8</span>, <span class="hljs-number">12</span>))
 </code></pre>
 <p>(same as)</p>
 <pre><code class="lang-python">matrix = [
@@ -476,12 +493,24 @@ p[<span class="hljs-number">0</span>] + p[<span class="hljs-number">1</span>]
 x, y = p
 </code></pre>
 <p>Becomes</p>
-<pre><code class="lang-tut">case class Point(x: Int, y: Int)
-val p = Point(1, 22) // or Point(x=1,y=22)
-p.x + p.y
-val Point(x,y) = p // destructuring
-(x,y)
-val p2 = p.copy(y = 0) // copy constructor
+<pre><code class="lang-scala">scala&gt; <span class="hljs-keyword">case</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Point</span>(<span class="hljs-params">x: <span class="hljs-type">Int</span>, y: <span class="hljs-type">Int</span></span>)</span>
+defined <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Point</span></span>
+
+scala&gt; <span class="hljs-keyword">val</span> p = <span class="hljs-type">Point</span>(<span class="hljs-number">1</span>, <span class="hljs-number">22</span>) <span class="hljs-comment">// or Point(x=1,y=22)</span>
+p: <span class="hljs-type">Point</span> = <span class="hljs-type">Point</span>(<span class="hljs-number">1</span>,<span class="hljs-number">22</span>)
+
+scala&gt; p.x + p.y
+res28: <span class="hljs-type">Int</span> = <span class="hljs-number">23</span>
+
+scala&gt; <span class="hljs-keyword">val</span> <span class="hljs-type">Point</span>(x,y) = p <span class="hljs-comment">// destructuring</span>
+x: <span class="hljs-type">Int</span> = <span class="hljs-number">1</span>
+y: <span class="hljs-type">Int</span> = <span class="hljs-number">22</span>
+
+scala&gt; (x,y)
+res29: (<span class="hljs-type">Int</span>, <span class="hljs-type">Int</span>) = (<span class="hljs-number">1</span>,<span class="hljs-number">22</span>)
+
+scala&gt; <span class="hljs-keyword">val</span> p2 = p.copy(y = <span class="hljs-number">0</span>) <span class="hljs-comment">// copy constructor</span>
+p2: <span class="hljs-type">Point</span> = <span class="hljs-type">Point</span>(<span class="hljs-number">1</span>,<span class="hljs-number">0</span>)
 </code></pre>
 <h2 id="sets">Sets</h2>
 <p>There&apos;s no special syntax for sets in Scala so we&apos;ll just use the standard library constructors.</p>
@@ -540,7 +569,8 @@ val p2 = p.copy(y = 0) // copy constructor
 <pre><code class="lang-python">{x <span class="hljs-keyword">for</span> x <span class="hljs-keyword">in</span> <span class="hljs-string">&apos;abracadabra&apos;</span> <span class="hljs-keyword">if</span> x <span class="hljs-keyword">not</span> <span class="hljs-keyword">in</span> <span class="hljs-string">&apos;abc&apos;</span>}
 </code></pre>
 <p>becomes</p>
-<pre><code class="lang-tut">(for (x &lt;- &quot;abracadabra&quot; if &quot;abc&quot; contains x) yield x).toSet
+<pre><code class="lang-scala">scala&gt; (<span class="hljs-keyword">for</span> (x &lt;- <span class="hljs-string">&quot;abracadabra&quot;</span> <span class="hljs-keyword">if</span> <span class="hljs-string">&quot;abc&quot;</span> contains x) <span class="hljs-keyword">yield</span> x).toSet
+res30: scala.collection.immutable.<span class="hljs-type">Set</span>[<span class="hljs-type">Char</span>] = <span class="hljs-type">Set</span>(a, b, c)
 </code></pre>
 <h2 id="dictionaries">Dictionaries</h2>
 <p>We&apos;ll use <code>collection.mutable.Map[A,B]</code>. One big difference here is that Scala <code>Map</code> is again a <em>homogenous</em> collection whereas Python dicts are heterogenous. We&apos;ll see ways to cope with this situation.</p>
@@ -598,15 +628,22 @@ val p2 = p.copy(y = 0) // copy constructor
     print(k, v)
 </code></pre>
 <p>Becomes (no <code>item</code> method required)</p>
-<pre><code class="lang-tut">val knights = Map(&quot;gallahad&quot; -&gt; &quot;the pure&quot;, &quot;robin&quot; -&gt; &quot;the brave&quot;)
-for ((k,v) &lt;- knights) println(k, v)
+<pre><code class="lang-scala">scala&gt; <span class="hljs-keyword">val</span> knights = <span class="hljs-type">Map</span>(<span class="hljs-string">&quot;gallahad&quot;</span> -&gt; <span class="hljs-string">&quot;the pure&quot;</span>, <span class="hljs-string">&quot;robin&quot;</span> -&gt; <span class="hljs-string">&quot;the brave&quot;</span>)
+knights: scala.collection.immutable.<span class="hljs-type">Map</span>[<span class="hljs-type">String</span>,<span class="hljs-type">String</span>] = <span class="hljs-type">Map</span>(gallahad -&gt; the pure, robin -&gt; the brave)
+
+scala&gt; <span class="hljs-keyword">for</span> ((k,v) &lt;- knights) println(k, v)
+(gallahad,the pure)
+(robin,the brave)
 </code></pre>
 <h3 id="with-the-position-index">With the position index</h3>
 <pre><code class="lang-python"><span class="hljs-keyword">for</span> i, v <span class="hljs-keyword">in</span> enumerate([<span class="hljs-string">&apos;tic&apos;</span>, <span class="hljs-string">&apos;tac&apos;</span>, <span class="hljs-string">&apos;toe&apos;</span>]):
     print(i, v)
 </code></pre>
-<pre><code class="lang-tut">for ((v,i) &lt;- List(&quot;tic&quot;, &quot;tac&quot;, &quot;toe&quot;).zipWithIndex)
-  println(i,v)
+<pre><code class="lang-scala">scala&gt; <span class="hljs-keyword">for</span> ((v,i) &lt;- <span class="hljs-type">List</span>(<span class="hljs-string">&quot;tic&quot;</span>, <span class="hljs-string">&quot;tac&quot;</span>, <span class="hljs-string">&quot;toe&quot;</span>).zipWithIndex)
+     |   println(i,v)
+(<span class="hljs-number">0</span>,tic)
+(<span class="hljs-number">1</span>,tac)
+(<span class="hljs-number">2</span>,toe)
 </code></pre>
 <h3 id="over-two-or-more-sequences">Over two or more sequences</h3>
 <pre><code class="lang-python">questions = [<span class="hljs-string">&apos;name&apos;</span>, <span class="hljs-string">&apos;quest&apos;</span>, <span class="hljs-string">&apos;favorite color&apos;</span>]
@@ -614,10 +651,17 @@ answers = [<span class="hljs-string">&apos;lancelot&apos;</span>, <span class="h
 <span class="hljs-keyword">for</span> q, a <span class="hljs-keyword">in</span> zip(questions, answers):
     print(<span class="hljs-string">&apos;What is your {0}?  It is {1}.&apos;</span>.format(q, a))
 </code></pre>
-<pre><code class="lang-tut">val questions = List(&quot;name&quot;, &quot;quest&quot;, &quot;favorite color&quot;)
-val answers = List(&quot;lancelot&quot;, &quot;the holy grail&quot;, &quot;blue&quot;)
-for ((q,a) &lt;- questions.zip(answers)) 
-  println(s&quot;What is your $q?  It is $a.&quot;)
+<pre><code class="lang-scala">scala&gt; <span class="hljs-keyword">val</span> questions = <span class="hljs-type">List</span>(<span class="hljs-string">&quot;name&quot;</span>, <span class="hljs-string">&quot;quest&quot;</span>, <span class="hljs-string">&quot;favorite color&quot;</span>)
+questions: <span class="hljs-type">List</span>[<span class="hljs-type">String</span>] = <span class="hljs-type">List</span>(name, quest, favorite color)
+
+scala&gt; <span class="hljs-keyword">val</span> answers = <span class="hljs-type">List</span>(<span class="hljs-string">&quot;lancelot&quot;</span>, <span class="hljs-string">&quot;the holy grail&quot;</span>, <span class="hljs-string">&quot;blue&quot;</span>)
+answers: <span class="hljs-type">List</span>[<span class="hljs-type">String</span>] = <span class="hljs-type">List</span>(lancelot, the holy grail, blue)
+
+scala&gt; <span class="hljs-keyword">for</span> ((q,a) &lt;- questions.zip(answers)) 
+     |   println(<span class="hljs-string">s&quot;What is your <span class="hljs-subst">$q</span>?  It is <span class="hljs-subst">$a</span>.&quot;</span>)
+<span class="hljs-type">What</span> is your name?  <span class="hljs-type">It</span> is lancelot.
+<span class="hljs-type">What</span> is your quest?  <span class="hljs-type">It</span> is the holy grail.
+<span class="hljs-type">What</span> is your favorite color?  <span class="hljs-type">It</span> is blue.
 </code></pre>
 <h2 id="boolean-operators">boolean operators</h2>
 <table>
@@ -645,7 +689,8 @@ for ((q,a) &lt;- questions.zip(answers))
 <h2 id="comparing-sequences-and-other-types">Comparing Sequences and Other Types</h2>
 <blockquote>
 <p>Note: <strong>This section is NOT required to sort sequences containing tuples or other sequences!!</strong></p>
-<pre><code class="lang-tut">List((1,2,3), (1,2,1)).sorted
+<pre><code class="lang-scala">scala&gt; <span class="hljs-type">List</span>((<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">3</span>), (<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">1</span>)).sorted
+res34: <span class="hljs-type">List</span>[(<span class="hljs-type">Int</span>, <span class="hljs-type">Int</span>, <span class="hljs-type">Int</span>)] = <span class="hljs-type">List</span>((<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">1</span>), (<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">3</span>))
 </code></pre>
 <p>as you can see a lexicography order was used to sort the elements</p>
 </blockquote>
@@ -667,11 +712,17 @@ for ((q,a) &lt;- questions.zip(answers))
 <p>The location of such extensions is specific to each library, so it usually involves checking the documentation.</p>
 <p>Let&apos;s see how we can use the usual comparison operators on tuples</p>
 <p>Before: (won&apos;t compile!)</p>
-<pre><code class="lang-tut:fail">(1,2,&quot;a&quot;) &lt; (1,2,&quot;c&quot;)
+<pre><code class="lang-scala">scala&gt; (<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-string">&quot;a&quot;</span>) &lt; (<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-string">&quot;c&quot;</span>)
+&lt;console&gt;:<span class="hljs-number">14</span>: error: value &lt; is not a member of (<span class="hljs-type">Int</span>, <span class="hljs-type">Int</span>, <span class="hljs-type">String</span>)
+       (<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-string">&quot;a&quot;</span>) &lt; (<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-string">&quot;c&quot;</span>)
+                 ^
 </code></pre>
 <p>After importing the required package</p>
-<pre><code class="lang-tut">import math.Ordering.Implicits._
-(1,2,&quot;a&quot;) &lt; (1,2,&quot;c&quot;)
+<pre><code class="lang-scala">scala&gt; <span class="hljs-keyword">import</span> math.<span class="hljs-type">Ordering</span>.<span class="hljs-type">Implicits</span>._
+<span class="hljs-keyword">import</span> math.<span class="hljs-type">Ordering</span>.<span class="hljs-type">Implicits</span>._
+
+scala&gt; (<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-string">&quot;a&quot;</span>) &lt; (<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-string">&quot;c&quot;</span>)
+res36: <span class="hljs-type">Boolean</span> = <span class="hljs-literal">true</span>
 </code></pre>
 
                                 
@@ -716,7 +767,7 @@ for ((q,a) &lt;- questions.zip(answers))
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Data Structures","level":"1.5","depth":1,"next":{"title":"Modules","level":"1.6","depth":1,"path":"4-modules.md","ref":"4-modules.md","articles":[]},"previous":{"title":"More control flow tools","level":"1.4","depth":1,"path":"2-more-control-flow-tools.md","ref":"2-more-control-flow-tools.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"3-data-structures.md","mtime":"2017-07-06T02:04:16.000Z","type":"markdown"},"gitbook":{"version":"3.2.2","time":"2017-07-06T23:50:20.298Z"},"basePath":".","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Data Structures","level":"1.5","depth":1,"next":{"title":"Modules","level":"1.6","depth":1,"path":"4-modules.md","ref":"4-modules.md","articles":[]},"previous":{"title":"More control flow tools","level":"1.4","depth":1,"path":"2-more-control-flow-tools.md","ref":"2-more-control-flow-tools.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"3-data-structures.md","mtime":"2017-07-07T04:48:11.000Z","type":"markdown"},"gitbook":{"version":"3.2.2","time":"2017-07-07T04:50:21.927Z"},"basePath":".","book":{"language":""}});
         });
     </script>
 </div>

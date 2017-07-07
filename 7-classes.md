@@ -147,7 +147,7 @@ class Complex(val r: Double, val i: Double) {
 // defined class Complex
 
 val c = new Complex(3.0, -4.5)
-// c: Complex = Complex@45529dd9
+// c: Complex = Complex@51a38e7b
 
 (c.r, c.i, c.rxi)
 // res5: (Double, Double, Double) = (3.0,-4.5,-13.5)
@@ -394,7 +394,7 @@ it.next
 //   at scala.collection.Iterator$$anon$2.next(Iterator.scala:38)
 //   at scala.collection.Iterator$$anon$2.next(Iterator.scala:36)
 //   at scala.collection.LinearSeqLike$$anon$1.next(LinearSeqLike.scala:47)
-//   ... 805 elided
+//   ... 819 elided
 ```
 
 in Python iterators are extremly common. In fact, `for` expressions are implemented in terms of `iter()` / `next()`.
