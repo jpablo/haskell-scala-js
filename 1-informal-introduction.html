@@ -1053,9 +1053,18 @@
                                 <section class="normal markdown-section">
                                 
                                 <h1 id="scala-as-a-calculator">Scala as a calculator</h1>
-<p>All the commands so far will assume that you started the Scala REPL via inside the <code>hello-world</code> project created in the introduction.</p>
-<pre><code>$ sbt console
-</code></pre><h2 id="arithmetic">Numbers and arithmetic </h2>
+<p>All the commands so far will assume that you started the Scala REPL via Ammonite as explained in the <a href="0-installation.html">Installation</a> section.</p>
+<pre><code class="lang-sh">$ amm
+Loading...
+Welcome to the Ammonite Repl 1.0.0
+(Scala 2.12.2 Java 1.8.0_131)
+If you like Ammonite, please support our development at www.patreon.com/lihaoyi
+jpablo@
+</code></pre>
+<blockquote>
+<p>Note: The default Ammonite prompt is just <code>@</code> whereas the one shown in the examples is <code>scala&gt;</code>. This should not have any effect in the code execution.</p>
+</blockquote>
+<h2 id="arithmetic">Numbers and arithmetic </h2>
 <pre><code class="lang-scala">scala&gt; <span class="hljs-number">2</span> + <span class="hljs-number">2</span>
 res0: <span class="hljs-type">Int</span> = <span class="hljs-number">4</span>
 
@@ -1445,9 +1454,9 @@ res41: <span class="hljs-type">Array</span>[<span class="hljs-type">Int</span>] 
 <li><p>The Python version doesn&apos;t need the temporal variable because multiple assignment: <code>a, b = b, a + b</code> works element by element.</p>
 <p>In contrast, Scala has a special version that works like this</p>
 <pre><code class="lang-tut">scala&gt;  val x, y, z = Math.random 
-x: Double = 0.48328138911727636
-y: Double = 0.13484583518421112
-z: Double = 0.5920917695871953
+x: Double = 0.6358870643966775
+y: Double = 0.9161618764483478
+z: Double = 0.447733265356537
 </code></pre>
 <p>The expression on the right is evaluated as many times as variables on the left.</p>
 </li>
@@ -1497,7 +1506,7 @@ z: Double = 0.5920917695871953
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Scala as a calculator {#calculator}","level":"1.3","depth":1,"next":{"title":"Numbers and arithmetic","level":"1.3.1","depth":2,"anchor":"#arithmetic","path":"1-informal-introduction.md","ref":"1-informal-introduction.md#arithmetic","articles":[]},"previous":{"title":"Editor Support","level":"1.2.3","depth":2,"anchor":"#editor","path":"0-installation.md","ref":"0-installation.md#editor","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"1-informal-introduction.md","mtime":"2017-07-07T19:36:43.000Z","type":"markdown"},"gitbook":{"version":"3.2.2","time":"2017-07-07T19:37:16.206Z"},"basePath":".","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Scala as a calculator {#calculator}","level":"1.3","depth":1,"next":{"title":"Numbers and arithmetic","level":"1.3.1","depth":2,"anchor":"#arithmetic","path":"1-informal-introduction.md","ref":"1-informal-introduction.md#arithmetic","articles":[]},"previous":{"title":"Editor Support","level":"1.2.3","depth":2,"anchor":"#editor","path":"0-installation.md","ref":"0-installation.md#editor","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"1-informal-introduction.md","mtime":"2017-07-07T19:51:52.000Z","type":"markdown"},"gitbook":{"version":"3.2.2","time":"2017-07-07T19:53:54.534Z"},"basePath":".","book":{"language":""}});
         });
     </script>
 </div>
