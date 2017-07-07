@@ -1,0 +1,755 @@
+
+<!DOCTYPE HTML>
+<html lang="" >
+    <head>
+        <meta charset="UTF-8">
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title>Data Structures · GitBook</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 3.2.2">
+        
+        
+        
+    
+    <link rel="stylesheet" href="gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="gitbook/gitbook-plugin-highlight/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="gitbook/gitbook-plugin-search/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    <link rel="next" href="4-modules.html" />
+    
+    
+    <link rel="prev" href="2-more-control-flow-tools.html" />
+    
+
+    </head>
+    <body>
+        
+<div class="book">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="Type to search" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="./">
+            
+                <a href="./">
+            
+                    
+                    About this document
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" data-path="0-introduction.html">
+            
+                <a href="0-introduction.html">
+            
+                    
+                    Installation
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3" data-path="1-informal-introduction.html">
+            
+                <a href="1-informal-introduction.html">
+            
+                    
+                    Informal Introduction to Scala
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4" data-path="2-more-control-flow-tools.html">
+            
+                <a href="2-more-control-flow-tools.html">
+            
+                    
+                    More control flow tools
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter active" data-level="1.5" data-path="3-data-structures.html">
+            
+                <a href="3-data-structures.html">
+            
+                    
+                    Data Structures
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6" data-path="4-modules.html">
+            
+                <a href="4-modules.html">
+            
+                    
+                    Modules
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
+            Published with GitBook
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href="." >Data Structures</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <h1 id="data-structures">Data Structures</h1>
+<h2 id="brief-tour-of-common-data-structures">Brief tour of common data structures</h2>
+<p>Scala has a rich collection of data structures. Each data structure has a few unique operations that are specific to it but also implements a large number of methods that are the same across all structures.</p>
+<p>For the rest of the section assume the following imports:</p>
+<pre><code class="lang-scala"><span class="hljs-keyword">import</span> collection.{mutable, immutable}
+</code></pre>
+<table>
+<thead>
+<tr>
+<th>Structure</th>
+<th>Immutable</th>
+<th>Mutable</th>
+<th>Use case</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Linked list</td>
+<td><code>List</code></td>
+<td></td>
+<td>Access the head + tail</td>
+</tr>
+<tr>
+<td>Growable list</td>
+<td></td>
+<td><code>ListBuffer</code></td>
+<td>Constant time append / prepend </td>
+</tr>
+<tr>
+<td>Array (Continguos memory region)</td>
+<td></td>
+<td><code>Array</code>, <code>BufferArray</code></td>
+<td>Access arbitrary position</td>
+</tr>
+<tr>
+<td>Growable Array</td>
+<td></td>
+<td><code>ArrayBuffer</code></td>
+<td>Add / remove elements from the beginning / end</td>
+</tr>
+<tr>
+<td>Sets</td>
+<td><code>Set</code></td>
+<td><code>mutable.Set</code> </td>
+</tr>
+<tr>
+<td>Sorted sets</td>
+<td><code>immutable.TreeSet</code></td>
+<td><code>mutable.TreeSet</code> </td>
+</tr>
+<tr>
+<td>Maps</td>
+<td><code>Map</code></td>
+<td><code>mutable.Map</code> </td>
+</tr>
+<tr>
+<td>Sorted maps</td>
+<td><code>immutable.TreeMap</code></td>
+<td><code>mutable.TreeMap</code> </td>
+</tr>
+</tbody>
+</table>
+<h2 id="more-on-mutablearraybuffer">More on mutable.ArrayBuffer</h2>
+<table>
+<thead>
+<tr>
+<th>Python array</th>
+<th>Scala <code>ArrayBuffer</code></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>a = []</code></td>
+<td><code>val b = mutable.ArrayBuffer[Int]()</code></td>
+</tr>
+<tr>
+<td><code>a.append(x)</code></td>
+<td><code>b.append(x)</code> or<br><code>b += x</code></td>
+</tr>
+<tr>
+<td><code>a.extend(iterable)</code></td>
+<td><code>b.appendAll(iterable)</code> or<br><code>b ++= iterable</code></td>
+</tr>
+<tr>
+<td><code>a.insert(i,x)</code></td>
+<td><code>b.insert(i, elems*)</code></td>
+</tr>
+<tr>
+<td><code>a.remove(x)</code></td>
+<td><code>b.remove(i)</code></td>
+</tr>
+<tr>
+<td><code>a.pop([i])</code></td>
+<td><code>b.remove(b.length - 1)</code></td>
+</tr>
+<tr>
+<td><code>a.clear()</code></td>
+<td><code>b.clear()</code></td>
+</tr>
+<tr>
+<td><code>a.index(x[,start[,end]])</code></td>
+<td><code>b.indexOf(x[,start])</code></td>
+</tr>
+<tr>
+<td><code>a.count(x)</code></td>
+<td><code>b.count(_ == x)</code></td>
+</tr>
+<tr>
+<td><code>a.sort([key])</code></td>
+<td><code>b.sorted</code> <br><code>b.sortBy(key)</code></td>
+</tr>
+<tr>
+<td><code>a.reverse()</code></td>
+<td><code>b.reverse</code></td>
+</tr>
+<tr>
+<td><code>a.copy()</code></td>
+<td><code>b.clone</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="stacks">Stacks</h3>
+<p>Scala has a <code>Stack</code> class that is deprecated now. The recommended alternative is to use a <code>List</code> assigned to a <code>var</code>. </p>
+<pre><code class="lang-scala"><span class="hljs-keyword">var</span> stack = <span class="hljs-type">List</span>(<span class="hljs-number">3</span>,<span class="hljs-number">2</span>,<span class="hljs-number">1</span>)
+stack = <span class="hljs-number">4</span> :: stack <span class="hljs-comment">// &quot;push&quot;</span>
+stack.head <span class="hljs-comment">// &quot;top&quot;</span>
+stack = stack.tail <span class="hljs-comment">// &quot;pop&quot;</span>
+</code></pre>
+<h3 id="queues">Queues</h3>
+<pre><code class="lang-tut">import collection.mutable
+val q = mutable.Queue[String](&quot;Eric&quot;, &quot;John&quot;)
+q.enqueue(&quot;Terry&quot;)
+q.dequeue()
+q.dequeue()
+q
+</code></pre>
+<h3 id="for-comprehensions">For comprehensions</h3>
+<pre><code class="lang-python">squares = [x**<span class="hljs-number">2</span> <span class="hljs-keyword">for</span> x <span class="hljs-keyword">in</span> range(<span class="hljs-number">10</span>)]
+</code></pre>
+<p>becomes</p>
+<pre><code class="lang-tut">val squares = for(x &lt;- 0 until 10) yield x*x
+</code></pre>
+<h4 id="guards">Guards</h4>
+<pre><code class="lang-python">[(x, y) <span class="hljs-keyword">for</span> x <span class="hljs-keyword">in</span> [<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">3</span>] <span class="hljs-keyword">for</span> y <span class="hljs-keyword">in</span> [<span class="hljs-number">3</span>,<span class="hljs-number">1</span>,<span class="hljs-number">4</span>] <span class="hljs-keyword">if</span> x != y]
+</code></pre>
+<p>becomes</p>
+<pre><code class="lang-tut">for {
+  x &lt;- List(1,2,3)
+  y &lt;- List(3,1,4) if x != y
+} yield (x,y)
+</code></pre>
+<p>More examples</p>
+<pre><code class="lang-tut:silent">val vec = List(-4, -2, 0, 2, 4)
+for(x &lt;- vec) yield x*2
+ // same as
+vec.map(_ * 2)
+
+for(x &lt;- vec if x &gt;= 0) yield x
+// same as
+vec.filter(_ &gt;= 0) 
+
+val freshFruit = List(&quot;  banana&quot;, &quot;  loganberry &quot;, &quot;passion fruit  &quot;)
+for(fruit &lt;- freshFruit) yield fruit.trim
+ // same as
+freshFruit.map(_.trim)
+
+for(x &lt;- 0 until 6) yield (x, x*x)
+ // same as
+(0 until 6).map(x =&gt; (x, x*x))
+val lists = List(List(1,2,3),List(4,5,6),List(7,8,9))
+
+for(lst &lt;- lists; l &lt;- lst) yield l
+ // same as
+lists.flatMap(lst =&gt; lst.map(identity))
+ // or even
+lists.flatten
+</code></pre>
+<h4 id="nested-for-comprehensions">Nested For Comprehensions</h4>
+<p>For comprehensions have the effect of <em>flattening</em> inner structures:</p>
+<pre><code class="lang-tut">val vs = Vector(Vector(1,2), Vector(), Vector(3))
+for {
+  v &lt;- vs // top level
+  i &lt;- v  // 2nd level
+} yield i + 1
+</code></pre>
+<p>(same as)</p>
+<pre><code class="lang-python">vs = [[<span class="hljs-number">1</span>,<span class="hljs-number">2</span>], [], [<span class="hljs-number">3</span>]
+[i + <span class="hljs-number">1</span> <span class="hljs-keyword">for</span> v <span class="hljs-keyword">in</span> vs <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> v]
+</code></pre>
+<p>If we don&apos;t want this then we can nest them:</p>
+<pre><code class="lang-tut">val matrix = List(
+  List(1, 2, 3, 4),
+  List(5, 6, 7, 8),
+  List(9, 10, 11, 12)
+)
+
+for(i &lt;- 0 until 4) yield { for(row &lt;- matrix) yield row(i) }
+</code></pre>
+<p>(same as)</p>
+<pre><code class="lang-python">matrix = [
+    [<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">4</span>],
+    [<span class="hljs-number">5</span>, <span class="hljs-number">6</span>, <span class="hljs-number">7</span>, <span class="hljs-number">8</span>],
+    [<span class="hljs-number">9</span>, <span class="hljs-number">10</span>, <span class="hljs-number">11</span>, <span class="hljs-number">12</span>]
+]
+
+[[row[i] <span class="hljs-keyword">for</span> row <span class="hljs-keyword">in</span> matrix] <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> range(<span class="hljs-number">4</span>)]
+</code></pre>
+<p>(which can be done with the builtin <code>matrix.transpose</code>)</p>
+<h2 id="del-statement"><code>del</code> statement</h2>
+<p>Although you can remove elements from collections (we&apos;ve seen <code>buffer.remove(i)</code>), there&apos;s no way to remove <em>variables</em> from a scope in Scala.</p>
+<h2 id="tuples">Tuples</h2>
+<p>Tuples in Scala share some similarities with Python tuples</p>
+<table>
+<thead>
+<tr>
+<th>Python</th>
+<th>Scala</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>t = 1, True, &quot;Hello&quot;</code></td>
+<td><code>val t = (1, true, &quot;Hello&quot;)</code></td>
+<td>Heterogenous types</td>
+</tr>
+<tr>
+<td><code>u = t, (4, 5)</code></td>
+<td><code>val u = (u, (4, 5))</code></td>
+<td>Nested tuples</td>
+</tr>
+<tr>
+<td><code>t[0] == 1</code></td>
+<td><code>t._1 == 1</code></td>
+<td>element access</td>
+</tr>
+<tr>
+<td><code>t[0] = 2 # Error!!</code></td>
+<td><code>t._1 = 2</code> // Error!!</td>
+<td>immutable</td>
+</tr>
+<tr>
+<td>Differences</td>
+</tr>
+<tr>
+<td><code>for i in t: print(t)</code></td>
+<td><code>for(i &lt;- t.productIterator) println(i)</code></td>
+<td>catch: <code>productIterator</code> forgets type information</td>
+</tr>
+</tbody>
+</table>
+<p>Scala tuples can have heterogenous types, but there&apos;s a caviat: the only way to safely recover the elements is using the accessor funcions <code>t._1, t._2, t._3, ...</code> etc (up to 22).</p>
+<p>Also, tuples of different lengths are completely unrelated to each other, so if a function for example expects a 2-tuple then the only way to use 3-tuple is by manually constructing the required 2-tuple.</p>
+<p>There&apos;s a way to access an arbitrary element of a tuple given a index <code>i</code> using the function <code>t.productElement(i)</code>, but with a catch: The result will have the type <code>Any</code> which is not very useful or safe except for printing to the console perhaps.</p>
+<p>In other words, the type of each element will be lost.</p>
+<h3 id="namedtuples--case-classes">Namedtuples / Case Classes</h3>
+<p>Instead of <code>namedtuples</code> you can use <em>case classes</em> which will be discussed at length later</p>
+<pre><code class="lang-python"><span class="hljs-keyword">from</span> collections <span class="hljs-keyword">import</span> namedtuple
+Point = namedtuple(<span class="hljs-string">&apos;Point&apos;</span>, [<span class="hljs-string">&apos;x&apos;</span>, <span class="hljs-string">&apos;y&apos;</span>])
+p = Point(<span class="hljs-number">11</span>, y=<span class="hljs-number">22</span>)
+p[<span class="hljs-number">0</span>] + p[<span class="hljs-number">1</span>]
+x, y = p
+</code></pre>
+<p>Becomes</p>
+<pre><code class="lang-tut">case class Point(x: Int, y: Int)
+val p = Point(1, 22) // or Point(x=1,y=22)
+p.x + p.y
+val Point(x,y) = p // destructuring
+(x,y)
+val p2 = p.copy(y = 0) // copy constructor
+</code></pre>
+<h2 id="sets">Sets</h2>
+<p>There&apos;s no special syntax for sets in Scala so we&apos;ll just use the standard library constructors.</p>
+<table>
+<thead>
+<tr>
+<th>Python</th>
+<th>Scala</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>basket = {&apos;apple&apos;, &apos;orange&apos;, &apos;apple&apos;}</code></td>
+<td><code>val basked = Set(&quot;apple&quot;, &quot;orange&quot; apple&quot;)</code></td>
+<td>Scala: Immutable version</td>
+</tr>
+<tr>
+<td><code>&apos;orange&apos; in basket</code></td>
+<td><code>basket contains &quot;apple&quot;</code></td>
+</tr>
+<tr>
+<td><code>a = set(&apos;abracadabra&apos;)</code></td>
+<td><code>val a = Set(&quot;abracadabra&quot;:_*)</code></td>
+<td>Spread operator <code>(:_*)</code> required</td>
+</tr>
+<tr>
+<td><code>b = set(&apos;alacazam&apos;)</code></td>
+<td><code>val b = &quot;alacazam&quot;.toSet</code></td>
+<td>Much easier</td>
+</tr>
+<tr>
+<td><code>a - b</code></td>
+<td><code>a &amp;~ b</code></td>
+<td>Or <code>a diff b</code></td>
+</tr>
+<tr>
+<td><code>a | b</code></td>
+<td><code>a | b</code></td>
+<td>Or <code>a union b</code></td>
+</tr>
+<tr>
+<td><code>a &amp; b</code></td>
+<td><code>a &amp; b</code></td>
+<td>Or <code>a intersect b</code></td>
+</tr>
+<tr>
+<td><code>a ^ b</code></td>
+<td><code>(a &amp;~ b) | (b &amp;~ a)</code></td>
+<td>Or <code>(a diff b) union (b diff a)</code></td>
+</tr>
+</tbody>
+</table>
+<p>Unless you are a heavy user of Sets I suggest sticking with the named functions instead of the operators.</p>
+<p>There&apos;s no special support for set comprehensions, so</p>
+<pre><code class="lang-python">{x <span class="hljs-keyword">for</span> x <span class="hljs-keyword">in</span> <span class="hljs-string">&apos;abracadabra&apos;</span> <span class="hljs-keyword">if</span> x <span class="hljs-keyword">not</span> <span class="hljs-keyword">in</span> <span class="hljs-string">&apos;abc&apos;</span>}
+</code></pre>
+<p>becomes</p>
+<pre><code class="lang-tut">(for (x &lt;- &quot;abracadabra&quot; if &quot;abc&quot; contains x) yield x).toSet
+</code></pre>
+<h2 id="dictionaries">Dictionaries</h2>
+<p>We&apos;ll use <code>collection.mutable.Map[A,B]</code>. One big difference here is that Scala <code>Map</code> is again a <em>homogenous</em> collection whereas Python dicts are heterogenous. We&apos;ll see ways to cope with this situation.</p>
+<table>
+<thead>
+<tr>
+<th>Python</th>
+<th>Scala</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>d = {}</code></td>
+<td><code>val d = mutable.Map[String, Int]()</code></td>
+<td>Empty dict requires explicit type information</td>
+</tr>
+<tr>
+<td><code>tel = {&apos;jack&apos;: 4098, &apos;sape&apos;: 4139}</code></td>
+<td><code>val tel = mutable.Map(&quot;jack&quot; -&gt; 4098, &quot;sape&quot; -&gt; 439)</code></td>
+<td>type info can be inferred from args here</td>
+</tr>
+<tr>
+<td><code>tel[&apos;guido&apos;] = 4127</code></td>
+<td><code>tel(&apos;guido&apos;) = 4127</code></td>
+</tr>
+<tr>
+<td><code>del tel[&apos;sape&apos;]</code></td>
+<td><code>tel -= &quot;sape&quot;</code></td>
+</tr>
+<tr>
+<td><code>list(tel.keys())</code></td>
+<td><code>tel.keys.toList</code></td>
+</tr>
+<tr>
+<td><code>sorted(tel.keys())</code></td>
+<td><code>tel.keys.toList.sorted</code></td>
+</tr>
+<tr>
+<td><code>&apos;guido&apos; in tel</code></td>
+<td><code>tel contains &quot;guido&quot;</code></td>
+</tr>
+<tr>
+<td><code>dict([(&apos;a&apos;,1),(&apos;b&apos;,2)])</code></td>
+<td><code>List((&quot;a&quot;,1),(&quot;b&quot;,2)).toMap</code></td>
+</tr>
+</tbody>
+</table>
+<p>As you can see the <code>Map</code> constructor takes a variable number of pairs <code>key -&gt; value</code>. The <code>(-&gt;)</code> operator is in fact a helper operator that constructs tuples, so that <code>Map((&apos;a&apos;,1),(&apos;b&apos;,2))</code> is the same as 
+<code>Map(&apos;a&apos; -&gt; 1, &apos;b&apos; -&gt; 2)</code> but (arguably) harder to read.</p>
+<h2 id="looping-techniques">Looping Techniques</h2>
+<h3 id="over-maps">Over maps</h3>
+<pre><code class="lang-python">knights = {<span class="hljs-string">&apos;gallahad&apos;</span>: <span class="hljs-string">&apos;the pure&apos;</span>, <span class="hljs-string">&apos;robin&apos;</span>: <span class="hljs-string">&apos;the brave&apos;</span>}
+<span class="hljs-keyword">for</span> k, v <span class="hljs-keyword">in</span> knights.items():
+    print(k, v)
+</code></pre>
+<p>Becomes (no <code>item</code> method required)</p>
+<pre><code class="lang-tut">val knights = Map(&quot;gallahad&quot; -&gt; &quot;the pure&quot;, &quot;robin&quot; -&gt; &quot;the brave&quot;)
+for ((k,v) &lt;- knights) println(k, v)
+</code></pre>
+<h3 id="with-the-position-index">With the position index</h3>
+<pre><code class="lang-python"><span class="hljs-keyword">for</span> i, v <span class="hljs-keyword">in</span> enumerate([<span class="hljs-string">&apos;tic&apos;</span>, <span class="hljs-string">&apos;tac&apos;</span>, <span class="hljs-string">&apos;toe&apos;</span>]):
+    print(i, v)
+</code></pre>
+<pre><code class="lang-tut">for ((v,i) &lt;- List(&quot;tic&quot;, &quot;tac&quot;, &quot;toe&quot;).zipWithIndex)
+  println(i,v)
+</code></pre>
+<h3 id="over-two-or-more-sequences">Over two or more sequences</h3>
+<pre><code class="lang-python">questions = [<span class="hljs-string">&apos;name&apos;</span>, <span class="hljs-string">&apos;quest&apos;</span>, <span class="hljs-string">&apos;favorite color&apos;</span>]
+answers = [<span class="hljs-string">&apos;lancelot&apos;</span>, <span class="hljs-string">&apos;the holy grail&apos;</span>, <span class="hljs-string">&apos;blue&apos;</span>]
+<span class="hljs-keyword">for</span> q, a <span class="hljs-keyword">in</span> zip(questions, answers):
+    print(<span class="hljs-string">&apos;What is your {0}?  It is {1}.&apos;</span>.format(q, a))
+</code></pre>
+<pre><code class="lang-tut">val questions = List(&quot;name&quot;, &quot;quest&quot;, &quot;favorite color&quot;)
+val answers = List(&quot;lancelot&quot;, &quot;the holy grail&quot;, &quot;blue&quot;)
+for ((q,a) &lt;- questions.zip(answers)) 
+  println(s&quot;What is your $q?  It is $a.&quot;)
+</code></pre>
+<h2 id="boolean-operators">boolean operators</h2>
+<table>
+<thead>
+<tr>
+<th>Python</th>
+<th>Scala</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>and</code></td>
+<td><code>&amp;&amp;</code></td>
+</tr>
+<tr>
+<td><code>or</code></td>
+<td><code>||</code></td>
+</tr>
+<tr>
+<td><code>not</code></td>
+<td><code>!</code></td>
+</tr>
+</tbody>
+</table>
+<h2 id="comparing-sequences-and-other-types">Comparing Sequences and Other Types</h2>
+<blockquote>
+<p>Note: <strong>This section is NOT required to sort sequences containing tuples or other sequences!!</strong></p>
+<pre><code class="lang-tut">List((1,2,3), (1,2,1)).sorted
+</code></pre>
+<p>as you can see a lexicography order was used to sort the elements</p>
+</blockquote>
+<p>On the other hand if you want to use compare tuples yourself, then continue reading.</p>
+<p>In Scala it is common to divide operations and functions on a given type in two groups:</p>
+<ol>
+<li>Operations that are intrinsic to a type and constantly used:<ul>
+<li>Numerical operations on Int: <code>1 + 2</code>, <code>3 * 5</code>.</li>
+<li>Taking the <code>lst.head</code> of a list</li>
+</ul>
+</li>
+<li>Operations that can be considered auxiliary and used only ocasionally:<ul>
+<li>Comparison operators on tuples <code>(1,2) &lt; (3,4)</code></li>
+<li>etc</li>
+</ul>
+</li>
+</ol>
+<p>Operations in the second group are usually available only after importing a specific package that provides the functionality by adding the missing methods / operations to specific types.</p>
+<p>The location of such extensions is specific to each library, so it usually involves checking the documentation.</p>
+<p>Let&apos;s see how we can use the usual comparison operators on tuples</p>
+<p>Before: (won&apos;t compile!)</p>
+<pre><code class="lang-tut:fail">(1,2,&quot;a&quot;) &lt; (1,2,&quot;c&quot;)
+</code></pre>
+<p>After importing the required package</p>
+<pre><code class="lang-tut">import math.Ordering.Implicits._
+(1,2,&quot;a&quot;) &lt; (1,2,&quot;c&quot;)
+</code></pre>
+
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="2-more-control-flow-tools.html" class="navigation navigation-prev " aria-label="Previous page: More control flow tools">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="4-modules.html" class="navigation navigation-next " aria-label="Next page: Modules">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"Data Structures","level":"1.5","depth":1,"next":{"title":"Modules","level":"1.6","depth":1,"path":"4-modules.md","ref":"4-modules.md","articles":[]},"previous":{"title":"More control flow tools","level":"1.4","depth":1,"path":"2-more-control-flow-tools.md","ref":"2-more-control-flow-tools.md","articles":[]},"dir":"ltr"},"config":{"plugins":[],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"gitbook":"*"},"file":{"path":"3-data-structures.md","mtime":"2017-07-06T02:04:16.000Z","type":"markdown"},"gitbook":{"version":"3.2.2","time":"2017-07-06T23:59:59.706Z"},"basePath":".","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <script src="gitbook/gitbook.js"></script>
+    <script src="gitbook/theme.js"></script>
+    
+        
+        <script src="gitbook/gitbook-plugin-search/search-engine.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-search/search.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-lunr/lunr.min.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-lunr/search-lunr.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-sharing/buttons.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+
+    </body>
+</html>
+

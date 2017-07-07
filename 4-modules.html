@@ -1,0 +1,522 @@
+
+<!DOCTYPE HTML>
+<html lang="" >
+    <head>
+        <meta charset="UTF-8">
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title>Modules · GitBook</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 3.2.2">
+        
+        
+        
+    
+    <link rel="stylesheet" href="gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="gitbook/gitbook-plugin-highlight/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="gitbook/gitbook-plugin-search/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    
+    <link rel="prev" href="3-data-structures.html" />
+    
+
+    </head>
+    <body>
+        
+<div class="book">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="Type to search" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="./">
+            
+                <a href="./">
+            
+                    
+                    About this document
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" data-path="0-introduction.html">
+            
+                <a href="0-introduction.html">
+            
+                    
+                    Installation
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3" data-path="1-informal-introduction.html">
+            
+                <a href="1-informal-introduction.html">
+            
+                    
+                    Informal Introduction to Scala
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4" data-path="2-more-control-flow-tools.html">
+            
+                <a href="2-more-control-flow-tools.html">
+            
+                    
+                    More control flow tools
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5" data-path="3-data-structures.html">
+            
+                <a href="3-data-structures.html">
+            
+                    
+                    Data Structures
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter active" data-level="1.6" data-path="4-modules.html">
+            
+                <a href="4-modules.html">
+            
+                    
+                    Modules
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
+            Published with GitBook
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href="." >Modules</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <h1 id="objects">Objects</h1>
+<p>Scala has the keyword <code>object</code> to create a named container of definitions like methods, values, classes, etc.</p>
+<pre><code class="lang-tut:silent">object constants {
+  val Pi = 3.141592653589793
+  val E = 2.718281828459045
+  def doublePi = 2 * Pi
+}
+</code></pre>
+<p>The definitions can be used directly</p>
+<pre><code class="lang-tut">constants.doublePi
+</code></pre>
+<p> or can be imported</p>
+<pre><code class="lang-tut">import constants.doublePi
+doublePi
+</code></pre>
+<p>Similar functionality can be achieved in Python by declaring static elements of a class:</p>
+<pre><code class="lang-python"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">constants</span>:</span>
+    Pi = <span class="hljs-number">3.141592653589793</span>
+    E = <span class="hljs-number">2.718281828459045</span>
+
+<span class="hljs-number">2</span> * constants.Pi
+</code></pre>
+<p>One diference is that Python static members cannot be imported so the only way to refer to them would be with the class prefix: <code>constants.Pi</code>, etc.</p>
+<p><code>objects</code> are also called <em>companion Objects</em> for reasons we&apos;ll explain when we talk about classes.</p>
+<h1 id="packages-modules">Packages (modules)</h1>
+<p>In Python a module is simply a file with the <code>.py</code> extension. It can contain any definition like functions, classes, names, etc.</p>
+<p>Let&apos;s follow the tutorial and assume we have a file name <code>fibo.py</code> with a function <code>fib</code> defined in it.</p>
+<pre><code class="lang-python"><span class="hljs-comment"># fibo.py</span>
+
+initial = (<span class="hljs-number">0</span>, <span class="hljs-number">1</span>)
+
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">fib</span><span class="hljs-params">(n)</span>:</span>
+    a, b = initial
+    <span class="hljs-keyword">while</span> b &lt; n:
+        print(b, end=<span class="hljs-string">&apos; &apos;</span>)
+        a, b = b, a+b
+    print()
+</code></pre>
+<p>Then this can be used in the repl by importing it:</p>
+<pre><code class="lang-python"><span class="hljs-meta">&gt;&gt;&gt; </span><span class="hljs-keyword">import</span> fibo
+<span class="hljs-meta">&gt;&gt;&gt; </span>fibo.fib(<span class="hljs-number">1000</span>)
+<span class="hljs-number">1</span> <span class="hljs-number">1</span> <span class="hljs-number">2</span> <span class="hljs-number">3</span> <span class="hljs-number">5</span> <span class="hljs-number">8</span> <span class="hljs-number">13</span> <span class="hljs-number">21</span> <span class="hljs-number">34</span> <span class="hljs-number">55</span> <span class="hljs-number">89</span> <span class="hljs-number">144</span> <span class="hljs-number">233</span> <span class="hljs-number">377</span> <span class="hljs-number">610</span> <span class="hljs-number">987</span>
+</code></pre>
+<p>The equivalent notion in Scala is a <code>package</code>. </p>
+<pre><code class="lang-scala"><span class="hljs-keyword">package</span> example
+
+<span class="hljs-class"><span class="hljs-keyword">object</span> <span class="hljs-title">fibo</span> </span>{
+
+  <span class="hljs-keyword">val</span> initial = (<span class="hljs-number">0</span>, <span class="hljs-number">1</span>)
+
+  <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">fib</span></span>(n: <span class="hljs-type">Int</span>): <span class="hljs-type">Unit</span> = {
+    <span class="hljs-keyword">var</span> (a,b) = initial
+    <span class="hljs-keyword">var</span> tmp = <span class="hljs-number">0</span>
+    <span class="hljs-keyword">while</span> (a &lt; n) {
+      print(<span class="hljs-string">s&quot;<span class="hljs-subst">$a</span> &quot;</span>)
+      tmp = a + b; a = b; b = tmp
+    }
+    println()
+  }
+}
+</code></pre>
+<p>This introduces the name <code>example.fibo.fib</code> in the <strong>global</strong> namespace of packages available inside a project.</p>
+<p>So we can use it directly:</p>
+<pre><code class="lang-scala">example.fibo.fib(<span class="hljs-number">100</span>)
+</code></pre>
+<p>or we can import it first:</p>
+<pre><code class="lang-scala"><span class="hljs-keyword">import</span> example.fibo.fib
+fib(<span class="hljs-number">100</span>)
+</code></pre>
+<p>Notes:</p>
+<ul>
+<li>Packages are not defined implicitly by files, but rather by an explicit <code>package</code> declaration</li>
+<li>packages <em>cannot</em> contain functions as top level objects</li>
+<li>they can only contain<ul>
+<li><code>class</code> declarations</li>
+<li><code>object</code> declarations (as in our example)</li>
+<li>type declarations</li>
+<li>nested packages</li>
+</ul>
+</li>
+</ul>
+<h2 id="importing-packages">Importing packages</h2>
+<table>
+<thead>
+<tr>
+<th>Python</th>
+<th>Scala</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>from fibo import fib, initial</code></td>
+<td><code>import example.fibo.{fib, initial}</code></td>
+</tr>
+<tr>
+<td><code>from fibo import *</code></td>
+<td><code>import example.fibo._</code></td>
+</tr>
+<tr>
+<td><code>from fibo import fib as Fib</code></td>
+<td><code>import example.fibo.{fib =&gt; Fib}</code></td>
+</tr>
+</tbody>
+</table>
+<h2 id="executing-packages">Executing packages</h2>
+<blockquote>
+<p>Note: This is not the best way to run code in production!</p>
+</blockquote>
+<p>Executing modules can be useful when developing an app. The entry point of the program is an object that extends <code>App</code></p>
+<pre><code class="lang-scala"><span class="hljs-keyword">package</span> example
+
+<span class="hljs-class"><span class="hljs-keyword">object</span> <span class="hljs-title">fibo</span> </span>{
+  <span class="hljs-keyword">val</span> initial = (<span class="hljs-number">0</span>, <span class="hljs-number">1</span>)
+
+  <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">fib</span></span>(n: <span class="hljs-type">Int</span>): <span class="hljs-type">Unit</span> = {
+    <span class="hljs-keyword">var</span> (a,b) = initial
+    <span class="hljs-keyword">var</span> tmp = <span class="hljs-number">0</span>
+    <span class="hljs-keyword">while</span> (a &lt; n) {
+      print(<span class="hljs-string">s&quot;<span class="hljs-subst">$a</span> &quot;</span>)
+      tmp = a + b; a = b; b = tmp
+    }
+    println()
+  }
+}
+
+<span class="hljs-class"><span class="hljs-keyword">object</span> <span class="hljs-title">main</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">App</span> </span>{
+  fibo.fib(<span class="hljs-number">100</span>)
+}
+</code></pre>
+<p>If there&apos;s only one such object in your code you can run it with <code>sbt</code> like so:</p>
+<pre><code class="lang-sh">sbt run 
+[info] Loading global plugins from /Users/user/.sbt/0.13/plugins
+[info] Loading project definition from /Users/user/myProject/project
+[info] Set current project to Python To Scala (<span class="hljs-keyword">in</span> build file:/Users/user/myProject/)
+[info] Running example.main
+0 1 1 2 3 5 8 13 21 34 55 89
+[success] Total time: 0 s, completed Apr 2, 2017 2:52:43 PM
+</code></pre>
+<p>If you prefer to hide the extra messages you can do this:</p>
+<pre><code class="lang-sh">sbt --error <span class="hljs-string">&apos;set showSuccess := false&apos;</span> run
+</code></pre>
+<h4 id="multiple-main-objects">Multiple main objects</h4>
+<p>If on the other hand you have multiple main files you have to tell sbt which one to run by using the <code>runMain</code> command:</p>
+<pre><code class="lang-sh">sbt <span class="hljs-string">&quot;runMain example.main&quot;</span>
+</code></pre>
+<h3 id="package-search-path">Package search path</h3>
+<p>Since Scala is a compiled language based on the Java Virtual Machine, everything has to be compiled before it can be used.</p>
+<p>When you have a project that is managed by <code>sbt</code> you normally don&apos;t have to care about the details; <code>sbt</code> will make sure that when you do</p>
+<pre><code class="lang-sh">sbt console
+</code></pre>
+<p>All the code is compiled and available to be imported.</p>
+<p>The equivalent of Python&apos;s <code>PYTHONPATH</code> is <code>CLASSPATH</code> which specifies the location of user defined classes and packages.</p>
+<p>You can print the value used by sbt with</p>
+<pre><code class="lang-sh">sbt <span class="hljs-string">&apos;show runtime:fullClasspath&apos;</span>
+</code></pre>
+<p>which would be analogous to</p>
+<pre><code class="lang-python"><span class="hljs-meta">&gt;&gt;&gt; </span><span class="hljs-keyword">import</span> sys; <span class="hljs-keyword">print</span> sys.path
+</code></pre>
+<h3 id="compiled-scala-files">Compiled Scala files</h3>
+<p>Pyhon compiles source files into a binary file with the extension <code>.pyc</code>. Scala compiles sourcode into a Java  class file (<code>.class</code>) that contains Java bytecode  executed by the Java Virtual Machine (JVM). They usually live under <code>target/scala-2.12/classes/</code>.</p>
+<p>The following command removes the compiled files under <code>target/</code>:</p>
+<pre><code class="lang-sh">sbt clean
+</code></pre>
+<h2 id="standard-packages">Standard packages</h2>
+<p>The Scala standard library lives under the package <code>scala</code>. It contains the core types like <code>Int</code>, <code>Float</code>, <code>String</code>; the collection library (<code>List</code>, <code>Map</code>, etc), plus many packages dealing with concurrent programming, IO, Regular expressions, etc.</p>
+<p>The official documentation can be found <a href="http://www.scala-lang.org/api/current" target="_blank">here</a>.</p>
+<blockquote>
+<p><em>Identifiers in the scala package and the scala.Predef object are always in scope by default.</em></p>
+<p><em>Some of these identifiers are type aliases provided as shortcuts to commonly used classes. For example, List is an alias for scala.collection.immutable.List.</em></p>
+<p><em>Other aliases refer to classes provided by the underlying platform. For example, on the JVM, String is an alias for java.lang.String.</em></p>
+<p>-- <a href="http://www.scala-lang.org/api/current/" target="_blank">http://www.scala-lang.org/api/current/</a></p>
+</blockquote>
+<h2 id="the-dir-function--reflection">The <code>dir()</code> function / reflection.</h2>
+<p>There&apos;s no direct equivalent for this in Scala. </p>
+<p>It is possible to inspect objects at runtime using what is known as <em>reflection</em>.  </p>
+<p>For example, here&apos;s how you would get the list of elements of our <code>fibo</code> object:</p>
+<pre><code class="lang-scala">scala&gt; fibo.getClass.getDeclaredMethods
+res8: <span class="hljs-type">Array</span>[java.lang.reflect.<span class="hljs-type">Method</span>] = <span class="hljs-type">Array</span>(public scala.<span class="hljs-type">Tuple2</span> example.fibo$.initial(), public void example.fibo$.fib(int))
+</code></pre>
+<p>Unfortunately the api for manipulating objects like this at runtime is much lower level and cumbersome to use than the Python equivalent. On top of that, operating at this level involves bypassing the type checker in many cases, so it is inherently less safe than regular Scala programming.</p>
+<p>For that reason it is advisable to leave this as the last resort.</p>
+<h1 id="modules">Modules</h1>
+<p>Scala doesn&apos;t have a distinction between Packages vs Modules as in Python. </p>
+<p>Instead of modules, a package can have &quot;subpackages&quot; that are identified by having a name starting with the parent name dot and the the subpackage, like <code>sound.formats</code>.</p>
+<p>Let&apos;s examine the hypothetical hierarchy presented in the tutorial:</p>
+<pre>
+sound/                          Top-level package
+      __init__.py               Initialize the sound package
+      formats/                  Subpackage for file format conversions
+              __init__.py
+              wavread.py
+              wavwrite.py
+              ...
+      effects/                  Subpackage for sound effects
+              __init__.py
+              echo.py
+              ...
+</pre>
+
+<p>In Scala this would be accomplished by this structure:</p>
+<pre>
+sound/                          Top-level package
+      formats/                  Subpackage for file format conversions
+              wavread.scala
+              wavwrite.scala
+              ...
+      effects/                  Subpackage for sound effects
+              echo.scala
+              ...
+</pre>
+
+<p>But the structure itself is not enough, the package declaration is actually more important:</p>
+<pre><code class="lang-scala"><span class="hljs-comment">// file: sound/formats/wavread.scala</span>
+<span class="hljs-keyword">package</span> sound.formats
+<span class="hljs-class"><span class="hljs-keyword">object</span> <span class="hljs-title">wavread</span> </span>{
+  ...
+}
+</code></pre>
+<pre><code class="lang-scala"><span class="hljs-comment">// file: sound/formats/wavwrite.scala</span>
+<span class="hljs-keyword">package</span> sound.formats
+<span class="hljs-class"><span class="hljs-keyword">object</span> <span class="hljs-title">wavwrite</span> </span>{
+  ...
+}
+</code></pre>
+<pre><code class="lang-scala"><span class="hljs-comment">// file: sound/effects/echo.scala</span>
+<span class="hljs-keyword">package</span> sound.effects
+<span class="hljs-class"><span class="hljs-keyword">object</span> <span class="hljs-title">echo</span> </span>{
+  ...
+}
+</code></pre>
+<p>If the top level objects defined above become to big they can easily be replaced by a subpackage and split into multiple files.</p>
+<blockquote>
+<p>Note: There is no need to create the special <code>__init__</code> file when adding a new folder with packages.</p>
+</blockquote>
+
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="3-data-structures.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page: Data Structures">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"Modules","level":"1.6","depth":1,"previous":{"title":"Data Structures","level":"1.5","depth":1,"path":"3-data-structures.md","ref":"3-data-structures.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"4-modules.md","mtime":"2017-07-06T02:04:19.000Z","type":"markdown"},"gitbook":{"version":"3.2.2","time":"2017-07-06T23:50:20.298Z"},"basePath":".","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <script src="gitbook/gitbook.js"></script>
+    <script src="gitbook/theme.js"></script>
+    
+        
+        <script src="gitbook/gitbook-plugin-search/search-engine.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-search/search.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-lunr/lunr.min.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-lunr/search-lunr.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-sharing/buttons.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+
+    </body>
+</html>
+

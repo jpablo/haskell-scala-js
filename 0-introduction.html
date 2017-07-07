@@ -1,0 +1,466 @@
+
+<!DOCTYPE HTML>
+<html lang="" >
+    <head>
+        <meta charset="UTF-8">
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title>Installation · GitBook</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 3.2.2">
+        
+        
+        
+    
+    <link rel="stylesheet" href="gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="gitbook/gitbook-plugin-highlight/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="gitbook/gitbook-plugin-search/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    <link rel="next" href="1-informal-introduction.html" />
+    
+    
+    <link rel="prev" href="./" />
+    
+
+    </head>
+    <body>
+        
+<div class="book">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="Type to search" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="./">
+            
+                <a href="./">
+            
+                    
+                    About this document
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter active" data-level="1.2" data-path="0-introduction.html">
+            
+                <a href="0-introduction.html">
+            
+                    
+                    Installation
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3" data-path="1-informal-introduction.html">
+            
+                <a href="1-informal-introduction.html">
+            
+                    
+                    Informal Introduction to Scala
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4" data-path="2-more-control-flow-tools.html">
+            
+                <a href="2-more-control-flow-tools.html">
+            
+                    
+                    More control flow tools
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5" data-path="3-data-structures.html">
+            
+                <a href="3-data-structures.html">
+            
+                    
+                    Data Structures
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6" data-path="4-modules.html">
+            
+                <a href="4-modules.html">
+            
+                    
+                    Modules
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
+            Published with GitBook
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href="." >Installation</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <h1 id="using-scala-on-the-browser-via-scastie">Using Scala on the Browser via Scastie</h1>
+<p>If you just want to try Scala in the browser without having to install anything
+then you can use
+<a href="https://scastie.scala-lang.org/" target="_blank">Scastie</a>
+.</p>
+<p>You can copy / paste most of the examples.</p>
+<h1 id="using-a-standalone-scala-repl">Using a standalone Scala Repl</h1>
+<p>The next option in terms of commitment is downloading the amazing
+<a href="http://www.lihaoyi.com/Ammonite/#Ammonite-REPL" target="_blank">Ammonite</a>.</p>
+<p>Ammonite is not completely dissimilar to IPython and it&apos;s a great way to
+play with code in the console and run quick scripts.</p>
+<p>Installation is usually very simple provided you have Java already installed (see next section).</p>
+<p>Again you can copy/paste most of the examples into the Ammonite repl.</p>
+<h1 id="full-scala-installation">Full Scala installation</h1>
+<p>Finally, in order to run a full fledged Scala project with tests, etc. follow these instructions:</p>
+<h2 id="quick-start">Quick Start</h2>
+<p>First you need to install the Java platform (Java SE)</p>
+<ul>
+<li><a href="https://www.oracle.com/technetwork/java/javase/downloads/index.html" target="_blank">https://www.oracle.com/technetwork/java/javase/downloads/index.html</a></li>
+</ul>
+<p>Next you&apos;ll need <code>sbt</code> (the Scala Build Tool):</p>
+<ul>
+<li><a href="http://www.scala-sbt.org/download.html" target="_blank">http://www.scala-sbt.org/download.html</a></li>
+</ul>
+<h2 id="your-first-scala-program">Your first Scala program</h2>
+<p>With <code>sbt</code> installed, let&apos;s use a starter template:</p>
+<pre><code class="lang-sh">$ sbt new scala/scala-seed.g8
+</code></pre>
+<p>When prompted for the project name type <code>Hello World</code> and hit enter:</p>
+<pre><code class="lang-sh">Minimum Scala build.
+
+name [My Something Project]: Hello World
+
+Template applied <span class="hljs-keyword">in</span> ./hello-world
+</code></pre>
+<p>This is what was created:</p>
+<pre>
+hello-world/
+&#x251C;&#x2500;&#x2500; build.sbt
+&#x251C;&#x2500;&#x2500; project
+&#x2502;   &#x251C;&#x2500;&#x2500; Dependencies.scala
+&#x2502;   &#x2514;&#x2500;&#x2500; build.properties
+&#x2514;&#x2500;&#x2500; src
+    &#x251C;&#x2500;&#x2500; main
+    &#x2502;   &#x2514;&#x2500;&#x2500; scala
+    &#x2502;       &#x2514;&#x2500;&#x2500; example
+    &#x2502;           &#x2514;&#x2500;&#x2500; Hello.scala
+    &#x2514;&#x2500;&#x2500; test
+        &#x2514;&#x2500;&#x2500; scala
+            &#x2514;&#x2500;&#x2500; example
+                &#x2514;&#x2500;&#x2500; HelloSpec.scala
+</pre>
+
+<p><code>cd</code> to the newly created folder</p>
+<pre><code class="lang-sh">$ <span class="hljs-built_in">cd</span> hello-world
+</code></pre>
+<p>This is the <em>root</em> of the project. </p>
+<p>Open up the file <code>src/main/scala/example/Hello.scala</code> with any editor (we&apos;ll get back to that later) and replace the contents with this:</p>
+<pre><code class="lang-scala"><span class="hljs-keyword">package</span> example
+
+<span class="hljs-class"><span class="hljs-keyword">object</span> <span class="hljs-title">Hello</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">App</span> </span>{
+  println(<span class="hljs-string">&quot;hello world!&quot;</span>)
+}
+</code></pre>
+<h3 id="running-the-program">Running the program</h3>
+<p>we&apos;ll use <code>sbt</code> to compile and run the program:</p>
+<pre><code class="lang-sh">sbt run
+</code></pre>
+<blockquote>
+<p>Note: The very first time you run <code>sbt</code> it will download and cache many depencies, including the Scala compiler! It might take some time but the second time it will be faster.</p>
+<p>The cached files live under <code>$HOME/.ivy2/</code>.</p>
+</blockquote>
+<p>Eventually you&apos;ll see something similar to this:</p>
+<pre><code>[info] Loading global plugins from /Users/jpablo/.sbt/0.13/plugins
+[info] Loading project definition from /Users/jpablo/tmp/hello-world/project
+[info] Set current project to Hello (in build file:/Users/jpablo/tmp/hello-world/)
+[info] Compiling 1 Scala source to /Users/jpablo/tmp/hello-world/target/scala-2.12/classes...
+[info] Running example.Hello
+hello world!
+[success] Total time: 3 s, completed Apr 13, 2017 11:52:49 PM
+</code></pre><h3 id="running-the-tests">Running the tests</h3>
+<p>We need to adjust the tests to account for the code we just changed. Open up the file <code>src/test/scala/example/HelloSpec.scala</code> and replace the contents to this:</p>
+<pre><code class="lang-scala"><span class="hljs-keyword">package</span> example
+
+<span class="hljs-keyword">import</span> org.scalatest._
+
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">HelloSpec</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">FlatSpec</span> <span class="hljs-keyword">with</span> <span class="hljs-title">Matchers</span> </span>{
+  <span class="hljs-string">&quot;Addition of small numbers&quot;</span> should <span class="hljs-string">&quot;work correctly&quot;</span> in {
+    (<span class="hljs-number">1</span> + <span class="hljs-number">1</span>) shouldEqual <span class="hljs-number">2</span>
+  }
+}
+</code></pre>
+<p>Now let&apos;s run the tests:</p>
+<pre><code class="lang-sh">$ sbt <span class="hljs-built_in">test</span>
+[info] Loading global plugins from /Users/jpablo/.sbt/0.13/plugins
+[info] Loading project definition from /Users/jpablo/tmp/hello-world/project
+[info] Set current project to Hello (<span class="hljs-keyword">in</span> build file:/Users/jpablo/tmp/hello-world/)
+[info] HelloSpec:
+[info] Addition of small numbers
+[info] - should work correctly
+[info] Run completed <span class="hljs-keyword">in</span> 353 milliseconds.
+[info] Total number of tests run: 1
+[info] Suites: completed 1, aborted 0
+[info] Tests: succeeded 1, failed 0, canceled 0, ignored 0, pending 0
+[info] All tests passed.
+[success] Total time: 1 s, completed Apr 14, 2017 12:07:49 AM
+</code></pre>
+<p>Hooray!! You have you&apos;re first Scala program compiled, executed and tested.</p>
+<h3 id="the-repl">The REPL</h3>
+<p>Add the following code at the bottom of our <code>Hello.scala</code> file:</p>
+<pre><code class="lang-scala"><span class="hljs-class"><span class="hljs-keyword">object</span> <span class="hljs-title">Secret</span> </span>{
+  <span class="hljs-keyword">val</span> number = <span class="hljs-number">1</span>
+}
+</code></pre>
+<p><code>sbt</code> provides with a REPL via the command <code>sbt console</code>. </p>
+<pre><code class="lang-sh">$ sbt console
+[info] Loading global plugins from /Users/jpablo/.sbt/0.13/plugins
+[info] Loading project definition from /Users/jpablo/tmp/hello-world/project
+[info] Set current project to Hello (<span class="hljs-keyword">in</span> build file:/Users/jpablo/tmp/hello-world/)
+[info] Starting scala interpreter...
+[info]
+Welcome to Scala 2.12.1 (Java HotSpot(TM) 64-Bit Server VM, Java 1.8.0_40).
+Type <span class="hljs-keyword">in</span> expressions <span class="hljs-keyword">for</span> evaluation. Or try :help.
+
+scala&gt; example.Secret.number
+res0: Int = 1
+
+scala&gt; 1 + 2
+res1: Int = 3
+</code></pre>
+<p>Observe how we can use our own code by using the correct package name (<code>example</code> in this case).</p>
+<blockquote>
+<p>Hints:</p>
+<ul>
+<li><code>sbt compile</code> will only compile the code and nothing else</li>
+<li>Adding <code>~</code> to many <code>sbt</code> commands will enable <em>file watch mode</em>. For example <code>sbt &quot;~test&quot;</code> will recompile / rerun the tests every time a change in the project&apos;s source code is detected. (<code>sbt &quot;~compile&quot;</code> will recompile on every change)</li>
+</ul>
+</blockquote>
+<h2 id="editing-scala-code">Editing Scala Code</h2>
+<p>In order to enjoy many of the benefits of using a statically typed language like Scala (such as precise autocompletion, code generation, etc) you&apos;ll need to configure correctly your editor. A good option is to use IntelliJ IDEA which is an IDE that has support for Scala via a plugin. If you&apos;ve ever used PyCharm you&apos;ll feel at home.</p>
+<ul>
+<li><a href="https://www.jetbrains.com/idea/download/" target="_blank">https://www.jetbrains.com/idea/download/</a></li>
+</ul>
+<p>(Download and install the <strong>Comunity</strong> edition which is free).</p>
+<p>Once IJ is running you&apos;ll need to install the Scala plugin:</p>
+<p><code>Preferences =&gt; Plugins =&gt; Browse repositories</code></p>
+<p>Search for &quot;Scala&quot;. Install the plugin and restart the IDE.</p>
+<p>After restarting IJ, on the welcome dialog click on &quot;Open&quot; and choose our Scala <code>hello-world</code> folder. You&apos;ll be asked to confirm a few options in the dialog &quot;Import Project from SBT&quot;. Accept the defaults and click &quot;Ok&quot;.</p>
+<p>Another dialog will ask for modules to include. Again accept the defaults and click &quot;Ok&quot;.</p>
+<p>After that you can explore the project on the panel to the left and start making changes to your code.</p>
+<h2 id="about-java">About Java</h2>
+<p>There are a few java-relatee terms that are useful to know while using Scala.</p>
+<h3 id="the-java-language">The Java Language</h3>
+<p>You probably already know about the Java Programming Language. It is an Object Oriented statically typed language released by Sun Microsystems back in 1995.</p>
+<p>Unlike languages like C or C++, Java doesn&apos;t compile directly to native code, but rather to <em>bytecode</em> that can be executed on any <em>Java Virtual Machine</em> (<code>JVM</code>).</p>
+<h3 id="jvm">JVM</h3>
+<p>A <em>Java Virtual Machine</em> or <em>JVM</em> for short is a an idealized version of a computing machine. The idea is that once a program has been compiled to bytecodes it can then run unmodified into any platform for which an JVM exists.</p>
+<p>There&apos;s nothing that prevents any language to be compiled to Java bytecode, and thus variants of many common languages exist that can run on the JVM. </p>
+<h3 id="java-2-platform">Java 2 Platform</h3>
+<p>Also known as <em>Java Standard Edition</em> or <em>Java SE</em> is a set of libraries and APIs that form the <em>standard library</em> of the Java language. </p>
+<h3 id="scala-and-java">Scala and Java</h3>
+<p>Scala was originally designed as a language that targets the JVM. It was also designed to make it very easy to use existing Java libraries. In particular, all the Java SE libraries can be imported and used within Scala programs. </p>
+<p>The Java standard library is accessible in Scala programs under the <code>java.*</code> namespace. Scala&apos;s own std library is available under the <code>scala.*</code> namespace. We&apos;ll talk more about packages and namespaces later.</p>
+<h2 id="sbt"><code>sbt</code></h2>
+<p><code>sbt</code> is a commonly used build tool for Scala. It can take care amongst other things:</p>
+<ul>
+<li>Start a project from scratch via templates</li>
+<li>Managing dependencies</li>
+<li>Building a project</li>
+<li>Running tests</li>
+<li>etc</li>
+</ul>
+
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="./" class="navigation navigation-prev " aria-label="Previous page: About this document">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="1-informal-introduction.html" class="navigation navigation-next " aria-label="Next page: Informal Introduction to Scala">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"Installation","level":"1.2","depth":1,"next":{"title":"Informal Introduction to Scala","level":"1.3","depth":1,"path":"1-informal-introduction.md","ref":"1-informal-introduction.md","articles":[]},"previous":{"title":"About this document","level":"1.1","depth":1,"path":"README.md","ref":"README.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"0-introduction.md","mtime":"2017-07-06T02:09:48.000Z","type":"markdown"},"gitbook":{"version":"3.2.2","time":"2017-07-06T23:50:20.298Z"},"basePath":".","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <script src="gitbook/gitbook.js"></script>
+    <script src="gitbook/theme.js"></script>
+    
+        
+        <script src="gitbook/gitbook-plugin-search/search-engine.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-search/search.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-lunr/lunr.min.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-lunr/search-lunr.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-sharing/buttons.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+
+    </body>
+</html>
+

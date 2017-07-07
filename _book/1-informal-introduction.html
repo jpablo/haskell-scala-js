@@ -1,0 +1,591 @@
+
+<!DOCTYPE HTML>
+<html lang="" >
+    <head>
+        <meta charset="UTF-8">
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title>Informal Introduction to Scala · GitBook</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 3.2.2">
+        
+        
+        
+    
+    <link rel="stylesheet" href="gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="gitbook/gitbook-plugin-highlight/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="gitbook/gitbook-plugin-search/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    <link rel="next" href="2-more-control-flow-tools.html" />
+    
+    
+    <link rel="prev" href="0-introduction.html" />
+    
+
+    </head>
+    <body>
+        
+<div class="book">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="Type to search" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="./">
+            
+                <a href="./">
+            
+                    
+                    About this document
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" data-path="0-introduction.html">
+            
+                <a href="0-introduction.html">
+            
+                    
+                    Installation
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter active" data-level="1.3" data-path="1-informal-introduction.html">
+            
+                <a href="1-informal-introduction.html">
+            
+                    
+                    Informal Introduction to Scala
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4" data-path="2-more-control-flow-tools.html">
+            
+                <a href="2-more-control-flow-tools.html">
+            
+                    
+                    More control flow tools
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5" data-path="3-data-structures.html">
+            
+                <a href="3-data-structures.html">
+            
+                    
+                    Data Structures
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6" data-path="4-modules.html">
+            
+                <a href="4-modules.html">
+            
+                    
+                    Modules
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
+            Published with GitBook
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href="." >Informal Introduction to Scala</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <h1 id="scala-as-a-calculator">Scala as a calculator</h1>
+<p>All the commands so far will assume that you started the Scala REPL via inside the <code>hello-world</code> project created in the introduction.</p>
+<pre><code>$ sbt console
+</code></pre><h2 id="numbers-and-arithmetic">Numbers and arithmetic</h2>
+<pre><code class="lang-tut">2 + 2
+50 - 5*6
+(50 - 5*6) / 4
+8 / 5
+</code></pre>
+<p>As you can see, each result has the type indicated to the left.</p>
+<blockquote>
+<p>Note: <code>8/5</code> performs integer division. In order to get a floating point operation you need to convert one of the arguments:</p>
+</blockquote>
+<pre><code class="lang-tut">8.toDouble / 5
+</code></pre>
+<p>There&apos;s no predefined operator to calculate powers, but you can use <code>Math.pow</code></p>
+<pre><code class="lang-tut">Math.pow(5,2)
+</code></pre>
+<p>To save a value for later use you can use the keyword <code>val</code> and the equal sign <code>(=)</code>:</p>
+<pre><code class="lang-tut">val width = 20
+val height = 5 * 9
+width * height
+</code></pre>
+<blockquote>
+<p>Note: names created with <code>val</code> cannot be reassigned. For such cases you need to use <code>var</code>:</p>
+</blockquote>
+<pre><code class="lang-tut">var x = 1
+x = x + 1
+</code></pre>
+<h2 id="numeric-types">Numeric types</h2>
+<p>Python has 4 main numeric types. All have a corresponding type in Scala except <code>complex</code>.</p>
+<table>
+<thead>
+<tr>
+<th>Python</th>
+<th>Scala</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>bool</code></td>
+<td><code>Boolean</code></td>
+</tr>
+<tr>
+<td><code>int</code></td>
+<td><code>BigInt</code></td>
+</tr>
+<tr>
+<td><code>float</code></td>
+<td><code>Double</code></td>
+</tr>
+<tr>
+<td><code>complex</code></td>
+<td>NA</td>
+</tr>
+</tbody>
+</table>
+<p>From the Scala point of view these are the numeric types:</p>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>T.MinValue</th>
+<th>T.MaxValue</th>
+<th>Example</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>Int</code></td>
+<td><code>-2147483648</code></td>
+<td><code>2147483647</code></td>
+<td><code>100</code></td>
+</tr>
+<tr>
+<td><code>Long</code></td>
+<td><code>-9223372036854775808</code></td>
+<td><code>9223372036854775807</code></td>
+<td><code>2147483648L</code></td>
+</tr>
+<tr>
+<td><code>Float</code></td>
+<td><code>-3.4028235E38</code></td>
+<td><code>3.4028235E38</code></td>
+<td><code>1.23F</code></td>
+</tr>
+<tr>
+<td><code>Double</code></td>
+<td><code>-1.7976931348623157E308</code></td>
+<td><code>1.7976931348623157E308</code></td>
+<td><code>1.23</code></td>
+</tr>
+<tr>
+<td><code>BigInt</code></td>
+<td>Unbounded (limited by memory)</td>
+<td>Unbounded</td>
+<td><code>BigInt(123)</code></td>
+</tr>
+<tr>
+<td><code>BigDecimal</code></td>
+<td>Unbounded (limited by memory)</td>
+<td>Unbounded</td>
+<td><code>BigDecimal(1.23)</code></td>
+</tr>
+</tbody>
+</table>
+<p>For all bounded types you can obtain the min/max values using the <code>MinValue</code> / <code>MaxValue</code> functions.</p>
+<pre><code class="lang-tut">Int.MaxValue
+</code></pre>
+<h2 id="strings">Strings</h2>
+<p>There are 3 common ways to create literal strings:</p>
+<h3 id="double-quotes">Double quotes</h3>
+<pre><code class="lang-tut">&quot;spam eggs&quot;
+&quot;doesn&apos;t&quot;
+&quot;\&quot;abc\&quot;&quot;
+&quot;La ni&#xF1;a com&#xED;a r&#xE1;banos&quot;
+&quot;The &#x1F431; ate the &#x1F34E;&quot;
+</code></pre>
+<h3 id="triple-quotes">Triple quotes</h3>
+<pre><code class="lang-tut">&quot;&quot;&quot;&quot;Isn&apos;t,&quot; she said.&quot;&quot;&quot;
+&quot;&quot;&quot;a
+multiline
+word
+&quot;&quot;&quot;
+&quot;&quot;&quot;c:\some\name&quot;&quot;&quot;
+&quot;&quot;&quot;{&quot;x&quot;:1, &quot;y&quot;:&quot;2&quot;}&quot;&quot;&quot;
+</code></pre>
+<p>Translation: <code>print(s)</code> becomes <code>println(s)</code></p>
+<h3 id="string-interpolation">String interpolation</h3>
+<pre><code class="lang-tut">val x = 1 + 2 + 3
+println(s&quot;1 + 2 + 3 = $x&quot;)
+</code></pre>
+<p>The <code>s&quot;...&quot;</code> syntax allows to embed code directly within a string.</p>
+<h3 id="characters">Characters</h3>
+<p>Characters have a special type in scala <code>Char</code> and are constructed using single quotes</p>
+<pre><code class="lang-tut">&apos;a&apos;
+</code></pre>
+<h3 id="string-operations">String operations</h3>
+<p>A String is conceptually a sequence of characters. </p>
+<table>
+<tbody>
+<tr>
+<td></td>
+<td>Python</td>
+<td>Scala</td>
+<td>Notes</td>
+</tr>
+
+<tr>
+<td>Concatenate</td>
+<td><pre>&quot;a&quot; + &quot;b&quot;</pre></td>
+<td><pre>&quot;a&quot; + &quot;b&quot;</pre></td>
+</tr>
+
+<tr>
+
+<td>Indexing</td>
+
+<td>
+<pre>word = &quot;Scala&quot;
+word[0] == &quot;S&quot;
+word[4] == &quot;a&quot;</pre>
+</td>
+
+<td>
+<pre>val word = &quot;Scala&quot;
+word(0) == &apos;S&apos;
+word(4) == &apos;a&apos;</pre>
+</td>
+
+<td>
+<ul>
+<li> Insted of square brackets `seq[i]` Scala uses parenthesis `seq(i)` to access the `i-th` element of a sequence.
+</li><li> The result is a `Char`, not a `String`
+</li><li> Indices cannot be negative.
+<ul>
+</ul></li></ul></td>
+</tr>
+
+<tr>
+<td>Slices</td>
+<td><pre>&quot;Python&quot;[2:6] == &quot;thon&quot;</pre></td>
+<td><pre>&quot;Python&quot;.slice(2,6) == &quot;thon&quot;</pre></td>
+<td>There is no syntax for slices (you have to use the `.slice` method)</td><td>
+</td></tr>
+
+<tr>
+<td>Length</td>
+<td><pre>len(&quot;Python&quot;) == 6</pre></td>
+<td><pre>&quot;Python&quot;.length == 6</pre></td>
+<td>There&apos;s no global `len` function as in Python but rather each collection has its own `length` method.</td><td>
+</td></tr>
+
+
+</tbody>
+</table>
+
+
+<h2 id="collections">Collections</h2>
+<p>Scala has a rich library of data structures. A few highlights:</p>
+<ul>
+<li>There&apos;s no special syntax for building lists. (e.g. <code>[1,2,3]</code>)</li>
+<li>Scala collections are <em>homogeneous</em>. They can only hold values of a single type.</li>
+<li>Most of the collections have a <em>immutable</em> version and a <em>mutable</em> version. In general only the immutable variant is imported automatically (<code>Array</code> is an exception).</li>
+<li>The immutable versions are probably more performant than what you&apos;d expect.</li>
+<li>When in doubt, is better to use the immutable variant and only switch to the mutable variant when you need it for reasons like convenience, performance, etc.</li>
+</ul>
+<p>Let&apos;s start with one of the most popular immutable collections.</p>
+<h3 id="list"><code>List</code></h3>
+<p>Lists are in fact <strong>linked lists</strong>, which means that they are very fast at inserting elements at the beginning and iterating sequentially, but accessing element <em>n</em> requires scanning the whole list up to the <em>n-th</em> element.</p>
+<p>Pro tip: <code>List</code> is <em>not</em> like Python&apos;s <code>list</code>. Use <code>Vector</code> (immutable) or <code>Array</code> (mutable) if you need fast access to an arbitrary index.</p>
+<pre><code class="lang-tut">val lst = List(1, 2, 3, 4, 5, 6)
+lst.length
+</code></pre>
+<p>List is particularly good if you need to get hold of the first element (the <em>head</em>) and everything but the head (the <em>tail</em>)</p>
+<pre><code class="lang-tut">val h = lst.head
+val t = lst.tail
+</code></pre>
+<p>In most data structures getting a copy of the tail is a relatively expensive operation that requires copying n - 1 elements. In a linked list this just involves following a pointer so it is super fast.</p>
+<p>Another fast operation on Lists is prepending an element via the <code>(::)</code> operator</p>
+<pre><code class="lang-tut">val lst2 = 0 :: lst
+lst2.head
+</code></pre>
+<h3 id="mutablearraybuffer">mutable.ArrayBuffer</h3>
+<p>Probably the most similar structure to Python&apos;s <code>list</code> is <code>collection.mutable.ArrayBuffer</code>.</p>
+<p>The &quot;Buffer&quot; part refers to the fact that the size can be changed, as opposed to the <code>Array</code> which has a fixed size (see below).</p>
+<pre><code class="lang-tut">import collection.mutable.ArrayBuffer // required import
+
+val b = ArrayBuffer(1, 2, 3, 4, 5)
+</code></pre>
+<p>All of the operations that we&apos;ve seen on Strings and Vectors work for <code>ArrayBuffer</code>:</p>
+<pre><code class="lang-tut">b(0)
+b(1)
+b.slice(1,3)
+b.take(2)
+b.drop(2)
+</code></pre>
+<p>Since they are mutable they support a few extra operations to modify / append / preppend / extend the Arraybuffer</p>
+<pre><code class="lang-tut">b(0) = 2 // modify in place
+b
+b(0) += 1 // increment operator
+b
+b.append(6)
+b
+b.prepend(0)
+b
+b.appendAll(ArrayBuffer(7,8,9))
+b
+</code></pre>
+<p>Since a collection is completely agnostic towards its contents (i.e. &quot;generic&quot;) we can have nested buffers</p>
+<pre><code class="lang-tut">val b1 = ArrayBuffer(1, 2, 3)
+val b2 = ArrayBuffer(4, 5, 6)
+val c = ArrayBuffer(b1, b2)
+</code></pre>
+<p>let&apos;s update the element (0,0)</p>
+<pre><code class="lang-tut">c(0)(0) += 1
+c
+</code></pre>
+<p>As we saw, <code>ArrayBuffer</code> allow not only updating its contents in-place but also modifing the length of the array. This imposes a small overhead; if you need maximum performance it&apos;s better to use an <code>Array</code> which allows in place modification but cannot change its size.</p>
+<p>You can build an ArrayBuffer and the transform it into an Array</p>
+<pre><code class="lang-tut">b.toArray
+</code></pre>
+<p>or if you know the size beforehand it&apos;s better to create the Array directly</p>
+<pre><code class="lang-tut">val arr = Array(1,2,3)
+arr(0) += 1
+arr
+Array.ofDim[Int](5)
+</code></pre>
+<h1 id="first-steps-towards-programming">First Steps Towards Programming</h1>
+<p>Let&apos;s generate the classic fibonacci series</p>
+<pre><code class="lang-python">a, b = <span class="hljs-number">0</span>, <span class="hljs-number">1</span>
+<span class="hljs-keyword">while</span> b &lt; <span class="hljs-number">10</span>:
+    print(b)
+    a, b = b, a+b
+</code></pre>
+<p>becomes</p>
+<pre><code class="lang-tut:book">var a = 0
+var b = 1
+var tmp = 0
+while (b &lt; 10) {
+  println(b)
+  tmp = a + b
+  a = b
+  b = tmp
+}
+</code></pre>
+<p>We can observe a few differences: </p>
+<ul>
+<li><p>The Python version doesn&apos;t need the temporal variable because multiple assignment: <code>a, b = b, a + b</code> works element by element.</p>
+<p>In contrast, Scala has a special version that works like this</p>
+<pre><code class="lang-tut">val x, y, z = Math.random
+</code></pre>
+<p>The expression on the right is evaluated as many times as variables on the left.</p>
+</li>
+<li><p>Scala does not use indentation as part of the syntax. The body of the <code>while</code> loop consists of the block immediately next to it; curly brackets <code>{}</code> are required if there is more than one line (as in this case).</p>
+</li>
+</ul>
+
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="0-introduction.html" class="navigation navigation-prev " aria-label="Previous page: Installation">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="2-more-control-flow-tools.html" class="navigation navigation-next " aria-label="Next page: More control flow tools">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"Informal Introduction to Scala","level":"1.3","depth":1,"next":{"title":"More control flow tools","level":"1.4","depth":1,"path":"2-more-control-flow-tools.md","ref":"2-more-control-flow-tools.md","articles":[]},"previous":{"title":"Installation","level":"1.2","depth":1,"path":"0-introduction.md","ref":"0-introduction.md","articles":[]},"dir":"ltr"},"config":{"plugins":[],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"gitbook":"*"},"file":{"path":"1-informal-introduction.md","mtime":"2017-07-06T02:00:19.000Z","type":"markdown"},"gitbook":{"version":"3.2.2","time":"2017-07-06T23:59:59.706Z"},"basePath":".","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <script src="gitbook/gitbook.js"></script>
+    <script src="gitbook/theme.js"></script>
+    
+        
+        <script src="gitbook/gitbook-plugin-search/search-engine.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-search/search.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-lunr/lunr.min.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-lunr/search-lunr.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-sharing/buttons.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+
+    </body>
+</html>
+
