@@ -1,10 +1,10 @@
 # Summary
 
 * [Installation](0-installation.md)
-  * [Trying out Scala on the Browser](0-installation.md#browser)
   * [Using a standalone Scala REPL](0-installation.md#ammonite)
+  * [Trying out Scala on the Browser](0-installation.md#browser)
   * [Editor Support](0-installation.md#editor)
-* [Scala as a calculator {#calculator}](1-informal-introduction.md)
+* [Scala as a calculator](1-informal-introduction.md)
   * [Numbers and arithmetic](1-informal-introduction.md#arithmetic)
   * [Numeric types](1-informal-introduction.md#numeric-types)
   * [Strings](1-informal-introduction.md#strings)
@@ -59,7 +59,7 @@
   * Mathematics
   * Internet Access
   * Dates and Times
-* [Full Scala installation {#full-installation}](9-setting-up-a-full-project.md)
+* [Full Scala installation](9-setting-up-a-full-project.md)
   * [Quick Start](9-setting-up-a-full-project.md#quick-start)
   * [Your first Scala program](9-setting-up-a-full-project.md#first-scala-program)
   * [Editing Scala Code](9-setting-up-a-full-project.md#editing-scala-code)

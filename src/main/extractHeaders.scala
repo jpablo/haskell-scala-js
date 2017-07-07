@@ -27,4 +27,5 @@ def mkSub(p: Path) = {
 val files = ls! pwd / 'tut |? (_.name matches """\d+-.*\.md""")
 val result = files map(mkSub) mkString "\n"
 
+println("# Summary\n")
 println(result)

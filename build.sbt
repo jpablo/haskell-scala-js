@@ -20,4 +20,5 @@ sourceDirectory in GitBook := tutTargetDirectory.value
 makeSite := makeSite.dependsOn(tutQuick).value
 previewLaunchBrowser := false
 
+preprocessVars in Preprocess := Map("VERSION" -> version.value, "DATE" -> new Date().toString)
 
