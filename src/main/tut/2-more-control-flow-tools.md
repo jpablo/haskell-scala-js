@@ -2,7 +2,7 @@
 
 Most of the usual Python control flow constructs translate into Scala but there are a few differences that we'll be careful to indicate.
 
-## `if` Expressions
+## `if` Expressions {#if}
 
 In Scala (unlike Python) an `if` is an **expression**, which means that it has a return value.
 
@@ -50,7 +50,7 @@ thereby forcing us to create one extra mutable variable (`message`).
 x = 0 if x < 0 else x0
 ```
 
-## `for` comprehensions
+## `for` comprehensions {#for-comprehensions}
 
 `for` expressions (called "for comprehensions") are one of the most interesting aspects of Scala.
 
@@ -117,7 +117,7 @@ As you can see the only difference is that now we are using the keyword **`yield
 
 (We'll spend more time on for comprehensions later).
 
-## Ranges
+## Ranges {#ranges}
 
 | Python | Scala | values |
 | ---    |---    | --- |
@@ -146,7 +146,7 @@ but there is a niftier way using the standard method `.indices`
 for (i <- lst.indices) println(i, lst(i))
 ```
 
-## Enumerate
+## Enumerate {#enumerate}
 Another standard function in Python is `enumerate`:
 
 ```python
@@ -162,7 +162,7 @@ val seasons = List("Spring", "Summer", "Fall", "Winder")
 seasons.zipWithIndex
 ```
 
-## `break`, `continue`, `else` clause
+## `break`, `continue`, `else` clause {#break}
 
 This is one of the cases where Scala shows its functional side by not having any of those.
 
@@ -221,7 +221,7 @@ while (num < 10) {
 }
 ```
 
-## `pass` statements
+## `pass` statements {#pass}
 
 
 | Python | Scala
@@ -232,7 +232,7 @@ while (num < 10) {
 
 So in most cases the empty body (`{}`) is a good substitute for `pass` and in classes not even that is required.
 
-## Defining Functions
+## Defining Functions {#defining-functions}
 
 
 ```python

@@ -1,4 +1,4 @@
-# Scala as a calculator
+# Scala as a calculator {#calculator}
 All the commands so far will assume that you started the Scala REPL via inside the `hello-world` project created in the introduction.
 
 ```
@@ -284,7 +284,7 @@ arr
 Array.ofDim[Int](5)
 ```
 
-# First Steps Towards Programming
+# First Steps Towards Programming {#first-steps}
 
 Let's generate the classic fibonacci series
 

@@ -1,6 +1,6 @@
 enablePlugins(TutPlugin)
-//enablePlugins(GhpagesPlugin)
-enablePlugins(JekyllPlugin)
+enablePlugins(GitBookPlugin)
+enablePlugins(GhpagesPlugin)
 
 lazy val root = (project in file(".")).
   settings(
@@ -14,3 +14,10 @@ lazy val root = (project in file(".")).
 
 
 scalacOptions in Tut := Seq("-Dscala.color")
+git.remoteRepo := "git@github.com:jpablo/python-scala.git"
+ghpagesNoJekyll := true
+sourceDirectory in GitBook := tutTargetDirectory.value
+makeSite := makeSite.dependsOn(tutQuick).value
+previewLaunchBrowser := false
+
+
