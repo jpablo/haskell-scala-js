@@ -4,7 +4,7 @@
     <head>
         <meta charset="UTF-8">
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
-        <title>Introduction · GitBook</title>
+        <title>Input and output · GitBook</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="description" content="">
         <meta name="generator" content="GitBook 3.2.2">
@@ -57,8 +57,6 @@
     <link rel="shortcut icon" href="gitbook/images/favicon.ico" type="image/x-icon">
 
     
-    <link rel="next" href="0-installation.html" />
-    
     
 
     </head>
@@ -87,7 +85,7 @@
         
         
     
-        <li class="chapter active" data-level="1.1" data-path="./">
+        <li class="chapter " data-level="1.1" data-path="./">
             
                 <a href="./">
             
@@ -572,7 +570,7 @@
             
         </li>
     
-        <li class="chapter " data-level="1.7" data-path="5-input-and-output.html">
+        <li class="chapter active" data-level="1.7" data-path="5-input-and-output.html">
             
                 <a href="5-input-and-output.html">
             
@@ -912,7 +910,7 @@
     <!-- Title -->
     <h1>
         <i class="fa fa-circle-o-notch fa-spin"></i>
-        <a href="." >Introduction</a>
+        <a href="." >Input and output</a>
     </h1>
 </div>
 
@@ -927,8 +925,72 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <h1 id="introduction">Introduction</h1>
-<p>This is an introductory tutorial to Scala from a Python&apos;s developer point of view.</p>
+                                <h1 id="input-and-output">Input and Output</h1>
+<p>So far we&apos;ve used <code>println()</code> and <code>print()</code>.</p>
+<h2 id="fancier-output-formatting">Fancier Output Formatting</h2>
+<blockquote>
+<p>Note: There&apos;s no analog of Python functions <code>str.rjust()</code>, <code>str.ljust()</code>, or <code>str.center()</code>.</p>
+</blockquote>
+<p>The first tool for string formatting is using string interpolation</p>
+<pre><code class="lang-scala">scala&gt; <span class="hljs-string">s&quot;<span class="hljs-subst">${math.Pi}</span>&quot;</span>
+res0: <span class="hljs-type">String</span> = <span class="hljs-number">3.141592653589793</span>
+</code></pre>
+<p>There is another type of interpolator used to format strings that is similar to Python&apos;s <code>string.format</code>. For example to print only 2 decimal values of Pi:</p>
+<pre><code class="lang-scala">scala&gt; <span class="hljs-string">f&quot;<span class="hljs-subst">${math.Pi}</span>%.2f&quot;</span>
+res1: <span class="hljs-type">String</span> = <span class="hljs-number">3.14</span>
+</code></pre>
+<p>As you can see it is very similar to the regular <code>s&quot;&quot;</code> interpolator, but you have to add a <code>%</code> and format string after the embedded expression.</p>
+<pre><code class="lang-scala">scala&gt; <span class="hljs-keyword">for</span> (x &lt;- <span class="hljs-number">1</span> to <span class="hljs-number">10</span>) println(<span class="hljs-string">f&quot;<span class="hljs-subst">$x</span>%2d <span class="hljs-subst">${x*x}</span>%3d <span class="hljs-subst">${x*x*x}</span>%4d&quot;</span>)
+ <span class="hljs-number">1</span>   <span class="hljs-number">1</span>    <span class="hljs-number">1</span>
+ <span class="hljs-number">2</span>   <span class="hljs-number">4</span>    <span class="hljs-number">8</span>
+ <span class="hljs-number">3</span>   <span class="hljs-number">9</span>   <span class="hljs-number">27</span>
+ <span class="hljs-number">4</span>  <span class="hljs-number">16</span>   <span class="hljs-number">64</span>
+ <span class="hljs-number">5</span>  <span class="hljs-number">25</span>  <span class="hljs-number">125</span>
+ <span class="hljs-number">6</span>  <span class="hljs-number">36</span>  <span class="hljs-number">216</span>
+ <span class="hljs-number">7</span>  <span class="hljs-number">49</span>  <span class="hljs-number">343</span>
+ <span class="hljs-number">8</span>  <span class="hljs-number">64</span>  <span class="hljs-number">512</span>
+ <span class="hljs-number">9</span>  <span class="hljs-number">81</span>  <span class="hljs-number">729</span>
+<span class="hljs-number">10</span> <span class="hljs-number">100</span> <span class="hljs-number">1000</span>
+</code></pre>
+<p>As another alternative, you can use the <code>String.format</code> method:</p>
+<pre><code class="lang-python"><span class="hljs-keyword">for</span> x <span class="hljs-keyword">in</span> range(<span class="hljs-number">1</span>, <span class="hljs-number">11</span>):
+    print(<span class="hljs-string">&apos;{0:2d} {1:3d} {2:4d}&apos;</span>.format(x, x*x, x*x*x))
+</code></pre>
+<p>Becomes</p>
+<pre><code class="lang-scala">scala&gt; <span class="hljs-keyword">for</span> (x &lt;- <span class="hljs-number">1</span> to <span class="hljs-number">10</span>) 
+     |   println(<span class="hljs-string">&quot;%2d %3d %4d&quot;</span>.format(x, x*x, x*x*x))
+ <span class="hljs-number">1</span>   <span class="hljs-number">1</span>    <span class="hljs-number">1</span>
+ <span class="hljs-number">2</span>   <span class="hljs-number">4</span>    <span class="hljs-number">8</span>
+ <span class="hljs-number">3</span>   <span class="hljs-number">9</span>   <span class="hljs-number">27</span>
+ <span class="hljs-number">4</span>  <span class="hljs-number">16</span>   <span class="hljs-number">64</span>
+ <span class="hljs-number">5</span>  <span class="hljs-number">25</span>  <span class="hljs-number">125</span>
+ <span class="hljs-number">6</span>  <span class="hljs-number">36</span>  <span class="hljs-number">216</span>
+ <span class="hljs-number">7</span>  <span class="hljs-number">49</span>  <span class="hljs-number">343</span>
+ <span class="hljs-number">8</span>  <span class="hljs-number">64</span>  <span class="hljs-number">512</span>
+ <span class="hljs-number">9</span>  <span class="hljs-number">81</span>  <span class="hljs-number">729</span>
+<span class="hljs-number">10</span> <span class="hljs-number">100</span> <span class="hljs-number">1000</span>
+</code></pre>
+<p>In both cases the format is implemented in terms of <code>java.util.Formatter</code>.</p>
+<ul>
+<li><a href="https://docs.oracle.com/javase/tutorial/essential/io/formatting.html" target="_blank">Formatting Guide</a></li>
+<li><a href="https://docs.oracle.com/javase/8/docs/api/java/util/Formatter.html" target="_blank">Formatting API docs</a></li>
+</ul>
+<h2 id="reading-and-wrinting-files">Reading and Wrinting Files</h2>
+<h3 id="reading">Reading</h3>
+<p>To read all the lines from a file into a list of strings:</p>
+<pre><code class="lang-scala"><span class="hljs-keyword">val</span> lines = io.<span class="hljs-type">Source</span>.fromFile(<span class="hljs-string">&quot;my-file&quot;</span>).getLines().toList
+</code></pre>
+<h3 id="writing">Writing</h3>
+<p>Scala defers to the <code>Java</code> classes for writing to files. Here&apos;s how you can open a file for writing and write a line using <code>.println()</code>. Dont forget to close the file!</p>
+<pre><code class="lang-scala"><span class="hljs-keyword">val</span> append = <span class="hljs-literal">true</span>
+<span class="hljs-keyword">val</span> writer = <span class="hljs-keyword">new</span> java.io.<span class="hljs-type">FileWriter</span>(<span class="hljs-string">&quot;README.md&quot;</span>, append)
+writer.write(<span class="hljs-string">&quot;Lorem ipsum dolor sit amet, consectetur adipiscing elit\n&quot;</span>)
+writer.close()
+</code></pre>
+<p>For something more elaborate a good option is the library <code>better-files</code> that wraps the <code>java.io</code> package in a more Scala friendly face</p>
+<blockquote>
+<p>Hint: Use <a href="https://github.com/pathikrit/better-files" target="_blank">https://github.com/pathikrit/better-files</a>!</p>
+</blockquote>
 
                                 
                                 </section>
@@ -957,10 +1019,6 @@
             
                 
                 
-                <a href="0-installation.html" class="navigation navigation-next navigation-unique" aria-label="Next page: Installation">
-                    <i class="fa fa-angle-right"></i>
-                </a>
-                
             
         
     </div>
@@ -968,7 +1026,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Introduction","level":"1.1","depth":1,"next":{"title":"Installation","level":"1.2","depth":1,"path":"0-installation.md","ref":"0-installation.md","articles":[{"title":"Quick Start","level":"1.2.1","depth":2,"ref":"","articles":[]},{"title":"Your first Scala program","level":"1.2.2","depth":2,"ref":"","articles":[]},{"title":"Editing Scala Code","level":"1.2.3","depth":2,"ref":"","articles":[]},{"title":"About Java","level":"1.2.4","depth":2,"ref":"","articles":[]}]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"README.md","mtime":"2017-07-07T05:10:22.000Z","type":"markdown"},"gitbook":{"version":"3.2.2","time":"2017-07-07T08:45:36.342Z"},"basePath":".","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Input and output","level":"1.7","depth":1,"next":{"title":"Fancier Output Formatting","level":"1.7.1","depth":2,"ref":"","articles":[]},"previous":{"title":"The  function / reflection.","level":"1.6.4","depth":2,"ref":"","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"5-input-and-output.md","mtime":"2017-07-07T05:10:34.000Z","type":"markdown"},"gitbook":{"version":"3.2.2","time":"2017-07-07T08:45:36.342Z"},"basePath":".","book":{"language":""}});
         });
     </script>
 </div>

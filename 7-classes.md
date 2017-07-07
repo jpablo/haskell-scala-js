@@ -147,7 +147,7 @@ class Complex(val r: Double, val i: Double) {
 // defined class Complex
 
 val c = new Complex(3.0, -4.5)
-// c: Complex = Complex@51a38e7b
+// c: Complex = Complex@57123140
 
 (c.r, c.i, c.rxi)
 // res5: (Double, Double, Double) = (3.0,-4.5,-13.5)
