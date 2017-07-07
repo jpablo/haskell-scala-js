@@ -1,6 +1,6 @@
 # Data Structures
 
-## Brief tour of common data structures
+## Brief tour of common data structures {#brief-tour}
 
 Scala has a rich collection of data structures. Each data structure has a few unique operations that are specific to it but also implements a large number of methods that are the same across all structures.
 
@@ -23,7 +23,7 @@ import collection.{mutable, immutable}
 
 
 
-## More on mutable.ArrayBuffer
+### More on mutable.ArrayBuffer {#array-buffer}
 
 | Python array | Scala `ArrayBuffer`
 | ---    | --- |---
@@ -63,7 +63,7 @@ q.dequeue()
 q
 ```
 
-### For comprehensions
+## For comprehensions {#for-comprehensions}
 
 ```python
 squares = [x**2 for x in range(10)]
@@ -163,11 +163,11 @@ matrix = [
 
 (which can be done with the builtin `matrix.transpose`)
 
-## `del` statement
+## `del` statement {#del-statement}
 
 Although you can remove elements from collections (we've seen `buffer.remove(i)`), there's no way to remove *variables* from a scope in Scala.
 
-## Tuples
+## Tuples {#tuples}
 Tuples in Scala share some similarities with Python tuples
 
 | Python | Scala | Notes
@@ -209,7 +209,7 @@ val Point(x,y) = p // destructuring
 val p2 = p.copy(y = 0) // copy constructor
 ```
 
-## Sets
+## Sets {#sets}
 
 There's no special syntax for sets in Scala so we'll just use the standard library constructors.
 
@@ -239,7 +239,7 @@ becomes
 (for (x <- "abracadabra" if "abc" contains x) yield x).toSet
 ```
 
-## Dictionaries
+## Dictionaries {#Dictionaries}
 
 We'll use `collection.mutable.Map[A,B]`. One big difference here is that Scala `Map` is again a *homogenous* collection whereas Python dicts are heterogenous. We'll see ways to cope with this situation.
 
@@ -258,7 +258,7 @@ We'll use `collection.mutable.Map[A,B]`. One big difference here is that Scala `
 As you can see the `Map` constructor takes a variable number of pairs `key -> value`. The `(->)` operator is in fact a helper operator that constructs tuples, so that `Map(('a',1),('b',2))` is the same as 
 `Map('a' -> 1, 'b' -> 2)` but (arguably) harder to read.
 
-## Looping Techniques
+## Looping Techniques {#looping}
 
 ### Over maps
 
@@ -303,7 +303,7 @@ for ((q,a) <- questions.zip(answers))
   println(s"What is your $q?  It is $a.")
 ```
 
-## boolean operators
+## boolean operators {#boolean-ops}
 
 | Python | Scala
 | ---    | --- 
@@ -311,7 +311,7 @@ for ((q,a) <- questions.zip(answers))
 | `or`  | <code>&#124;&#124;</code>
 | `not` | `!`
 
-## Comparing Sequences and Other Types
+## Comparing Sequences and Other Types {#comparisons}
 
 > Note: **This section is NOT required to sort sequences containing tuples or other sequences!!**
 > 

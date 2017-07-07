@@ -1,6 +1,6 @@
 # Classes
 
-## Scopes
+## Scopes {#scopes}
 
 Scala uses curly braces `{}` instead of indentation to indicate code blocks. Every such block creates a new scope.
 
@@ -31,7 +31,7 @@ def function() =
   a = 1
 ```
 
-## A first look at Classes
+## A first look at Classes {#first-look}
 
 ### Class Definition Syntax
 
@@ -92,7 +92,7 @@ MyClass.i
 MyClass.f
 ```
 
-## Class instances
+## Class instances {#class-instances}
 Class instantiation uses `new` keyword:
 
 ```python
@@ -189,7 +189,7 @@ object Dog {
 While a companion object can be defined everywhere, if it's defined in the same file than the class then it can access the companion class private members (and viceversa)
 
 
-## Inheritance
+## Inheritance {#inheritance}
 
 ```python
 class DerivedClassName(BaseClassName):
@@ -225,7 +225,7 @@ class DerivedClassName extends Base1 with Base2 with Base3 {
 }
 ```
 
-## Abstract members / incomplete definitions
+## Abstract members / incomplete definitions {#abstract-members}
 
 Consider the following class
 
@@ -333,7 +333,7 @@ This idiom is used a lot in Scala code, so it's very useful to be familiar with 
 
 
 
-## Iterators
+## Iterators {#iterators}
 
 Python has the notion of *iterable* objects capable of returning its members one at a time. This is accomplished by implementing a method `__iter__` that returns an *iterator*.
 
@@ -486,7 +486,7 @@ Again, by implementing this abstract method `Reverse3` gains a lot of standard m
 def foreach[U](f: Elem => U): Unit = {  val it = iterator  while (it.hasNext) f(it.next())}
 ```
 
-## Generators and Generator Expressions
+## Generators and Generator Expressions {#generators}
 
 Generators in Python provide a lightweight way to create iterators. They come it two types:
 
@@ -566,10 +566,10 @@ def reverse(data):
 for char in reverse("golf"):
     print(char)        
     
-# f
-# l
-# o
-# g    
+### f
+### l
+### o
+### g    
 ```
 
 becomes

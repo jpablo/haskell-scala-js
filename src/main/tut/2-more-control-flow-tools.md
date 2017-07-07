@@ -46,7 +46,6 @@ thereby forcing us to create one extra mutable variable (`message`).
 > Python actually has a second `if` for that behaves in a similar (albeit limited) way:
 
 ```python
-# Python
 x = 0 if x < 0 else x0
 ```
 
@@ -366,7 +365,7 @@ List[Int]()
 
 Clearly in this case the compiler doesn't have any extra information so we have to provide the type of the elements explicitly.
 
-## More on defining functions
+## More on defining functions {#more-functions}
 
 ### Default argument values
 ```python

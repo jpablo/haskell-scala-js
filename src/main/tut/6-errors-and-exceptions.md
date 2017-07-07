@@ -2,7 +2,7 @@
 
 Python has 2 kinds of errors: *syntax errors* and *exceptions*.
 
-## Handling Exceptions
+## Handling Exceptions {#handling-exceptions}
 
 Let's make our code that writes to files bulletproof
 
@@ -45,7 +45,7 @@ Besides the syntatic differences there is one issue worth mentioning: in Python 
 
 That is not the case in Scala, where each `{ ... }` block creates a new scope. For that reason we're forced to declare an un-initialized `FileWriter` variable in a place where is accessible in both the `try` and the `finally` blocks.
 
-## Raising exceptions
+## Raising exceptions {#raising-exceptions}
 ```python
 raise Exception('error!')
 ```
@@ -55,7 +55,7 @@ Becomes
 throw new Exception("error!")
 ```
 
-## Predefined Clean-up Actions
+## Predefined Clean-up Actions {#cleanup-actions}
 
 There's no direct equivalent in Scala to Python's `with` statement, but it can be more or less emulated with the following construct, called "the loaner pattern" in the Scala book.
 

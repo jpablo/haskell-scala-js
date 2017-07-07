@@ -1,4 +1,6 @@
-# Objects
+# Bundling things
+
+## Objects {#objects}
 
 Scala has the keyword `object` to create a named container of definitions like methods, values, classes, etc.
 
@@ -36,14 +38,14 @@ One diference is that Python static members cannot be imported so the only way t
 
 `objects` are also called *companion Objects* for reasons we'll explain when we talk about classes.
 
-# Packages (modules)
+## Packages (modules) {#packages}
 
 In Python a module is simply a file with the `.py` extension. It can contain any definition like functions, classes, names, etc.
 
 Let's follow the tutorial and assume we have a file name `fibo.py` with a function `fib` defined in it.
 
 ```python
-# fibo.py
+### fibo.py
 
 initial = (0, 1)
 
@@ -109,7 +111,7 @@ Notes:
     * nested packages
 
 
-## Importing packages
+## Importing packages {#imports}
 
 | Python | Scala
 | ---    | --- 
@@ -117,7 +119,7 @@ Notes:
 | `from fibo import *` | `import example.fibo._`
 | `from fibo import fib as Fib` | `import example.fibo.{fib => Fib}`
 
-## Executing packages
+## Executing packages {#excuting-packages}
 
 > Note: This is not the best way to run code in production!
 
@@ -208,7 +210,7 @@ The following command removes the compiled files under `target/`:
 sbt clean
 ```
 
-## Standard packages
+## Standard packages {#std-packages}
 
 The Scala standard library lives under the package `scala`. It contains the core types like `Int`, `Float`, `String`; the collection library (`List`, `Map`, etc), plus many packages dealing with concurrent programming, IO, Regular expressions, etc.
 
@@ -222,7 +224,7 @@ The official documentation can be found [here](http://www.scala-lang.org/api/cur
 > 
 > -- [http://www.scala-lang.org/api/current/](http://www.scala-lang.org/api/current/)
 
-## The `dir()` function / reflection.
+## The `dir()` function / reflection. {#reflection}
 
 There's no direct equivalent for this in Scala. 
 
@@ -240,7 +242,7 @@ Unfortunately the api for manipulating objects like this at runtime is much lowe
 For that reason it is advisable to leave this as the last resort.
 
 
-# Modules
+## Modules {#modules}
 
 Scala doesn't have a distinction between Packages vs Modules as in Python. 
 

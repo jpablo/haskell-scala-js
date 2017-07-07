@@ -2,7 +2,7 @@
 
 So far we've used `println()` and `print()`.
 
-## Fancier Output Formatting
+## Fancier Output Formatting {#output-formatting}
 > Note: There's no analog of Python functions `str.rjust()`, `str.ljust()`, or `str.center()`.
 
 
@@ -44,7 +44,7 @@ In both cases the format is implemented in terms of `java.util.Formatter`.
 * [Formatting API docs](https://docs.oracle.com/javase/8/docs/api/java/util/Formatter.html)
 
 
-## Reading and Wrinting Files
+## Reading and Wrinting Files {#reading-writing}
 
 ### Reading 
 

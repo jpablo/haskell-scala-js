@@ -1,6 +1,6 @@
 # Brief Tour of the Standard Library
 
-## Operating System Interface
+## Operating System Interface {#os-interface}
 
 [`scala.sys.process`](http://www.scala-lang.org/files/archive/api/current/scala/sys/process/index.html) provides functions similar to `os`
 
@@ -9,7 +9,7 @@ import scala.sys.process._
 "ls".!!
 ```
 
-## Command line arguments
+## Command line arguments {#command-line-args}
 
 Inside an `App` you can access the command line arguments:
 
@@ -20,7 +20,7 @@ object main extends App {
 ```
 
 
-## String Pattern Matching
+## String Pattern Matching {#string-pattern-matching}
 
 ```scala
   val dateR = "(.*)T(.*)Z".r

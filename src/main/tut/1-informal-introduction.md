@@ -4,7 +4,7 @@ All the commands so far will assume that you started the Scala REPL via inside t
 ```
 $ sbt console
 ```
-## Numbers and arithmetic
+## Numbers and arithmetic {#arithmetic}
 
 ```tut
 2 + 2
@@ -42,7 +42,7 @@ var x = 1
 x = x + 1
 ```
 
-## Numeric types
+## Numeric types {#numeric-types}
 Python has 4 main numeric types. All have a corresponding type in Scala except `complex`.
 
 | Python | Scala |
@@ -71,7 +71,7 @@ For all bounded types you can obtain the min/max values using the `MinValue` / `
 Int.MaxValue
 ```
 
-## Strings
+## Strings {#strings}
 There are 3 common ways to create literal strings:
 
 ### Double quotes
@@ -175,7 +175,7 @@ word(4) == 'a'</pre>
 </table>
 
 
-## Collections  
+## Collections {#collections}
 Scala has a rich library of data structures. A few highlights:
 
 * There's no special syntax for building lists. (e.g. `[1,2,3]`)
@@ -284,7 +284,7 @@ arr
 Array.ofDim[Int](5)
 ```
 
-# First Steps Towards Programming {#first-steps}
+## First Steps Towards Programming {#first-steps}
 
 Let's generate the classic fibonacci series
 
