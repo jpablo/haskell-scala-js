@@ -55,7 +55,7 @@ x = 0 if x < 0 else x0
 
 They operate in two ways. 
 
-### As `for` loops
+### 1. As `for` loops
 The first one is similar to a `for` statement in Python:
 
 ```python
@@ -96,7 +96,7 @@ for {
 ```
 
 
-### As lists comprehensions
+### 2. As lists comprehensions
 
 The second form operates similarly to Python's list comprehensions:
 

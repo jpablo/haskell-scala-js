@@ -303,7 +303,7 @@ for ((q,a) <- questions.zip(answers))
   println(s"What is your $q?  It is $a.")
 ```
 
-## boolean operators {#boolean-ops}
+## Boolean operators {#boolean-ops}
 
 | Python | Scala
 | ---    | --- 
@@ -311,7 +311,7 @@ for ((q,a) <- questions.zip(answers))
 | `or`  | <code>&#124;&#124;</code>
 | `not` | `!`
 
-## Comparing Sequences and Other Types {#comparisons}
+## Comparing Sequences and other types {#comparisons}
 
 > Note: **This section is NOT required to sort sequences containing tuples or other sequences!!**
 > 
@@ -320,7 +320,7 @@ List((1,2,3), (1,2,1)).sorted
 ```
 > as you can see a lexicography order was used to sort the elements
 
-On the other hand if you want to use compare tuples yourself, then continue reading.
+> On the other hand if you want to use compare tuples yourself, then continue reading.
 
 In Scala it is common to divide operations and functions on a given type in two groups:
 

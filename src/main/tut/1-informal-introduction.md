@@ -137,6 +137,7 @@ A String is conceptually a sequence of characters.
 <td>Concatenate</td>
 <td><pre>"a" + "b"</pre></td>
 <td><pre>"a" + "b"</pre></td>
+<td> </td>
 </tr>
 
 <tr>
