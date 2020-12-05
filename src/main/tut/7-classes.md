@@ -4,7 +4,7 @@
 
 Scala uses curly braces `{}` instead of indentation to indicate code blocks. Every such block creates a new scope.
 
-```scala:book
+```scala
 val i = 1
 {
   val i = 2
@@ -25,7 +25,7 @@ def function():
 ```
 Becomes
 
-```scala:silent
+```scala
 var a = 0
 def function() =
   a = 1
@@ -64,7 +64,7 @@ class MyClass:
 ```
 Becomes
 
-```scala:silent
+```scala
 class MyClass {
   val i = 12345
   
@@ -100,7 +100,7 @@ x = MyClass()
 ```
 Becomes
 
-```scala:silent
+```scala
 val x = new MyClass
 ```
 
@@ -127,7 +127,7 @@ c.r, c.i,c.rxi
 ```
 Becomes
 
-```scala:book
+```scala
 class Complex(val r: Double, val i: Double) {
   val rxi = r * i
 }
@@ -177,7 +177,7 @@ class Dog:
 ```
 Becomes
 
-```scala:silent
+```scala
 class Dog(val name: String)
 
 object Dog {
@@ -229,7 +229,7 @@ class DerivedClassName extends Base1 with Base2 with Base3 {
 
 Consider the following class
 
-```scala:silent
+```scala
 abstract class Showable {
   def show(): String
 }
@@ -243,13 +243,13 @@ Nevertheless, it is very useful since it provides a *contract* about some functi
 
 For example, we can define a function that operates on Showables:
 
-```scala:silent
+```scala
 def print(s: Showable) = s.show()
 ```
 
 In order to use `show` we can use inheritance:
 
-```scala:silent
+```scala
 class MyClass(x: Int) extends Showable {
   def show(): String = s"[$x]"
 }
@@ -288,7 +288,7 @@ fn(5) == 15
 
 becomes
 
-```scala:silent
+```scala
 class Factory(x: Int) {
   def apply(y: Int) = x + y 
 }
@@ -299,7 +299,7 @@ fn(5) == 15
 
 It's worth noting that the companion object of a class can also have an `apply` method. This is commonly used for factories. In our previous example, if we wanted to avoid calling `new ...` every time we could've done this:
 
-```scala:silent
+```scala
 class Factory(x: Int) { 
   // allow *instances* to be invoked
   def apply(y: Int) = x + y
@@ -316,7 +316,7 @@ fn(5) == 15
 
 To reiterate, 
 
-```scala:silent
+```scala
 Factory(10) == Factory.apply(10)
 
 // and
@@ -352,7 +352,7 @@ next(it) # raises StopIteration
 ```
 becomes
 
-```scala:silent
+```scala
 val l = List(1,2,3)
 val it = l.iterator
 it.next == 1
@@ -401,7 +401,7 @@ def foreach[U](f: Elem => U)
 Any class that implements `foreach` can be used as part of a `for` expression.
 
 
-```scala:silent
+```scala
 class Reverse[Elem](data: Seq[Elem]) {
   
   def foreach(f: Elem => Unit) = {
@@ -423,7 +423,7 @@ for (i <- r) println(i)
 
 If a class also *extends* the trait `Traversable` then it gains access to *a lot* of methods for free.
 
-```scala:silent
+```scala
 class Reverse2[Elem](data: Seq[Elem]) extends Traversable[Elem] {
   
   def foreach[U](f: Elem => U) = {
@@ -459,7 +459,7 @@ def iterator: Iterator[Elem]
 
 Let's reimplement our silly container using `Iterable`:
 
-```scala:silent
+```scala
 class Reverse3[Elem](data: Seq[Elem]) extends Iterable[Elem] {
   
   def iterator = new Iterator[Elem] {
@@ -538,11 +538,11 @@ Using this kind of lazy behaviour it is possible to construct infinite lists.
 
 For example, we could generate the fiboncci sequence like this:
 
-```scala:silent
+```scala
 def fib(a: Int, b: Int): Stream[Int] = a #:: fib(b, a + b)
 ```
 
-```scala:book
+```scala
 fib(1,1).take(10).toList
 ```
 which is the same as 
@@ -577,7 +577,7 @@ for char in reverse("golf"):
 
 becomes
 
-```scala:silent
+```scala
 def reverse[A](data: Seq[A]) = {
   def go(index: Int): Stream[A] = 
     if (index >= 0) data(index) #:: go(index - 1) else Stream.empty
@@ -586,7 +586,7 @@ def reverse[A](data: Seq[A]) = {
 }
 ```
 
-```scala:book
+```scala
 for (char <- reverse("golf")) 
     println(char)
 ```

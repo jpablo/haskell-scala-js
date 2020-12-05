@@ -89,7 +89,7 @@ for {
 
 More examples
 
-```scala:silent
+```scala
 val vec = List(-4, -2, 0, 2, 4)
 for(x <- vec) yield x*2
  // same as

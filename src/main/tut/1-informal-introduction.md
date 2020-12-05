@@ -306,7 +306,7 @@ while b < 10:
 
 becomes
 
-```scala:book
+```scala
 var a = 0
 var b = 1
 var tmp = 0

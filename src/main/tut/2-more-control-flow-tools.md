@@ -65,7 +65,7 @@ for w in words:
 ```
 becomes
 
-```scala:book
+```scala
 val words = List("Cat", "Dog", "Monkey")
 for (w <- words)
   println(w, w.length)
@@ -87,7 +87,7 @@ for x in range(2):
 
 becomes
 
-```scala:book
+```scala
 for {
   x <- 0 until 2
   y <- x until 4
@@ -181,7 +181,7 @@ for n in range(2, 10):
 
 This can be translated mechanically to the following Scala code
  
-```scala:book
+```scala
 for (n <- 2 until 10) {
   var break = false
   var x = 2
@@ -209,7 +209,7 @@ for num in range(2, 10):
 
 becomes
 
-```scala:book
+```scala
 var num = 2
 while (num < 10) {
   if (num % 2 == 0)
@@ -247,7 +247,7 @@ fib(2000)
 ```
 becomes
 
-```scala:silent
+```scala
 /**
   * Print a Fibonacci series up to n.
   */
@@ -351,7 +351,7 @@ A function signature with `Unit` should alerts us that the function's main purpo
 ### Generic functions
 Many functions need to know the type of its arguments so that it can invoke methods / call functions or them.
 
-```scala:silent
+```scala
 def add1(x: Int) = x + 1
 //                   ^
 //                   |
@@ -364,7 +364,7 @@ But what if within the body of the function we don't actually make use of any me
 
 This is common for functions that wrap arguments, for example
 
-```scala:silent
+```scala
 def toList[A](x: A) = List(x)
 //         ^   
 //         |
@@ -384,7 +384,7 @@ In many cases (but not all), the type argument can be inferred by something else
 
 One example when the type cannot be inferred is when we want to construct an empty list:
 
-```scala:silent
+```scala
 List[Int]()
 ```
 
@@ -454,7 +454,7 @@ def parrot(voltage, state='a stiff', action='voom', type='Norwegian Blue'):
 ```
 becomes
 
-```scala:silent
+```scala
   def parrot(voltage: Any, state: String = "a stiff", action: String = "voom", `type`: String = "Norwegian Blue") = {
     print("-- This parrot wouldn't " +  action + " ")
     println("if you put " + voltage + " volts through it.")
