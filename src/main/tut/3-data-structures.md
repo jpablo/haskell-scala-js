@@ -10,7 +10,7 @@ For the rest of the section assume the following imports:
 import collection.{mutable, immutable}
 ```
 
-| Structure | Immutable | Mutable | Use case
+| Structure | Immutable | Mutable | Use case
 | ---       |  --- | --- | ---
 | Linked list |  `List` |  | Access the head + tail
 | Growable list |  | `ListBuffer` | Constant time append / prepend 
@@ -26,7 +26,7 @@ import collection.{mutable, immutable}
 ### More on mutable.ArrayBuffer {#array-buffer}
 
 | Python array | Scala `ArrayBuffer`
-| ---    | --- |---
+| ---    | ---
 |`a = []` | `val b = mutable.ArrayBuffer[Int]()`
 |`a.append(x)`|`b.append(x)` or<br>`b += x`
 |`a.extend(iterable)`|`b.appendAll(iterable)` or<br>`b ++= iterable`
