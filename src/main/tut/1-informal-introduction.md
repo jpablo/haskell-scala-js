@@ -203,14 +203,14 @@ Lists are in fact **linked lists**, which means that they are very fast at inser
 
 Pro tip: `List` is *not* like Python's `list`. Use `Vector` (immutable) or `Array` (mutable) if you need fast access to an arbitrary index.
 
-```tut
+```scala
 val lst = List(1, 2, 3, 4, 5, 6)
 lst.length
 ```
 
 List is particularly good if you need to get hold of the first element (the *head*) and everything but the head (the *tail*)
 
-```tut
+```scala
 val h = lst.head
 val t = lst.tail
 ```
