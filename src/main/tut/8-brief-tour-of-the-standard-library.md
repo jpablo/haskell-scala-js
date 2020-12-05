@@ -33,7 +33,7 @@ object main extends App {
 
 ## Mathematics
 
-```tut
+```scala
 
 ```
 

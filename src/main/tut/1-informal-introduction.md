@@ -14,7 +14,7 @@ If you like Ammonite, please support our development at www.patreon.com/lihaoyi
 
 ## Numbers and arithmetic {#arithmetic}
 
-```tut
+```scala
 2 + 2
 50 - 5*6
 (50 - 5*6) / 4
@@ -24,19 +24,19 @@ As you can see, each result has the type indicated to the left.
 
 > Note: `8/5` performs integer division. In order to get a floating point operation you need to convert one of the arguments:
 
-```tut
+```scala
 8.toDouble / 5
 ```
 
 There's no predefined operator to calculate powers, but you can use `Math.pow`
 
-```tut
+```scala
 Math.pow(5,2)
 ```
 
 To save a value for later use you can use the keyword `val` and the equal sign `(=)`:
 
-```tut
+```scala
 val width = 20
 val height = 5 * 9
 width * height
@@ -45,7 +45,7 @@ width * height
 
 > Note: names created with `val` cannot be reassigned. For such cases you need to use `var`:
 
-```tut
+```scala
 var x = 1
 x = x + 1
 ```
@@ -75,7 +75,7 @@ From the Scala point of view these are the numeric types:
 
 For all bounded types you can obtain the min/max values using the `MinValue` / `MaxValue` functions.
 
-```tut
+```scala
 Int.MaxValue
 ```
 
@@ -84,7 +84,7 @@ There are 3 common ways to create literal strings:
 
 ### Double quotes
 
-```tut
+```scala
 "spam eggs"
 "doesn't"
 "\"abc\""
@@ -94,7 +94,7 @@ There are 3 common ways to create literal strings:
 
 ### Triple quotes
 
-```tut
+```scala
 """"Isn't," she said."""
 """a
 multiline
@@ -107,7 +107,7 @@ word
 Translation: `print(s)` becomes `println(s)`
 
 ### String interpolation
-```tut
+```scala
 val x = 1 + 2 + 3
 println(s"1 + 2 + 3 = $x")
 ```
@@ -117,7 +117,7 @@ The `s"..."` syntax allows to embed code directly within a string.
 ### Characters
 Characters have a special type in scala `Char` and are constructed using single quotes
 
-```tut
+```scala
 'a'
 ```
 
@@ -218,7 +218,7 @@ In most data structures getting a copy of the tail is a relatively expensive ope
 
 Another fast operation on Lists is prepending an element via the `(::)` operator
 
-```tut
+```scala
 val lst2 = 0 :: lst
 lst2.head
 ```
@@ -230,7 +230,7 @@ Probably the most similar structure to Python's `list` is `collection.mutable.Ar
 The "Buffer" part refers to the fact that the size can be changed, as opposed to the `Array` which has a fixed size (see below).
 
 
-```tut
+```scala
 import collection.mutable.ArrayBuffer // required import
 
 val b = ArrayBuffer(1, 2, 3, 4, 5)
@@ -238,7 +238,7 @@ val b = ArrayBuffer(1, 2, 3, 4, 5)
 
 All of the operations that we've seen on Strings and Vectors work for `ArrayBuffer`:
 
-```tut
+```scala
 b(0)
 b(1)
 b.slice(1,3)
@@ -248,7 +248,7 @@ b.drop(2)
 
 Since they are mutable they support a few extra operations to modify / append / preppend / extend the Arraybuffer
 
-```tut
+```scala
 b(0) = 2 // modify in place
 b
 b(0) += 1 // increment operator
@@ -263,7 +263,7 @@ b
 
 Since a collection is completely agnostic towards its contents (i.e. "generic") we can have nested buffers
 
-```tut
+```scala
 val b1 = ArrayBuffer(1, 2, 3)
 val b2 = ArrayBuffer(4, 5, 6)
 val c = ArrayBuffer(b1, b2)
@@ -272,7 +272,7 @@ val c = ArrayBuffer(b1, b2)
 
 let's update the element (0,0)
 
-```tut
+```scala
 c(0)(0) += 1
 c
 ```
@@ -280,13 +280,13 @@ c
 As we saw, `ArrayBuffer` allow not only updating its contents in-place but also modifing the length of the array. This imposes a small overhead; if you need maximum performance it's better to use an `Array` which allows in place modification but cannot change its size.
 
 You can build an ArrayBuffer and the transform it into an Array
-```tut
+```scala
 b.toArray
 ```
 
 or if you know the size beforehand it's better to create the Array directly
 
-```tut
+```scala
 val arr = Array(1,2,3)
 arr(0) += 1
 arr
@@ -306,7 +306,7 @@ while b < 10:
 
 becomes
 
-```tut:book
+```scala:book
 var a = 0
 var b = 1
 var tmp = 0
@@ -324,7 +324,7 @@ We can observe a few differences:
 
  In contrast, Scala has a special version that works like this
 
- ```tut
+ ```scala
  val x, y, z = Math.random 
  ```
 

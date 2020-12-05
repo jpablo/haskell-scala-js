@@ -54,7 +54,7 @@ stack = stack.tail // "pop"
 
 ### Queues
 
-```tut
+```scala
 import collection.mutable
 val q = mutable.Queue[String]("Eric", "John")
 q.enqueue("Terry")
@@ -70,7 +70,7 @@ squares = [x**2 for x in range(10)]
 ```
 becomes
 
-```tut
+```scala
 val squares = for(x <- 0 until 10) yield x*x
 ```
 
@@ -80,7 +80,7 @@ val squares = for(x <- 0 until 10) yield x*x
 ```
 becomes
 
-```tut
+```scala
 for {
   x <- List(1,2,3)
   y <- List(3,1,4) if x != y
@@ -89,7 +89,7 @@ for {
 
 More examples
 
-```tut:silent
+```scala:silent
 val vec = List(-4, -2, 0, 2, 4)
 for(x <- vec) yield x*2
  // same as
@@ -120,7 +120,7 @@ lists.flatten
 #### Nested For Comprehensions
 For comprehensions have the effect of *flattening* inner structures:
 
-```tut
+```scala
 val vs = Vector(Vector(1,2), Vector(), Vector(3))
 for {
   v <- vs // top level
@@ -138,7 +138,7 @@ vs = [[1,2], [], [3]
 If we don't want this then we can nest them:
 
 
-```tut
+```scala
 val matrix = List(
   List(1, 2, 3, 4),
   List(5, 6, 7, 8),
@@ -200,7 +200,7 @@ x, y = p
 
 Becomes
 
-```tut
+```scala
 case class Point(x: Int, y: Int)
 val p = Point(1, 22) // or Point(x=1,y=22)
 p.x + p.y
@@ -235,7 +235,7 @@ There's no special support for set comprehensions, so
 
 becomes
 
-```tut
+```scala
 (for (x <- "abracadabra" if "abc" contains x) yield x).toSet
 ```
 
@@ -270,7 +270,7 @@ for k, v in knights.items():
 
 Becomes (no `item` method required)
 
-```tut
+```scala
 val knights = Map("gallahad" -> "the pure", "robin" -> "the brave")
 for ((k,v) <- knights) println(k, v)
 ```
@@ -282,7 +282,7 @@ for i, v in enumerate(['tic', 'tac', 'toe']):
     print(i, v)
 ```
 
-```tut
+```scala
 for ((v,i) <- List("tic", "tac", "toe").zipWithIndex)
   println(i,v)
 ```
@@ -296,7 +296,7 @@ for q, a in zip(questions, answers):
     print('What is your {0}?  It is {1}.'.format(q, a))
 ```
 
-```tut
+```scala
 val questions = List("name", "quest", "favorite color")
 val answers = List("lancelot", "the holy grail", "blue")
 for ((q,a) <- questions.zip(answers)) 
@@ -315,7 +315,7 @@ for ((q,a) <- questions.zip(answers))
 
 > Note: **This section is NOT required to sort sequences containing tuples or other sequences!!**
 > 
-```tut
+```scala
 List((1,2,3), (1,2,1)).sorted
 ```
 > as you can see a lexicography order was used to sort the elements
@@ -339,13 +339,13 @@ Let's see how we can use the usual comparison operators on tuples
 
 Before: (won't compile!)
 
-```tut:fail
+```scala:fail
 (1,2,"a") < (1,2,"c")
 ```
 
 After importing the required package
 
-```tut
+```scala
 import math.Ordering.Implicits._
 (1,2,"a") < (1,2,"c")
 ```

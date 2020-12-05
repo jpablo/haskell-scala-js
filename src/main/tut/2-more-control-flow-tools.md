@@ -65,7 +65,7 @@ for w in words:
 ```
 becomes
 
-```tut:book
+```scala:book
 val words = List("Cat", "Dog", "Monkey")
 for (w <- words)
   println(w, w.length)
@@ -87,7 +87,7 @@ for x in range(2):
 
 becomes
 
-```tut:book
+```scala:book
 for {
   x <- 0 until 2
   y <- x until 4
@@ -107,7 +107,7 @@ print(words_length)
 ```
 becomes
 
-```tut
+```scala
 val wordsLength = for (w <- words) yield w.length
 println(wordsLength)
 ```
@@ -134,14 +134,14 @@ for i in range(len(lst)): print(i, lst[i])
 
 becomes
 
-```tut
+```scala
 val lst = List("a", "b", "c")
 for (i <- 0 until lst.length) println(i, lst(i))
 ```
 
 but there is a niftier way using the standard method `.indices`
 
-```tut
+```scala
 for (i <- lst.indices) println(i, lst(i))
 ```
 
@@ -156,7 +156,7 @@ list(enumerate(seasons))
 
 Which has an analogue in Scala's `zipWithIndex` method:
 
-```tut
+```scala
 val seasons = List("Spring", "Summer", "Fall", "Winder")
 seasons.zipWithIndex
 ```
@@ -181,7 +181,7 @@ for n in range(2, 10):
 
 This can be translated mechanically to the following Scala code
  
-```tut:book
+```scala:book
 for (n <- 2 until 10) {
   var break = false
   var x = 2
@@ -209,7 +209,7 @@ for num in range(2, 10):
 
 becomes
 
-```tut:book
+```scala:book
 var num = 2
 while (num < 10) {
   if (num % 2 == 0)
@@ -247,7 +247,7 @@ fib(2000)
 ```
 becomes
 
-```tut:silent
+```scala:silent
 /**
   * Print a Fibonacci series up to n.
   */
@@ -263,7 +263,7 @@ def fib(n: Int): Int = { // <= function signature
 }
 ```
 
-```tut
+```scala
 fib(2000)
 ```
 
@@ -351,7 +351,7 @@ A function signature with `Unit` should alerts us that the function's main purpo
 ### Generic functions
 Many functions need to know the type of its arguments so that it can invoke methods / call functions or them.
 
-```tut:silent
+```scala:silent
 def add1(x: Int) = x + 1
 //                   ^
 //                   |
@@ -364,7 +364,7 @@ But what if within the body of the function we don't actually make use of any me
 
 This is common for functions that wrap arguments, for example
 
-```tut:silent
+```scala:silent
 def toList[A](x: A) = List(x)
 //         ^   
 //         |
@@ -384,7 +384,7 @@ In many cases (but not all), the type argument can be inferred by something else
 
 One example when the type cannot be inferred is when we want to construct an empty list:
 
-```tut:silent
+```scala:silent
 List[Int]()
 ```
 
@@ -454,7 +454,7 @@ def parrot(voltage, state='a stiff', action='voom', type='Norwegian Blue'):
 ```
 becomes
 
-```tut:silent
+```scala:silent
   def parrot(voltage: Any, state: String = "a stiff", action: String = "voom", `type`: String = "Norwegian Blue") = {
     print("-- This parrot wouldn't " +  action + " ")
     println("if you put " + voltage + " volts through it.")
@@ -463,7 +463,7 @@ becomes
   }
 ```
 
-```tut
+```scala
 parrot(1000)                                          // 1 positional argument
 parrot(voltage=1000)                                  // 1 keyword argument
 parrot(voltage=1000000, action="VOOOOOM")             // 2 keyword arguments
@@ -486,7 +486,7 @@ def print_multiple_items(separator, *args):
 ```
 becomes
 
-```tut
+```scala
 def printMultipleItems(separator: String, args: Any*) =
   println(args.mkString(separator))
   
@@ -511,7 +511,7 @@ print_multiple_items(":",*my_args)
 
 becomes
 
-```tut
+```scala
 val myArgs = List(1,2,3,4)
 printMultipleItems(":", myArgs:_*)
 ```
@@ -532,13 +532,13 @@ becomes
 
 Now, in many cases the type annotations can be inferred by the compiler. Consider the method `filter`. The following 3 forms are equivalent
 
-```tut
+```scala
 List(1,2,3,4).filter((x: Int) => x % 2 == 0)
 ```
-```tut
+```scala
 List(1,2,3,4).filter(x => x % 2 == 0)
 ```
-```tut
+```scala
 List(1,2,3,4).filter(_ % 2 == 0)
 ```
 
@@ -546,13 +546,13 @@ This last form replaces each argument for a for a single `_`.
 
 For example, to sum all elements of a list:
 
-```tut
+```scala
 List(1,2,3,4).reduce(_+_)
 ```
 
 which is equivalent to the more verbose
 
-```tut
+```scala
 List(1,2,3,4).reduce((x,y) => x + y)
 ```
 
@@ -566,7 +566,7 @@ def make_incrementor(n):
 
 becomes
 
-```tut
+```scala
 def makeIncrementor(n: Int) =
   (x: Int) => x + n
 ```

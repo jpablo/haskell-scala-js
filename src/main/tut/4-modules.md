@@ -5,7 +5,7 @@
 Scala has the keyword `object` to create a named container of definitions like methods, values, classes, etc.
 
 
-```tut:silent
+```scala:silent
 object constants {
   val Pi = 3.141592653589793
   val E = 2.718281828459045
@@ -14,12 +14,12 @@ object constants {
 ```
 The definitions can be used directly
 
-```tut
+```scala
 constants.doublePi
 ```
  or can be imported
  
-```tut
+```scala
 import constants.doublePi
 doublePi
 ```

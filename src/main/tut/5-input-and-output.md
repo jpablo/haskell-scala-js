@@ -8,19 +8,19 @@ So far we've used `println()` and `print()`.
 
 The first tool for string formatting is using string interpolation
 
-```tut
+```scala
 s"${math.Pi}"
 ```
 
 There is another type of interpolator used to format strings that is similar to Python's `string.format`. For example to print only 2 decimal values of Pi:
 
-```tut
+```scala
 f"${math.Pi}%.2f"
 ```
 
 As you can see it is very similar to the regular `s""` interpolator, but you have to add a `%` and format string after the embedded expression.
 
-```tut
+```scala
 for (x <- 1 to 10) println(f"$x%2d ${x*x}%3d ${x*x*x}%4d")
 ```
 
@@ -32,7 +32,7 @@ for x in range(1, 11):
 ```
 Becomes
 
-```tut
+```scala
 for (x <- 1 to 10) 
   println("%2d %3d %4d".format(x, x*x, x*x*x))
 ```
